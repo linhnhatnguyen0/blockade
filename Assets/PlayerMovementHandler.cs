@@ -27,13 +27,78 @@ public class PlayerMovementHandler : MonoBehaviour
     public LayerMask layerMask;
     private List<Point> mouvablePositions = new List<Point>();
 
+    private float speed = 7f;
+    private float rotationSpeed = 500f;
+
+    private Animator anim;
+
     private int clickCounter = 0;
+    private Transform cubeHit;
     void Start()
     {
         currentPosition = new Point((int)initial.x, (int)initial.y);
+        anim = GetComponent<Animator>();
     }
+
+    void UpdateMovablePosition(Point currentPosition)
+    {
+        mouvablePositions.Add(new Point(currentPosition.X - 2, currentPosition.Y));
+        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y + 1));
+        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y + 2));
+        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y + 1));
+        mouvablePositions.Add(new Point(currentPosition.X + 2, currentPosition.Y));
+        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y - 1));
+        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y - 2));
+        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y - 1));
+        List<Point> copy = new List<Point>(mouvablePositions);
+        foreach (Point point in copy)
+        {
+            if (point.X > 13 || point.X < 0 || point.Y < 0 || point.Y > 10)
+            {
+                mouvablePositions.Remove(point);
+            }
+            //verifyMovablePosition(point);
+        }
+    }
+
+    void movePlayerHandler(Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        if (direction != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            if (transform.rotation == toRotation)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+                anim.SetBool("isFlying", true);
+            }
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+            anim.SetBool("isFlying", true);
+        }
+
+
+        if (transform.position == targetPosition)
+        {
+            // Set cubeHit to null
+            cubeHit = null;
+            anim.SetBool("isFlying", false);
+        }
+    }
+
     private void Update()
     {
+        if (cubeHit != null)
+        {
+            Vector3 targetPosition = new Vector3(cubeHit.position.x, transform.position.y, cubeHit.position.z);
+            Vector3 routePosition = new Vector3(cubeHit.position.x, transform.position.y, cubeHit.position.z);
+            // Rotate the object to face the target
+            movePlayerHandler(targetPosition);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log(clickCounter);
@@ -47,8 +112,7 @@ public class PlayerMovementHandler : MonoBehaviour
                     {
                         clickCounter = 0;
                         Debug.Log("Mouvable clicked");
-                        Transform cube = hitP.transform;
-                        transform.position = new Vector3(cube.position.x, transform.position.y, cube.position.z);
+                        cubeHit = hitP.transform;
                         GameObject[] plates = GameObject.FindGameObjectsWithTag("Plate");
                         foreach (GameObject plate in plates)
                         {
@@ -60,7 +124,7 @@ public class PlayerMovementHandler : MonoBehaviour
                             mouvable.tag = "Untagged";
                         }
                         mouvablePositions.Clear();
-                        currentPosition = GetCubeFromBoard(cube);
+                        currentPosition = GetCubeFromBoard(cubeHit);
                     }
                 }
             }
@@ -73,27 +137,9 @@ public class PlayerMovementHandler : MonoBehaviour
                     if (hit.transform.tag == "Pions")
                     {
                         clickCounter++;
-                        Debug.Log("Pion clicked");
-                        Debug.Log(currentPosition);
-                        mouvablePositions.Add(new Point(currentPosition.X - 2, currentPosition.Y));
-                        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y + 1));
-                        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y + 2));
-                        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y + 1));
-                        mouvablePositions.Add(new Point(currentPosition.X + 2, currentPosition.Y));
-                        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y - 1));
-                        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y - 2));
-                        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y - 1));
-                        List<Point> copy = new List<Point>(mouvablePositions);
-                        foreach (Point point in copy)
-                        {
-                            if (point.X > 13 || point.X < 0 || point.Y < 0 || point.Y > 10)
-                            {
-                                mouvablePositions.Remove(point);
-                            }
-                        }
+                        UpdateMovablePosition(currentPosition);
                         foreach (var item in mouvablePositions)
                         {
-                            Debug.Log("Mouvable" + item);
                             Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
                             cube.tag = "Mouvable";
                             cube.gameObject.layer = 0;
