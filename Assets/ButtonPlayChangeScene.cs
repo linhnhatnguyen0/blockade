@@ -9,6 +9,5 @@ public class ButtonPlayChangeScene : MonoBehaviour
     public void ChargerNouvelleScene(string nomScene)
     {
         SceneManager.LoadScene(nomScene);
-        //MainSceneSquid
     }
 }
