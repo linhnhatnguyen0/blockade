@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PlayNewGame.unity
+    guid: 69e26e63a94520749802704907bec1af
+  - enabled: 1
+    path: Assets/MainSceneSquid.unity
+    guid: 4fd67a0f3d47bf54999503999c0457b2
+  - enabled: 1
+    path: Assets/Scenes/PlayGameComputer.unity
+    guid: 21bd86b5ef1deda4bbd5899094b1ee5d
+  - enabled: 1
+    path: Assets/Scenes/PlayGamePlayer.unity
+    guid: 1fb739d4ba7d2c84899cf9674dbda290
   m_configObjects: {}
