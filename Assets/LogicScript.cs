@@ -10,13 +10,28 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
 
-    private void spawnChampionP1(string champNamePrefab)
     public GameObject cube;
     public Texture[] textures; // Liste des textures
     public Material[] materials; // Liste des materials
 
     // Start is called before the first frame update
     void Start()
+    {
+        int indexSol = PlayerPrefs.GetInt("IndexSol");
+        foreach (Transform lines in plateau.transform)
+        {
+            // Parcourir tous les cubes de la ligne actuelle
+            foreach (Transform cubes in lines)
+            {
+                Renderer renderer = cubes.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material = materials[indexSol];
+                }
+            }
+        }
+    }
+    private void spawnChampionP1(string champNamePrefab)
     {
         GameObject champPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
         GameObject champPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -89,43 +104,8 @@ public class LogicScript : MonoBehaviour
     }
 
     Vector3 setSpawnPosition(int x, int y)
-        int indexSol = PlayerPrefs.GetInt("IndexSol");
-    Transform line = cube.transform.parent;
-    Transform board = line.parent;
-    int indexCube = 0;
-    int indexLine = 0;
-        for (int i = 0; i<line.childCount; i++)
-        {
-            if (line.GetChild(i).gameObject == cube)
-            {
-                indexCube = i;
-            }
-        }
-        for (int i = 0; i < board.childCount; i++)
-{
-    if (board.GetChild(i).gameObject == line.gameObject)
     {
-
-        indexLine = i;
-    }
-}
-foreach (Transform lines in board)
-{
-    // Parcourir tous les cubes de la ligne actuelle
-    foreach (Transform cubes in lines)
-    {
-        Renderer renderer = cubes.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material = materials[indexSol];
-        }
-    }
-}
+        return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-{
-    return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
-}
 }
