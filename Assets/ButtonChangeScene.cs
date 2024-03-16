@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class ButtonPlayChangeScene : MonoBehaviour
+public class ButtonChangeScene : MonoBehaviour
 {
     public void ChargerNouvelleScene(string nomScene)
     {
         SceneManager.LoadScene(nomScene);
-        //MainSceneSquid
     }
 }

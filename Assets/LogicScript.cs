@@ -9,7 +9,25 @@ public class LogicScript : MonoBehaviour
     public GameObject plateau;
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
+    public Material[] materials; // Liste des materials
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        int indexSol = PlayerPrefs.GetInt("IndexSol");
+        foreach (Transform lines in plateau.transform)
+        {
+            // Parcourir tous les cubes de la ligne actuelle
+            foreach (Transform cubes in lines)
+            {
+                Renderer renderer = cubes.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material = materials[indexSol];
+                }
+            }
+        }
+    }
     private void spawnChampionP1(string champNamePrefab)
     {
         GameObject champPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -86,4 +104,5 @@ public class LogicScript : MonoBehaviour
     {
         return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
     }
+
 }
