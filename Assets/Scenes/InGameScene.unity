@@ -1,4 +1,3 @@
-
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
@@ -19018,6 +19017,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plateau: {fileID: 1787264645}
+  materials:
+  - {fileID: 2100000, guid: e9626647ac5db254d9e870edcdfd343b, type: 2}
+  - {fileID: 2100000, guid: 7f61e96487dd8084480def67ee56f766, type: 2}
+  - {fileID: 2100000, guid: 520938bf13624b04fb159c3db7351aca, type: 2}
+  - {fileID: 2100000, guid: f70d582ac8795e94fbba81f1bda57848, type: 2}
 --- !u!4 &1888136520
 Transform:
   m_ObjectHideFlags: 0

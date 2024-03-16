@@ -9,9 +9,6 @@ public class LogicScript : MonoBehaviour
     public GameObject plateau;
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
-
-    public GameObject cube;
-    public Texture[] textures; // Liste des textures
     public Material[] materials; // Liste des materials
 
     // Start is called before the first frame update
