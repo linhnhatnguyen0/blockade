@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayNewGame.unity
     guid: 69e26e63a94520749802704907bec1af
   - enabled: 1
-    path: Assets/MainSceneSquid.unity
+    path: Assets/Scenes/InGameScene.unity
     guid: 4fd67a0f3d47bf54999503999c0457b2
   - enabled: 1
     path: Assets/Scenes/PlayGameComputer.unity
