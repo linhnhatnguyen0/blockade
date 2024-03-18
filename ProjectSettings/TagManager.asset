@@ -3,12 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Plateau
+  - MappingPoint
+  - WallPreview
+  - WallDrag
+  - Pions
+  - Mouvable
+  - Plate
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NoHit
   - Water
   - UI
   - 
