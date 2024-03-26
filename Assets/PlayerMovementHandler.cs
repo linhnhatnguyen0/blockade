@@ -181,6 +181,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
+        currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         if (cubeHit != null && currentPlayer != null)   // Si le pion et la position de destination sont définis
         {
             Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
@@ -198,9 +199,6 @@ public class PlayerMovementHandler : MonoBehaviour
                 Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray2, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
-                    Debug.Log("Hit: " + hit.collider.tag);
-                    Debug.Log(clickCounter);
-
                     if (clickCounter == 1)
                     {
                         if (hit.transform.tag == "Mouvable") // Si la position cliquée est mouvable, on déplace le pion
@@ -210,28 +208,28 @@ public class PlayerMovementHandler : MonoBehaviour
                             deletePlaneAndRemoveMouvable();
                             clickCounter = 0;
                         }
-                        else
-                        {
-                            deletePlaneAndRemoveMouvable();
-                            clickCounter = 0;
-                        }
                     }
-                    if (clickCounter == 0)
+                    else
                     {
-                        if (hit.transform.tag == "Pions") // Si le pion cliqué est valide, on affiche les positions mouvables
+                        deletePlaneAndRemoveMouvable();
+                        clickCounter = 0;
+                    }
+                }
+                if (clickCounter == 0)
+                {
+                    if (hit.transform.tag == "Pions" && hit.transform.GetComponent<PlayerPositionHandler>().playerID == currentPlayerID) // Si le pion cliqué est valide, on affiche les positions mouvables
+                    {
+                        clickCounter++;
+                        currentPlayer = hit.transform.gameObject;
+                        anim = currentPlayer.GetComponent<Animator>();
+                        currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
+                        List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
+                        foreach (var item in mouvablePositions)
                         {
-                            clickCounter++;
-                            currentPlayer = hit.transform.gameObject;
-                            anim = currentPlayer.GetComponent<Animator>();
-                            currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
-                            List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
-                            foreach (var item in mouvablePositions)
-                            {
-                                Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
-                                cube.tag = "Mouvable";
-                                cube.gameObject.layer = 0;
-                                Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
-                            }
+                            Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
+                            cube.tag = "Mouvable";
+                            cube.gameObject.layer = 0;
+                            Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
                         }
                     }
                 }
@@ -239,3 +237,4 @@ public class PlayerMovementHandler : MonoBehaviour
         }
     }
 }
+
