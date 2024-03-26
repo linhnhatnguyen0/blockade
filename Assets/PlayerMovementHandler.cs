@@ -20,14 +20,14 @@ public class PlayerMovementHandler : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private GameObject board;
-    public GameObject plate;
+    private GameObject board;   // Le plateau de jeu
+    public GameObject plate;    // Le prefab de la position mouvable
     public LayerMask layerMask;
 
-    private float speed = 7f;
-    private float rotationSpeed = 500f;
+    private float speed = 7f;   // La vitesse de déplacement
+    private float rotationSpeed = 500f; // La vitesse de rotation
 
-    private Animator anim;
+    private Animator anim;  // Le controlleur de l'animation
 
     private int clickCounter = 0;
     private Transform cubeHit;
@@ -42,6 +42,11 @@ public class PlayerMovementHandler : MonoBehaviour
         board = GameObject.Find("Board");
     }
 
+    /// <summary>
+    /// La fonction de récupérer la position du cube sur le board
+    /// </summary>
+    /// <param name="cube"></param>
+    /// <returns></returns>
     public static Point GetCubeFromBoard(Transform cube)
     {
         Transform line = cube.parent;
@@ -118,6 +123,10 @@ public class PlayerMovementHandler : MonoBehaviour
         return mouvablePositions;
     }
 
+    /// <summary>
+    /// La fonction de gestion du rotation et du mouvement du pion
+    /// </summary>
+    /// <param name="targetPosition"></param>
     void movePlayerHandler(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - currentPlayer.transform.position).normalized;
@@ -149,6 +158,9 @@ public class PlayerMovementHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// La fonction de supprimer les planes et le tag "Mouvable" sur les cubes
+    /// </summary>
     private void deletePlaneAndRemoveMouvable()
     {
         GameObject[] plates = GameObject.FindGameObjectsWithTag("Plate");
@@ -169,15 +181,18 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
-        if (cubeHit != null && currentPlayer != null)
+        if (cubeHit != null && currentPlayer != null)   // Si le pion et la position de destination sont définis
         {
             Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
             movePlayerHandler(targetPosition);
-            //Vector3 routePosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
-            // Rotate the object to face the target
         }
         if (!isMoving)
         {
+            //----La gestion du click sur l'écran----//
+            // Le clic est séparé en deux etapes.
+            // Le premier étape est à détecter le pion cliqué et afficher les positions mouvables.
+            // Le deuxième étape est à détecter la position mouvable cliquée et déplacer le pion ou si le joueur clique sur un autre pion, on annule le premier étape.
+            //---------------------------------------//
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -188,7 +203,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
                     if (clickCounter == 1)
                     {
-                        if (hit.transform.tag == "Mouvable") // If the object hit is a position mouvable
+                        if (hit.transform.tag == "Mouvable") // Si la position cliquée est mouvable, on déplace le pion
                         {
                             cubeHit = hit.transform;
                             currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
@@ -203,7 +218,7 @@ public class PlayerMovementHandler : MonoBehaviour
                     }
                     if (clickCounter == 0)
                     {
-                        if (hit.transform.tag == "Pions") // If the object hit is a player
+                        if (hit.transform.tag == "Pions") // Si le pion cliqué est valide, on affiche les positions mouvables
                         {
                             clickCounter++;
                             currentPlayer = hit.transform.gameObject;

@@ -16,6 +16,9 @@ public class DragHandler : MonoBehaviour
         mOffset = transform.position - GetMouseWorldPos();
 
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + mOffset;
