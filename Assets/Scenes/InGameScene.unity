@@ -10042,6 +10042,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04000001, y: 0.04, z: 0.03999999}
   m_Center: {x: 0.000000011175871, y: 0.00000014901161, z: 0}
+--- !u!1 &992725278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7259943123354568998, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &992725283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992725278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f82e22b7713a2e4196c4f50e2f5fdd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PawnWall: {fileID: 2036125951}
+  WallEnd: {fileID: 1520411927}
 --- !u!1001 &1005756248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13406,15 +13425,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 486247924704161115, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 486247924704161115, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 992725283}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changePhaseHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PhaseHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1326984446938334694, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1454653529637985188, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_Enabled
@@ -13426,7 +13473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2087421414315034083, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2087421414315034083, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -15386,6 +15433,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1520411927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5727973356196367778, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1530629224
 GameObject:
   m_ObjectHideFlags: 0
@@ -20026,6 +20084,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2036125951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 63179219766567049, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2041048630
 PrefabInstance:
   m_ObjectHideFlags: 0
