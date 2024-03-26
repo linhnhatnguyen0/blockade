@@ -10,7 +10,11 @@ public class ButtonCreateWallHandler : MonoBehaviour
     public bool isHorizontal;
     public void CreateWall()
     {
-        Debug.Log("CreateWall");
+        GameObject wallExisted = GameObject.FindGameObjectWithTag("WallDrag");
+        if (wallExisted != null)
+        {
+            Destroy(wallExisted);
+        }
         Vector3 worldPosition = new Vector3(-7, 11, -16); // The position in world space to instantiate the prefab
                                                           //get array component with the tag "WallCreation"
         GameObject plateau = GameObject.FindGameObjectWithTag("Plateau");

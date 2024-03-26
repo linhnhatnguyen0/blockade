@@ -11,7 +11,8 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
 
-    // Start is called before the first frame update
+    // Start est appelé avant la première frame de mise à jour
+    // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
         int indexSol = PlayerPrefs.GetInt("IndexSol");
@@ -28,6 +29,11 @@ public class LogicScript : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Faire apparaitre les pions pour le joueur 1
+    /// </summary>
+    /// <param name="champNamePrefab"></param>
     private void spawnChampionP1(string champNamePrefab)
     {
         GameObject champPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -40,6 +46,10 @@ public class LogicScript : MonoBehaviour
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
     }
 
+    /// <summary>
+    /// Faire apparaitre les pions pour le joueur 2 
+    /// </summary>
+    /// <param name="champNamePrefab"></param>
     private void spawnChampionP2(string champNamePrefab)
     {
         GameObject champPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -51,8 +61,11 @@ public class LogicScript : MonoBehaviour
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 7);
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
     }
+
+    // Awake est appelé lorsque le script est chargé
     void Awake()
     {
+        //Récupérer les personnages choisis par les joueurs et faire apparaitre les pions
         int player1 = PlayerPrefs.GetInt("Player1");
         int player2 = PlayerPrefs.GetInt("Player2");
         Debug.Log("Player1: " + player1);
@@ -100,6 +113,12 @@ public class LogicScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Convertir les coordonnées du plateau en position de spawn
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     Vector3 setSpawnPosition(int x, int y)
     {
         return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
