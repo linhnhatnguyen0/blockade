@@ -29,7 +29,6 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private Animator anim;  // Le controlleur de l'animation
 
-    private int clickCounter = 0;
     private Transform cubeHit;
 
     private GameObject currentPlayer;
@@ -40,6 +39,7 @@ public class PlayerMovementHandler : MonoBehaviour
     void Start()
     {
         board = GameObject.Find("Board");
+        PlayerPrefs.SetInt("clickCounter", 0);
     }
 
     /// <summary>
@@ -147,11 +147,8 @@ public class PlayerMovementHandler : MonoBehaviour
             isMoving = true;
             anim.SetBool("isFlying", true);
         }
-
-
         if (currentPlayer.transform.position == targetPosition)
         {
-            // Set cubeHit to null
             cubeHit = null;
             anim.SetBool("isFlying", false);
             isMoving = false;
@@ -181,8 +178,15 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Current state: " + PlayerPrefs.GetInt("currentPhase"));
+        }
+        // Mise à jour du joueur courant
         currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
-        if (cubeHit != null && currentPlayer != null)   // Si le pion et la position de destination sont définis
+
+        // Si le pion et la position de destination sont définis
+        if (cubeHit != null && currentPlayer != null)
         {
             Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
             movePlayerHandler(targetPosition);
@@ -194,42 +198,55 @@ public class PlayerMovementHandler : MonoBehaviour
             // Le premier étape est à détecter le pion cliqué et afficher les positions mouvables.
             // Le deuxième étape est à détecter la position mouvable cliquée et déplacer le pion ou si le joueur clique sur un autre pion, on annule le premier étape.
             //---------------------------------------//
-            if (Input.GetMouseButtonDown(0))
+            if (PlayerPrefs.GetInt("currentPhase") == 0)
             {
-                Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray2, out RaycastHit hit, Mathf.Infinity, layerMask))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (clickCounter == 1)
+                    Debug.Log("Current click counter" + PlayerPrefs.GetInt("clickCounter"));
+                    Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray2, out RaycastHit hit, Mathf.Infinity, layerMask))
                     {
-                        if (hit.transform.tag == "Mouvable") // Si la position cliquée est mouvable, on déplace le pion
+                        if (PlayerPrefs.GetInt("clickCounter") == 1)
                         {
-                            cubeHit = hit.transform;
-                            currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
-                            deletePlaneAndRemoveMouvable();
-                            clickCounter = 0;
+                            if (hit.transform.tag == "Mouvable") // Si la position cliquée est mouvable, on déplace le pion
+                            {
+                                PlayerPrefs.SetInt("clickCounter", 2);
+                                cubeHit = hit.transform;
+                                currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
+                                deletePlaneAndRemoveMouvable();
+                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
+                                btn.SetActive(true);
+                            }
+                            else
+                            {
+                                PlayerPrefs.SetInt("clickCounter", 0);
+                                deletePlaneAndRemoveMouvable();
+                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
+                                btn.SetActive(true);
+                            }
                         }
-                    }
-                    else
-                    {
-                        deletePlaneAndRemoveMouvable();
-                        clickCounter = 0;
-                    }
-                }
-                if (clickCounter == 0)
-                {
-                    if (hit.transform.tag == "Pions" && hit.transform.GetComponent<PlayerPositionHandler>().playerID == currentPlayerID) // Si le pion cliqué est valide, on affiche les positions mouvables
-                    {
-                        clickCounter++;
-                        currentPlayer = hit.transform.gameObject;
-                        anim = currentPlayer.GetComponent<Animator>();
-                        currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
-                        List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
-                        foreach (var item in mouvablePositions)
+                        if (PlayerPrefs.GetInt("clickCounter") == 0)
                         {
-                            Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
-                            cube.tag = "Mouvable";
-                            cube.gameObject.layer = 0;
-                            Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
+                            if (hit.transform.tag == "Pions") // Si le pion cliqué est valide, on affiche les positions mouvables
+                            {
+                                if (hit.transform.GetComponent<PlayerPositionHandler>().playerID == currentPlayerID)
+                                {
+                                    PlayerPrefs.SetInt("clickCounter", 1);
+                                    currentPlayer = hit.transform.gameObject;
+                                    anim = currentPlayer.GetComponent<Animator>();
+                                    currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
+                                    List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
+                                    foreach (var item in mouvablePositions)
+                                    {
+                                        Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
+                                        cube.tag = "Mouvable";
+                                        cube.gameObject.layer = 0;
+                                        Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
+                                    }
+                                    GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
+                                    btn.SetActive(false);
+                                }
+                            }
                         }
                     }
                 }

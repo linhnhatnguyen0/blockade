@@ -27,12 +27,15 @@ public class DragHandler : MonoBehaviour
         {
             getClosestPoint(transform.position);
             wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
+            wall.GetComponent<WallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         }
         else
         {
             Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
             getClosestPoint(transform.position);
             wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
+            wall.GetComponent<WallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
+            // Changement de la couleur du mur en fonction du joueur
         }
     }
 

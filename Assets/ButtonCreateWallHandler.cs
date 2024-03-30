@@ -10,6 +10,10 @@ public class ButtonCreateWallHandler : MonoBehaviour
     public bool isHorizontal;
     public void CreateWall()
     {
+        if (PlayerPrefs.GetInt("currentPhase") != 1)
+        {
+            return;
+        }
         GameObject wallExisted = GameObject.FindGameObjectWithTag("WallDrag");
         if (wallExisted != null)
         {
@@ -17,9 +21,6 @@ public class ButtonCreateWallHandler : MonoBehaviour
         }
         Vector3 worldPosition = new Vector3(-7, 11, -16); // The position in world space to instantiate the prefab
                                                           //get array component with the tag "WallCreation"
-        GameObject plateau = GameObject.FindGameObjectWithTag("Plateau");
-        Debug.Log("plateau: " + plateau.transform.position);
-        Debug.Log("worldPosition: " + worldPosition);
         if (isHorizontal)
         {
             Instantiate(wallPrefab, worldPosition, Quaternion.identity); // Instantiate the prefab at the world position

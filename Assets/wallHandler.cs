@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class wallHandler : MonoBehaviour
+public class WallHandler : MonoBehaviour
 {
     // Start is called before the first frame update
-    private PlayerID playerID;
+    public PlayerID playerID;
     private GameObject[] cubeAttache;
 }
