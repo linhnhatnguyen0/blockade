@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragHandler : MonoBehaviour
 {
@@ -41,30 +42,38 @@ public class DragHandler : MonoBehaviour
         wall.tag = "Untagged";
         wall.GetComponent<wallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         Destroy(GameObject.FindGameObjectWithTag("WallDrag"));
+        GameObject vp1 = GameObject.FindGameObjectsWithTag("vp1")[0];
+        GameObject hp1 = GameObject.FindGameObjectsWithTag("hp1")[0];
+        GameObject vp2 = GameObject.FindGameObjectsWithTag("vp2")[0];
+        GameObject hp2 = GameObject.FindGameObjectsWithTag("hp2")[0];
         if (!isHorizontal)
         {
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
-                GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
-                Debug.Log("vp1" + GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+                vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                hp1.GetComponent<Button>().enabled = false;
+                vp1.GetComponent<Button>().enabled = false;
             }
             else
             {
-                GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
-                Debug.Log("vp2" + GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+                vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                hp2.GetComponent<Button>().enabled = false;
+                vp2.GetComponent<Button>().enabled = false;
             }
         }
         else
         {
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
-                GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
-                Debug.Log("hp1" + GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+                hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                hp1.GetComponent<Button>().enabled = false;
+                vp1.GetComponent<Button>().enabled = false;
             }
             else
             {
-                GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
-                Debug.Log("hp2" + GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+                hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                hp2.GetComponent<Button>().enabled = false;
+                vp2.GetComponent<Button>().enabled = false;
             }
         }
     }
