@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ButtonCreateWallHandler : MonoBehaviour
 {
@@ -23,12 +24,14 @@ public class ButtonCreateWallHandler : MonoBehaviour
                                                           //get array component with the tag "WallCreation"
         if (isHorizontal)
         {
-            Instantiate(wallPrefab, worldPosition, Quaternion.identity); // Instantiate the prefab at the world position
+            GameObject wall = Instantiate(wallPrefab, worldPosition, Quaternion.identity); // Instantiate the prefab at the world position
+            wall.GetComponent<DragHandler>().isHorizontal = true;
         }
         else
         {
             Quaternion rotation = Quaternion.Euler(0, 90, 0);
-            Instantiate(wallPrefab, worldPosition, rotation); // Instantiate the prefab at the world position
+            GameObject wall = Instantiate(wallPrefab, worldPosition, rotation); // Instantiate the prefab at the world position
+            wall.GetComponent<DragHandler>().isHorizontal = false;
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct Point
 {
@@ -178,10 +179,6 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Current state: " + PlayerPrefs.GetInt("currentPhase"));
-        }
         // Mise à jour du joueur courant
         currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
 
@@ -202,7 +199,6 @@ public class PlayerMovementHandler : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("Current click counter" + PlayerPrefs.GetInt("clickCounter"));
                     Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray2, out RaycastHit hit, Mathf.Infinity, layerMask))
                     {
@@ -215,14 +211,14 @@ public class PlayerMovementHandler : MonoBehaviour
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
                                 GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.SetActive(true);
+                                btn.GetComponent<Button>().enabled = true;
                             }
                             else
                             {
                                 PlayerPrefs.SetInt("clickCounter", 0);
                                 deletePlaneAndRemoveMouvable();
                                 GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.SetActive(true);
+                                btn.GetComponent<Button>().enabled = true;
                             }
                         }
                         if (PlayerPrefs.GetInt("clickCounter") == 0)
@@ -244,7 +240,7 @@ public class PlayerMovementHandler : MonoBehaviour
                                         Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
                                     }
                                     GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                    btn.SetActive(false);
+                                    btn.GetComponent<Button>().enabled = false;
                                 }
                             }
                         }

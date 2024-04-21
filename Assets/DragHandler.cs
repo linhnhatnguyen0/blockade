@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +8,7 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour
 {
     public GameObject wallPreviewPrefab;
+    public bool isHorizontal;
     private Vector3 closestPoint;
     private GameObject wall;
     Vector3 mOffset;
@@ -14,7 +16,6 @@ public class DragHandler : MonoBehaviour
     private void OnMouseDown()
     {
         mOffset = transform.position - GetMouseWorldPos();
-
     }
     /// <summary>
     /// 
@@ -27,22 +28,45 @@ public class DragHandler : MonoBehaviour
         {
             getClosestPoint(transform.position);
             wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
-            wall.GetComponent<WallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         }
-        else
-        {
-            Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
-            getClosestPoint(transform.position);
-            wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
-            wall.GetComponent<WallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
-            // Changement de la couleur du mur en fonction du joueur
-        }
+        Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
+        getClosestPoint(transform.position);
+        wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
+        // Changement de la couleur du mur en fonction du joueur
     }
+
 
     private void OnMouseUp()
     {
         wall.tag = "Untagged";
+        wall.GetComponent<wallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         Destroy(GameObject.FindGameObjectWithTag("WallDrag"));
+        if (!isHorizontal)
+        {
+            if (PlayerPrefs.GetInt("currentPlayer") == 1)
+            {
+                GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                Debug.Log("vp1" + GameObject.FindGameObjectsWithTag("vp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+            }
+            else
+            {
+                GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                Debug.Log("vp2" + GameObject.FindGameObjectsWithTag("vp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+            }
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("currentPlayer") == 1)
+            {
+                GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                Debug.Log("hp1" + GameObject.FindGameObjectsWithTag("hp1")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+            }
+            else
+            {
+                GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                Debug.Log("hp2" + GameObject.FindGameObjectsWithTag("hp2")[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
+            }
+        }
     }
 
     private Vector3 GetMouseWorldPos()
@@ -54,18 +78,10 @@ public class DragHandler : MonoBehaviour
 
     private void getClosestPoint(Vector3 position)
     {
-        //float distance = Vector3.Distance(wallPosition, transform.position);
-        Vector3 hitPosition = Vector3.zero;
-        SortedList<float, Vector2> closestPoints = new SortedList<float, Vector2>();
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the mouse position
-        // Log ray line to console
-        Debug.DrawRay(ray.origin, ray.direction * 40, Color.yellow);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            Debug.Log("Position wall" + position);
-            Debug.Log("Hit: " + hit.collider.name);
             if (hit.collider.tag == "MappingPoint")
             {
                 closestPoint = hit.transform.gameObject.transform.position;
