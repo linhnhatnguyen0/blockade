@@ -15,9 +15,22 @@ public class PhaseHandler : MonoBehaviour
     public GameObject vp2;
     public GameObject endturn_btnP1;
     public GameObject endturn_btnP2;
+    // Phase Bar
     public GameObject phaseBar1;
     public GameObject phaseBar2;
-    // Start is called before the first frame update
+    public Sprite phaseBarP1;
+    public Sprite phaseBarP2;
+
+    public GameObject phaseBarIconPion;
+    public GameObject phaseBarIconWall;
+    public GameObject phaseBarIconValid;
+    public Sprite phaseBarIconPionP1;
+    public Sprite phaseBarIconPionP2;
+    public Sprite phaseBarIconWallP1;
+    public Sprite phaseBarIconWallP2;
+    public Sprite phaseBarIconValidP1;
+    public Sprite phaseBarIconValidP2;
+
     void Start()
     {
         PlayerPrefs.SetInt("currentPhase", 0);
@@ -74,12 +87,22 @@ public class PhaseHandler : MonoBehaviour
             PlayerPrefs.SetInt("currentPlayer", 2);
             isMyTurnBtnP1.SetActive(false);
             isMyTurnBtnP2.SetActive(true);
+            phaseBar1.GetComponent<Image>().sprite = phaseBarP2;
+            phaseBar2.GetComponent<Image>().sprite = phaseBarP2;
+            phaseBarIconPion.GetComponent<Image>().sprite = phaseBarIconPionP2;
+            phaseBarIconWall.GetComponent<Image>().sprite = phaseBarIconWallP2;
+            phaseBarIconValid.GetComponent<Image>().sprite = phaseBarIconValidP2;
         }
         else
         {
             PlayerPrefs.SetInt("currentPlayer", 1);
             isMyTurnBtnP1.SetActive(true);
             isMyTurnBtnP2.SetActive(false);
+            phaseBar1.GetComponent<Image>().sprite = phaseBarP1;
+            phaseBar2.GetComponent<Image>().sprite = phaseBarP1;
+            phaseBarIconPion.GetComponent<Image>().sprite = phaseBarIconPionP1;
+            phaseBarIconWall.GetComponent<Image>().sprite = phaseBarIconWallP1;
+            phaseBarIconValid.GetComponent<Image>().sprite = phaseBarIconValidP1;
         }
     }
     public void ChangeColor(int state)
