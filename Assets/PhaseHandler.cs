@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 public class PhaseHandler : MonoBehaviour
 {
-    private PlayerID playerID;
     private int state = 0;
-    private Color newcolor;
-    private Color basecolor;
-    public Slider PawnWall;
-    public Slider WallEnd;
     public GameObject isMyTurnBtnP1;
     public GameObject isMyTurnBtnP2;
     public GameObject hp1;
@@ -26,7 +21,6 @@ public class PhaseHandler : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("currentPhase", 0);
-        playerID = PlayerID.Player1;
         hp1.GetComponent<Button>().enabled = false;
         vp1.GetComponent<Button>().enabled = false;
         hp2.GetComponent<Button>().enabled = false;
