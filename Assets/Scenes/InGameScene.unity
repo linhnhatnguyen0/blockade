@@ -10079,6 +10079,17 @@ MonoBehaviour:
   endturn_btnP2: {fileID: 2065233589}
   phaseBar1: {fileID: 1658019137}
   phaseBar2: {fileID: 1605902775}
+  phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
+  phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
+  phaseBarIconPion: {fileID: 1685113146}
+  phaseBarIconWall: {fileID: 1470782423}
+  phaseBarIconValid: {fileID: 1702915937}
+  phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
+  phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
+  phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
+  phaseBarIconWallP2: {fileID: 21300000, guid: 1556e8af3605f714997e5da4c101d243, type: 3}
+  phaseBarIconValidP1: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
+  phaseBarIconValidP2: {fileID: 21300000, guid: 98d5c21c18d2c4449a75b6ccc943f93a, type: 3}
 --- !u!1001 &1005756248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14120,6 +14131,9 @@ PrefabInstance:
     - {fileID: 3205234801985132900, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
     - {fileID: 63179219766567049, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
     - {fileID: 5727973356196367778, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+    - {fileID: 3085434685671666931, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+    - {fileID: 8868852624523752746, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+    - {fileID: 7470169355513166772, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
 --- !u!1 &1373372104
 GameObject:
@@ -15391,6 +15405,41 @@ Transform:
   m_Father: {fileID: 1787264646}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1470782423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 332140762255511010, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1470782427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470782423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1475474406
 GameObject:
   m_ObjectHideFlags: 0
@@ -17373,6 +17422,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 2706679320443213187, guid: cbcd90e60fcd44f4391efa5182476ff6, type: 3}
   isHorizontal: 1
+--- !u!1 &1685113146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 781609622220919231, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1685113150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685113146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1686695314
 GameObject:
   m_ObjectHideFlags: 0
@@ -17631,6 +17715,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04000001, y: 0.04, z: 0.03999999}
   m_Center: {x: 0, y: 0.00000014901161, z: 0}
+--- !u!1 &1702915937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5780833000148213593, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1702915941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702915937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &1707637811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21016,6 +21135,17 @@ MonoBehaviour:
   endturn_btnP2: {fileID: 2065233589}
   phaseBar1: {fileID: 1658019137}
   phaseBar2: {fileID: 1605902775}
+  phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
+  phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
+  phaseBarIconPion: {fileID: 1685113146}
+  phaseBarIconWall: {fileID: 1470782423}
+  phaseBarIconValid: {fileID: 1702915937}
+  phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
+  phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
+  phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
+  phaseBarIconWallP2: {fileID: 21300000, guid: 1556e8af3605f714997e5da4c101d243, type: 3}
+  phaseBarIconValidP1: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
+  phaseBarIconValidP2: {fileID: 21300000, guid: 98d5c21c18d2c4449a75b6ccc943f93a, type: 3}
 --- !u!1001 &2073597498
 PrefabInstance:
   m_ObjectHideFlags: 0
