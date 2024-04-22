@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using TMPro;
 
 public class PhaseHandler : MonoBehaviour
 {
@@ -34,17 +35,18 @@ public class PhaseHandler : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("currentPhase", 0);
-        hp1.GetComponent<Button>().enabled = false;
-        vp1.GetComponent<Button>().enabled = false;
-        hp2.GetComponent<Button>().enabled = false;
-        vp2.GetComponent<Button>().enabled = false;
+        changeWallButtonColor(false, false, false, false);
         isMyTurnBtnP1.SetActive(true);
         isMyTurnBtnP2.SetActive(false);
         phaseBar1.GetComponent<Image>().fillAmount = 0;
         phaseBar2.GetComponent<Image>().fillAmount = 0;
+        endturn_btnP1.GetComponent<Button>().interactable = false;
+        endturn_btnP2.GetComponent<Button>().interactable = false;
     }
     public void changePhaseHandler()
     {
+        endturn_btnP1.GetComponent<Button>().interactable = false;
+        endturn_btnP2.GetComponent<Button>().interactable = false;
         state++;
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
@@ -53,25 +55,16 @@ public class PhaseHandler : MonoBehaviour
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
-                hp1.GetComponent<Button>().enabled = true;
-                vp1.GetComponent<Button>().enabled = true;
-                hp2.GetComponent<Button>().enabled = false;
-                vp2.GetComponent<Button>().enabled = false;
+                changeWallButtonColor(true, true, false, false);
             }
             else
             {
-                hp1.GetComponent<Button>().enabled = false;
-                vp1.GetComponent<Button>().enabled = false;
-                hp2.GetComponent<Button>().enabled = true;
-                vp2.GetComponent<Button>().enabled = true;
+                changeWallButtonColor(false, false, true, true);
             }
         }
         if (state == 2)
         {
-            hp1.GetComponent<Button>().enabled = false;
-            vp1.GetComponent<Button>().enabled = false;
-            hp2.GetComponent<Button>().enabled = false;
-            vp2.GetComponent<Button>().enabled = false;
+            //changeWallButtonColor(false, false, false, false);
             StartCoroutine(DelayResetState());
         }
         // This is a placeholder for the function that will change the phase of the game
@@ -138,18 +131,23 @@ public class PhaseHandler : MonoBehaviour
         image.fillAmount = 1; // Ensure the fill amount is set to 1 at the end
     }
 
-    // Update is called once per frame
-    void Update()
+    public void changeWallButtonColor(bool hp1b, bool vp1b, bool hp2b, bool vp2b)
     {
-        if (PlayerPrefs.GetInt("currentPlayer") == 1)
-        {
-            endturn_btnP1.GetComponent<Button>().enabled = true;
-            endturn_btnP2.GetComponent<Button>().enabled = false;
-        }
-        else
-        {
-            endturn_btnP1.GetComponent<Button>().enabled = false;
-            endturn_btnP2.GetComponent<Button>().enabled = true;
-        }
+        hp1.GetComponent<Button>().interactable = hp1b;
+        vp1.GetComponent<Button>().interactable = vp1b;
+        hp2.GetComponent<Button>().interactable = hp2b;
+        vp2.GetComponent<Button>().interactable = vp2b;
+        Color colorH1 = hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color;
+        Color colorV1 = vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color;
+        Color colorH2 = hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color;
+        Color colorV2 = vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color;
+        colorH1.a = hp1b ? 1f : 0.5f;
+        colorV1.a = vp1b ? 1f : 0.5f;
+        colorH2.a = hp2b ? 1f : 0.5f;
+        colorV2.a = vp2b ? 1f : 0.5f;
+        hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorH1;
+        vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorV1;
+        hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorH2;
+        vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorV2;
     }
 }

@@ -25,7 +25,7 @@ public class PlayerMovementHandler : MonoBehaviour
     public GameObject plate;    // Le prefab de la position mouvable
     public LayerMask layerMask;
 
-    private float speed = 7f;   // La vitesse de déplacement
+    private float speed = 7f;   // La vitesse de dï¿½placement
     private float rotationSpeed = 500f; // La vitesse de rotation
 
     private Animator anim;  // Le controlleur de l'animation
@@ -44,7 +44,7 @@ public class PlayerMovementHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// La fonction de récupérer la position du cube sur le board
+    /// La fonction de rï¿½cupï¿½rer la position du cube sur le board
     /// </summary>
     /// <param name="cube"></param>
     /// <returns></returns>
@@ -179,10 +179,10 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
-        // Mise à jour du joueur courant
+        // Mise ï¿½ jour du joueur courant
         currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
 
-        // Si le pion et la position de destination sont définis
+        // Si le pion et la position de destination sont dï¿½finis
         if (cubeHit != null && currentPlayer != null)
         {
             Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
@@ -190,10 +190,10 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         if (!isMoving)
         {
-            //----La gestion du click sur l'écran----//
-            // Le clic est séparé en deux etapes.
-            // Le premier étape est à détecter le pion cliqué et afficher les positions mouvables.
-            // Le deuxième étape est à détecter la position mouvable cliquée et déplacer le pion ou si le joueur clique sur un autre pion, on annule le premier étape.
+            //----La gestion du click sur l'ï¿½cran----//
+            // Le clic est sï¿½parï¿½ en deux etapes.
+            // Le premier ï¿½tape est ï¿½ dï¿½tecter le pion cliquï¿½ et afficher les positions mouvables.
+            // Le deuxiï¿½me ï¿½tape est ï¿½ dï¿½tecter la position mouvable cliquï¿½e et dï¿½placer le pion ou si le joueur clique sur un autre pion, on annule le premier ï¿½tape.
             //---------------------------------------//
             if (PlayerPrefs.GetInt("currentPhase") == 0)
             {
@@ -204,26 +204,26 @@ public class PlayerMovementHandler : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt("clickCounter") == 1)
                         {
-                            if (hit.transform.tag == "Mouvable") // Si la position cliquée est mouvable, on déplace le pion
+                            if (hit.transform.tag == "Mouvable") // Si la position cliquï¿½e est mouvable, on dï¿½place le pion
                             {
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
                                 GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().enabled = true;
+                                btn.GetComponent<Button>().interactable = true;
                             }
                             else
                             {
                                 PlayerPrefs.SetInt("clickCounter", 0);
                                 deletePlaneAndRemoveMouvable();
                                 GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().enabled = true;
+                                btn.GetComponent<Button>().interactable = true;
                             }
                         }
                         if (PlayerPrefs.GetInt("clickCounter") == 0)
                         {
-                            if (hit.transform.tag == "Pions") // Si le pion cliqué est valide, on affiche les positions mouvables
+                            if (hit.transform.tag == "Pions") // Si le pion cliquï¿½ est valide, on affiche les positions mouvables
                             {
                                 if (hit.transform.GetComponent<PlayerPositionHandler>().playerID == currentPlayerID)
                                 {
@@ -240,7 +240,7 @@ public class PlayerMovementHandler : MonoBehaviour
                                         Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
                                     }
                                     GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                    btn.GetComponent<Button>().enabled = false;
+                                    btn.GetComponent<Button>().interactable = false;
                                 }
                             }
                         }
