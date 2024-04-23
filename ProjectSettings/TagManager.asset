@@ -3,12 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Plateau
+  - MappingPoint
+  - WallPreview
+  - WallDrag
+  - Pions
+  - Mouvable
+  - Plate
+  - vp1
+  - vp2
+  - hp1
+  - hp2
+  - isturnp1
+  - isturnp2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NoHit
   - Water
   - UI
   - 
