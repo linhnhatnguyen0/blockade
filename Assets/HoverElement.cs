@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-[RequireComponent(typeof(BoxCollider))]
-public class MouseAspect : MonoBehaviour
+public class HoverElement : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Texture2D cursorTexture;
     public Texture2D DefaultTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot= Vector2.zero;
-    void OnMouseEnter()
+    // Start is called before the first frame update
+    void Start()
     {
-        Cursor.SetCursor(cursorTexture,hotSpot,cursorMode);
+        
     }
 
     // Update is called once per frame
-    void OnMouseExit()
+    void Update()
     {
+        
+    }
+    public void changeWhenHover(){
+        Cursor.SetCursor(cursorTexture,hotSpot,cursorMode);
+    }
+    public void changeWhenLeaves(){
         Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
     }
+
+
 }
