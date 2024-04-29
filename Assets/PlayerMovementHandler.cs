@@ -210,15 +210,13 @@ public class PlayerMovementHandler : MonoBehaviour
                                 cubeHit = hit.transform;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().interactable = true;
+                                GameObject btnEndturn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
+                                btnEndturn.GetComponent<Button>().interactable = true;
                             }
                             else
                             {
                                 PlayerPrefs.SetInt("clickCounter", 0);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().interactable = true;
                             }
                         }
                         if (PlayerPrefs.GetInt("clickCounter") == 0)
