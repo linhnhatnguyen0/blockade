@@ -11,10 +11,11 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
 
-    // Start est appelé avant la première frame de mise à jour
+    // Start est appelï¿½ avant la premiï¿½re frame de mise ï¿½ jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
+        PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)
         {
@@ -62,14 +63,12 @@ public class LogicScript : MonoBehaviour
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
     }
 
-    // Awake est appelé lorsque le script est chargé
+    // Awake est appelï¿½ lorsque le script est chargï¿½
     void Awake()
     {
-        //Récupérer les personnages choisis par les joueurs et faire apparaitre les pions
-        int player1 = PlayerPrefs.GetInt("Player1");
-        int player2 = PlayerPrefs.GetInt("Player2");
-        Debug.Log("Player1: " + player1);
-        Debug.Log("Player2: " + player2);
+        //Rï¿½cupï¿½rer les personnages choisis par les joueurs et faire apparaitre les pions
+        int player1 = PlayerPrefs.GetInt("SpawnCharacterP1");
+        int player2 = PlayerPrefs.GetInt("SpawnCharacterP2");
         p1Spawn.Add(setSpawnPosition(3, 3));
         p1Spawn.Add(setSpawnPosition(3, 7));
         p2Spawn.Add(setSpawnPosition(10, 3));
@@ -114,12 +113,12 @@ public class LogicScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Convertir les coordonnées du plateau en position de spawn
+    /// Convertir les coordonnï¿½es du plateau en position de spawn
     /// </summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    Vector3 setSpawnPosition(int x, int y)
+    private Vector3 setSpawnPosition(int x, int y)
     {
         return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
     }
