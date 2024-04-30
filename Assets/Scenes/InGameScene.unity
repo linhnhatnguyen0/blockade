@@ -10148,6 +10148,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7447408856482103679, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1005756248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12047,6 +12063,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2090224042}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1173620768
 GameObject:
   m_ObjectHideFlags: 0
@@ -12154,6 +12186,22 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7447408856482103679, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -15076,6 +15124,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7447408856482103679, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1438078597
 GameObject:
   m_ObjectHideFlags: 0
@@ -16761,6 +16825,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7447408856482103679, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1577157312
 GameObject:
   m_ObjectHideFlags: 0
@@ -17805,6 +17885,22 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2090224042}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -21015,6 +21111,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7447408856482103679, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2021710679
 GameObject:
   m_ObjectHideFlags: 0
@@ -21617,6 +21729,22 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2090224042}
+          m_TargetAssemblyTypeName: HoverElement, Assembly-CSharp
+          m_MethodName: changeWhenLeaves
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -22715,6 +22843,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7447408856482103667, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7447408856482103670, guid: 7155f55cbfb70cb419064f3e4fab44c1, type: 3}
       propertyPath: m_Name
       value: MouseSensible
