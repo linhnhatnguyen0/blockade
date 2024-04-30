@@ -16,13 +16,12 @@ public class Benjamin
 
     public List<Point> canMovePosition(Point currentPosition)
     {
-        
-        return mouvablePositions;
+        return game.getAvailableMove(getPawnByCase(Point.x,Point.y));
     }
 
     public void updatePawnPosition(int xP, int yP, int x, int y)
     {
-        // Met � jour la position du pion
+        game.movePawn(getPawnByCase(xP,yP),x,y);
     }
 
     public bool canPlaceWall(int x, int y, bool isHorizontal)
