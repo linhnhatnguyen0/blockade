@@ -13,12 +13,16 @@ public class Case {
         this.beginning = isBeginning;
     }
 
-    public hasWalls(){
+    public hasWall(){
         if(topWall == null) return true;
         if(leftWall == null) return true;
         if(rightWall == null) return true;
         if(bottomWall == null) return true;
         return false;
+    }
+
+    public hasPawn(){
+        
     }
 
     public bool hasTopWall() {

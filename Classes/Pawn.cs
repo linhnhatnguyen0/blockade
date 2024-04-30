@@ -8,7 +8,12 @@ public enum MoveType{
     topRight,
     topLeft,
     bottomLeft,
-    bottomRight
+    bottomRight,
+    closeTop,
+    closeRight,
+    closeLeft,
+    closeBottom,
+
 }
 
 public class Pawn {
@@ -34,8 +39,7 @@ public class Pawn {
         set { y = value; }
     }
 
-    public void move(MoveType type) 
-    {
+    public void move((int _x, int _y)){
         switch (type)
         {
             case MoveType.top:
@@ -72,6 +76,22 @@ public class Pawn {
             case MoveType.topLeft:
                 x -= 1;
                 y += 1;
+                break;
+
+            case MoveType.closeBottom:
+                y -= 1;
+                break;
+
+            case MoveType.closeTop:
+                y += 1;
+                break;    
+
+            case MoveType.closeLeft:
+                x -= 1;
+                break;
+
+            case MoveType.closeRight:
+                x += 1;
                 break;
         }
     }
