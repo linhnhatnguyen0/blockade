@@ -48,15 +48,14 @@ public class DragHandler : MonoBehaviour
     {
         transform.position = GetMouseWorldPos() + mOffset;
         Quaternion rotation = Quaternion.Euler(0, this.transform.rotation.eulerAngles.y, 0);
-        if (closestPoint == null)
+        if (closestPoint != null)
         {
-            getClosestPoint(transform.position);
-            wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
+            Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
         }
-        Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
         getClosestPoint(transform.position);
         wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
+        wall.GetComponent<wallVerification>().resetCubeAttached();
         Point point = wall.GetComponent<wallVerification>().getCubeAttached();
         if (partie.canPlaceWall(point.X, point.Y, isHorizontal))
         {
@@ -77,6 +76,7 @@ public class DragHandler : MonoBehaviour
             Destroy(wall);
             return;
         }
+        wall.GetComponent<Renderer>().material.color = Color.blue;
         wall.tag = "Untagged";
         wall.GetComponent<wallVerification>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         Point point = wall.GetComponent<wallVerification>().getCubeAttached();  //TODO
