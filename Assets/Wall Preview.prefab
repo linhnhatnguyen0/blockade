@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2164175898932422924}
   - component: {fileID: 4648245858914150384}
   - component: {fileID: 7639538670185177076}
-  - component: {fileID: 3530157071492424682}
+  - component: {fileID: 6040007447842441407}
+  - component: {fileID: -499915126121367041}
   m_Layer: 3
   m_Name: Wall Preview
   m_TagString: WallPreview
@@ -93,12 +94,28 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2706679320443213187}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3530157071492424682
+--- !u!54 &6040007447842441407
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706679320443213187}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-499915126121367041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +124,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2706679320443213187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22fcdd15e1118d4a9a70efd8a2da806, type: 3}
+  m_Script: {fileID: 11500000, guid: b5480ed79d5067c49af89e9aa1107d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
