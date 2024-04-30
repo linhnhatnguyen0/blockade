@@ -10,10 +10,14 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
+    public Partie partie;
 
-    // Start is called before the first frame update
+    // Start est appel� avant la premi�re frame de mise � jour
+    // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
+        partie = new Partie();
+        PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)
         {
@@ -28,6 +32,11 @@ public class LogicScript : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Faire apparaitre les pions pour le joueur 1
+    /// </summary>
+    /// <param name="champNamePrefab"></param>
     private void spawnChampionP1(string champNamePrefab)
     {
         GameObject champPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -40,6 +49,10 @@ public class LogicScript : MonoBehaviour
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
     }
 
+    /// <summary>
+    /// Faire apparaitre les pions pour le joueur 2 
+    /// </summary>
+    /// <param name="champNamePrefab"></param>
     private void spawnChampionP2(string champNamePrefab)
     {
         GameObject champPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
@@ -51,12 +64,13 @@ public class LogicScript : MonoBehaviour
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 7);
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
     }
+
+    // Awake est appel� lorsque le script est charg�
     void Awake()
     {
-        int player1 = PlayerPrefs.GetInt("Player1");
-        int player2 = PlayerPrefs.GetInt("Player2");
-        Debug.Log("Player1: " + player1);
-        Debug.Log("Player2: " + player2);
+        //R�cup�rer les personnages choisis par les joueurs et faire apparaitre les pions
+        int player1 = PlayerPrefs.GetInt("SpawnCharacterP1");
+        int player2 = PlayerPrefs.GetInt("SpawnCharacterP2");
         p1Spawn.Add(setSpawnPosition(3, 3));
         p1Spawn.Add(setSpawnPosition(3, 7));
         p2Spawn.Add(setSpawnPosition(10, 3));
@@ -100,7 +114,13 @@ public class LogicScript : MonoBehaviour
         }
     }
 
-    Vector3 setSpawnPosition(int x, int y)
+    /// <summary>
+    /// Convertir les coordonn�es du plateau en position de spawn
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    private Vector3 setSpawnPosition(int x, int y)
     {
         return new Vector3(plateau.transform.GetChild(x).GetChild(y).transform.position.x, 2.1f, plateau.transform.GetChild(x).GetChild(y).transform.position.z);
     }
