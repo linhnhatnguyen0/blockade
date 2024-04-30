@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPreviewPrefab: {fileID: 2706679320443213187, guid: e7f45e7b7c1a5af4abfa23f9231b7c25, type: 3}
+  wallPutterPrefab: {fileID: 2706679320443213187, guid: 77e09d3df316de143af2dfc093395cb1, type: 3}
   isHorizontal: 0
   layerMask:
     serializedVersion: 2

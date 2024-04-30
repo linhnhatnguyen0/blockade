@@ -9,11 +9,13 @@ using UnityEngine.UI;
 public class DragHandler : MonoBehaviour
 {
     public GameObject wallPreviewPrefab;
+    public GameObject wallPutterPrefab;
     public bool isHorizontal;
     private Vector3 closestPoint;
     private GameObject wall;
     Vector3 mOffset;
     public LayerMask layerMask;
+
     private GameObject hp1;
     private GameObject vp1;
     private GameObject hp2;
@@ -21,6 +23,8 @@ public class DragHandler : MonoBehaviour
 
     private GameObject endturn_btnP1;
     private GameObject endturn_btnP2;
+
+    private Partie partie;
 
     private void Start()
     {
@@ -30,6 +34,7 @@ public class DragHandler : MonoBehaviour
         vp2 = GameObject.FindGameObjectsWithTag("vp2")[0];
         endturn_btnP1 = GameObject.Find("endturn_btnP1");
         endturn_btnP2 = GameObject.Find("endturn_btnP2");
+        partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
     }
 
     private void OnMouseDown()
@@ -51,15 +56,31 @@ public class DragHandler : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
         getClosestPoint(transform.position);
         wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
-        // Changement de la couleur du mur en fonction du joueur
+        wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
+        Point point = wall.GetComponent<wallVerification>().getCubeAttached();
+        if (partie.canPlaceWall(point.X, point.Y, isHorizontal))
+        {
+            wall.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            wall.GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 
 
     private void OnMouseUp()
     {
-        wall.tag = "Untagged";
-        wall.GetComponent<wallHandler>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         Destroy(GameObject.FindGameObjectWithTag("WallDrag"));
+        if (wall.GetComponent<Renderer>().material.color == Color.red)
+        {
+            Destroy(wall);
+            return;
+        }
+        wall.tag = "Untagged";
+        wall.GetComponent<wallVerification>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
+        Point point = wall.GetComponent<wallVerification>().getCubeAttached();  //TODO
+        partie.placeWall(point.X, point.Y, isHorizontal);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
             if (!isHorizontal)
