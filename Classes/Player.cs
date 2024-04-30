@@ -1,4 +1,5 @@
-using Blockadepublic class Player{
+using Blockade
+public class Player{
     protected Wall nbVerticalWallsRemaining;
     protected Wall nbHorizonalWallsRemaining;
     protected Pawn pawn1;
