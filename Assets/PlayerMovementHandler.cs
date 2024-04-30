@@ -36,12 +36,15 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private PlayerID currentPlayerID;
 
+    private Partie partie;
+
     private bool isMoving = false;
     void Start()
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
     }
+
 
     /// <summary>
     /// La fonction de r�cup�rer la position du cube sur le board
@@ -69,59 +72,6 @@ public class PlayerMovementHandler : MonoBehaviour
             }
         }
         return new Point(indexLine, indexCube);
-    }
-
-    List<Point> UpdateMovablePosition(Point currentPosition)
-    {
-        List<Point> mouvablePositions = new List<Point>();
-        mouvablePositions.Add(new Point(currentPosition.X - 2, currentPosition.Y));
-        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y + 1));
-        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y + 2));
-        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y + 1));
-        mouvablePositions.Add(new Point(currentPosition.X + 2, currentPosition.Y));
-        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y - 1));
-        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y - 2));
-        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y - 1));
-        Point point1 = new Point(currentPosition.X, currentPosition.Y + 1);
-        Point point2 = new Point(currentPosition.X + 1, currentPosition.Y);
-        Point point3 = new Point(currentPosition.X, currentPosition.Y - 1);
-        Point point4 = new Point(currentPosition.X - 1, currentPosition.Y);
-        List<Point> listPointDestination = new List<Point>();
-        listPointDestination.Add(point1);
-        listPointDestination.Add(point2);
-        listPointDestination.Add(point3);
-        listPointDestination.Add(point4);
-
-        List<Point> copy = new List<Point>(mouvablePositions);
-        foreach (Point point in copy)
-        {
-            if (point.X > 13 || point.X < 0 || point.Y < 0 || point.Y > 10)
-            {
-                mouvablePositions.Remove(point);
-            }
-            //verifyMovablePosition(point); 
-        }
-        if (currentPlayerID == PlayerID.Player1)
-        {
-            foreach (var point in listPointDestination)
-            {
-                if ((point.X == 10 && point.Y == 3) || (point.X == 10 && point.Y == 7))
-                {
-                    mouvablePositions.Add(point);
-                }
-            }
-        }
-        else
-        {
-            foreach (var point in listPointDestination)
-            {
-                if ((point.X == 3 && point.Y == 3) || (point.X == 3 && point.Y == 7))
-                {
-                    mouvablePositions.Add(point);
-                }
-            }
-        }
-        return mouvablePositions;
     }
 
     /// <summary>
@@ -179,6 +129,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Update()
     {
+        partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
         // Mise � jour du joueur courant
         currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
 
@@ -208,17 +159,16 @@ public class PlayerMovementHandler : MonoBehaviour
                             {
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
+                                partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().interactable = true;
+                                GameObject btnEndturn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
+                                btnEndturn.GetComponent<Button>().interactable = true;
                             }
                             else
                             {
                                 PlayerPrefs.SetInt("clickCounter", 0);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btn.GetComponent<Button>().interactable = true;
                             }
                         }
                         if (PlayerPrefs.GetInt("clickCounter") == 0)
@@ -231,7 +181,7 @@ public class PlayerMovementHandler : MonoBehaviour
                                     currentPlayer = hit.transform.gameObject;
                                     anim = currentPlayer.GetComponent<Animator>();
                                     currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
-                                    List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
+                                    List<Point> mouvablePositions = partie.canMovePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
                                     foreach (var item in mouvablePositions)
                                     {
                                         Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
