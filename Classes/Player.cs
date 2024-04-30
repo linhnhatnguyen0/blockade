@@ -4,7 +4,7 @@ using Blockadepublic class Player{
     protected Pawn pawn1;
     protected Pawn pawn2;
 
-    public Game()
+    public Player()
     {
         
     }
