@@ -11,7 +11,7 @@ public class DragHandler : MonoBehaviour
     public GameObject wallPreviewPrefab;
     public GameObject wallPutterPrefab;
     public bool isHorizontal;
-    private Vector3 closestPoint;
+    private Transform closestPoint;
     private GameObject wall;
     Vector3 mOffset;
     public LayerMask layerMask;
@@ -52,19 +52,17 @@ public class DragHandler : MonoBehaviour
         {
             Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
         }
-        getClosestPoint(transform.position);
-        wall = Instantiate(wallPreviewPrefab, closestPoint, rotation);
+        getClosestPoint();
+        wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
-        wall.GetComponent<wallVerification>().resetCubeAttached();
-        Point point = wall.GetComponent<wallVerification>().getCubeAttached();
-        if (partie.canPlaceWall(point.X, point.Y, isHorizontal))
-        {
-            wall.GetComponent<Renderer>().material.color = Color.green;
-        }
-        else
-        {
-            wall.GetComponent<Renderer>().material.color = Color.red;
-        }
+        //if (partie.canPlaceWall(point.X, point.Y, isHorizontal))
+        //{
+        //    wall.GetComponent<Renderer>().material.color = Color.green;
+        //}
+        //else
+        //{
+        //    wall.GetComponent<Renderer>().material.color = Color.red;
+        //}
     }
 
 
@@ -118,7 +116,7 @@ public class DragHandler : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
 
-    private void getClosestPoint(Vector3 position)
+    private void getClosestPoint()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the mouse position
@@ -126,9 +124,14 @@ public class DragHandler : MonoBehaviour
         {
             if (hit.collider.tag == "MappingPoint")
             {
-                closestPoint = hit.transform.gameObject.transform.position;
+                closestPoint = hit.transform.gameObject.transform;
             }
         }
+    }
+
+    private Point getCubeAttached(Transform closestPoint)
+    {
+
     }
 
     public void changeWallButtonColor(bool hp1b, bool vp1b, bool hp2b, bool vp2b)

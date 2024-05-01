@@ -6,7 +6,7 @@ public class wallVerification : MonoBehaviour
 {
     // Start is called before the first frame update
     public PlayerID playerID;
-    List<Point> cubeAttached;
+    List<Point> cubeAttached = new List<Point>(4);
     public bool isHorizontal;
 
     private void OnTriggerEnter(Collider other)
@@ -16,16 +16,11 @@ public class wallVerification : MonoBehaviour
             Point cube = PlayerMovementHandler.GetCubeFromBoard(other.transform);
             cubeAttached.Add(cube);
         }
-        //cubeAttached.ForEach(c =>
-        //{
-        //    Debug.Log(c.ToString());
-        //});
-    }
-
-    public void resetCubeAttached()
-    {
-        cubeAttached.Clear();
-        cubeAttached = new List<Point>(4);
+        Debug.Log("Cube attached: " + cubeAttached.Count);
+        if(cubeAttached.Count == 4)
+        {
+            Debug.Log("Cube attached to the wall");
+        }
     }
 
     public Point getCubeAttached()
@@ -35,6 +30,6 @@ public class wallVerification : MonoBehaviour
         {
             Debug.Log(c.ToString());
         });
-        return new Point(0, 0);
+        return cubeAttached[0];
     }
 }
