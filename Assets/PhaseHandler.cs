@@ -40,6 +40,7 @@ public class PhaseHandler : MonoBehaviour
     void Start()
     {
         //PAWN
+        announcer.Message(1,1);
         PlayerPrefs.SetInt("currentPhase", 0);
         changeWallButtonColor(false, false, false, false);
         isMyTurnBtnP1.SetActive(true);
@@ -63,14 +64,16 @@ public class PhaseHandler : MonoBehaviour
         if (state == 1)
         {
             //WALL
-            announcer.Message(1);
+            
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
+                announcer.Message(2,1);
                 changeWallButtonColor(true, true, false, false);
             }
             else
             {
+                announcer.Message(2,2);
                 changeWallButtonColor(false, false, true, true);
             }
             
@@ -84,13 +87,15 @@ public class PhaseHandler : MonoBehaviour
     }
     IEnumerator DelayResetState()
     {
-        yield return new WaitForSeconds(1); // waits 3 seconds
+        yield return new WaitForSeconds(1); // waits 1 seconds
         state = 0;
         //PAWN
+        announcer.Message(1,PlayerPrefs.GetInt("currentPlayer"));
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
+            announcer.Message(1,2);
             PlayerPrefs.SetInt("currentPlayer", 2);
             isMyTurnBtnP1.SetActive(false);
             isMyTurnBtnP2.SetActive(true);
@@ -102,6 +107,7 @@ public class PhaseHandler : MonoBehaviour
         }
         else
         {
+            announcer.Message(1,1);
             PlayerPrefs.SetInt("currentPlayer", 1);
             isMyTurnBtnP1.SetActive(true);
             isMyTurnBtnP2.SetActive(false);
