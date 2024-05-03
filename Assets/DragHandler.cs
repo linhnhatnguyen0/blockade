@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class DragHandler : MonoBehaviour
     private GameObject wall;
     Vector3 mOffset;
     public LayerMask layerMask;
+    private GameObject undoBtnP1;
+    private GameObject undoBtnP2;
 
     private GameObject hp1;
     private GameObject vp1;
@@ -25,6 +28,8 @@ public class DragHandler : MonoBehaviour
     private GameObject endturn_btnP2;
 
     private Partie partie;
+    private int closestPointIndex;
+    private Point cubeTopLeftPosition;
 
     private void Start()
     {
@@ -34,6 +39,8 @@ public class DragHandler : MonoBehaviour
         vp2 = GameObject.FindGameObjectsWithTag("vp2")[0];
         endturn_btnP1 = GameObject.Find("endturn_btnP1");
         endturn_btnP2 = GameObject.Find("endturn_btnP2");
+        undoBtnP1 = GameObject.Find("undo_btnP1");
+        undoBtnP2 = GameObject.Find("undo_btnP2");
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
     }
 
@@ -52,17 +59,27 @@ public class DragHandler : MonoBehaviour
         {
             Destroy(GameObject.FindGameObjectWithTag("WallPreview"));
         }
-        getClosestPoint();
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the mouse position
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            if (hit.collider.tag == "MappingPoint")
+            {
+                closestPoint = hit.transform.gameObject.transform;
+            }
+        }
         wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
-        //if (partie.canPlaceWall(point.X, point.Y, isHorizontal))
-        //{
-        //    wall.GetComponent<Renderer>().material.color = Color.green;
-        //}
-        //else
-        //{
-        //    wall.GetComponent<Renderer>().material.color = Color.red;
-        //}
+        closestPointIndex = int.Parse(Regex.Match(closestPoint.name, @"\d+").Value);
+        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10);
+        if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
+        {
+            wall.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            wall.GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 
 
@@ -77,35 +94,43 @@ public class DragHandler : MonoBehaviour
         wall.GetComponent<Renderer>().material.color = Color.blue;
         wall.tag = "Untagged";
         wall.GetComponent<wallVerification>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
-        Point point = wall.GetComponent<wallVerification>().getCubeAttached();  //TODO
-        partie.placeWall(point.X, point.Y, isHorizontal);
+        Debug.Log("Cube attached: " + cubeTopLeftPosition);
+        partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
+            undoBtnP1.GetComponent<undoBtnHandler>().wallPut = wall;
             if (!isHorizontal)
             {
                 vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                undoBtnP1.GetComponent<undoBtnHandler>().undoText = vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 changeWallButtonColor(false, false, false, false);
             }
             else
             {
                 hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                undoBtnP1.GetComponent<undoBtnHandler>().undoText = hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 changeWallButtonColor(false, false, false, false);
             }
             endturn_btnP1.GetComponent<Button>().interactable = true;
+            undoBtnP1.GetComponent<Button>().interactable = true;
         }
         else
         {
+            undoBtnP2.GetComponent<undoBtnHandler>().wallPut = wall;
             if (!isHorizontal)
             {
                 vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                undoBtnP2.GetComponent<undoBtnHandler>().undoText = vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 changeWallButtonColor(false, false, false, false);
             }
             else
             {
                 hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (int.Parse(hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text) - 1).ToString();
+                undoBtnP2.GetComponent<undoBtnHandler>().undoText = hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                 changeWallButtonColor(false, false, false, false);
             }
             endturn_btnP2.GetComponent<Button>().interactable = true;
+            undoBtnP2.GetComponent<Button>().interactable = true;
         }
     }
 
@@ -114,24 +139,6 @@ public class DragHandler : MonoBehaviour
         Vector3 mousePoint = Input.mousePosition;
         mousePoint.z = Camera.main.WorldToScreenPoint(transform.position).z;
         return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-
-    private void getClosestPoint()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Create a ray from the mouse position
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-        {
-            if (hit.collider.tag == "MappingPoint")
-            {
-                closestPoint = hit.transform.gameObject.transform;
-            }
-        }
-    }
-
-    private Point getCubeAttached(Transform closestPoint)
-    {
-
     }
 
     public void changeWallButtonColor(bool hp1b, bool vp1b, bool hp2b, bool vp2b)

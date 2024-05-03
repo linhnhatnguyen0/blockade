@@ -67,7 +67,7 @@ public class Partie
 
     public bool canPlaceWall(int x, int y, bool isHorizontal)
     {
-        return false;
+        return true;
     }
 
     public void placeWall(int x, int y, bool isHorizontal)
