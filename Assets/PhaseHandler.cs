@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using System.Threading.Tasks;
 using TMPro;
 
+
 public class PhaseHandler : MonoBehaviour
 {
+    public Announcer announcer;
+    
     private int state = 0;
     public GameObject isMyTurnBtnP1;
     public GameObject isMyTurnBtnP2;
@@ -34,6 +37,7 @@ public class PhaseHandler : MonoBehaviour
 
     void Start()
     {
+        //PAWN
         PlayerPrefs.SetInt("currentPhase", 0);
         changeWallButtonColor(false, false, false, false);
         isMyTurnBtnP1.SetActive(true);
@@ -52,6 +56,8 @@ public class PhaseHandler : MonoBehaviour
         PlayerPrefs.SetInt("currentPhase", state);
         if (state == 1)
         {
+            //WALL
+            announcer.Message(1);
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
@@ -61,6 +67,7 @@ public class PhaseHandler : MonoBehaviour
             {
                 changeWallButtonColor(false, false, true, true);
             }
+            
         }
         if (state == 2)
         {
@@ -73,6 +80,7 @@ public class PhaseHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(1); // waits 3 seconds
         state = 0;
+        //PAWN
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
