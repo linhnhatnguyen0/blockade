@@ -10,11 +10,15 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
+    public Partie partie;
+    public GameObject undoBtnP1;
+    public GameObject undoBtnP2;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
+        partie = new Partie();
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)

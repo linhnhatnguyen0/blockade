@@ -24,6 +24,10 @@ public class PlayerMovementHandler : MonoBehaviour
     private GameObject board;   // Le plateau de jeu
     public GameObject plate;    // Le prefab de la position mouvable
     public LayerMask layerMask;
+    public GameObject endTurnBtnP1;
+    public GameObject endTurnBtnP2;
+    public GameObject undoBtnP1;
+    public GameObject undoBtnP2;
 
     private float speed = 7f;   // La vitesse de d�placement
     private float rotationSpeed = 500f; // La vitesse de rotation
@@ -36,12 +40,20 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private PlayerID currentPlayerID;
 
+    private Partie partie;
+
     private bool isMoving = false;
+
+    private Point previousPosition;
+    private Vector3 previousRotation;
+
+    private Vector3 targetPosition;
     void Start()
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
     }
+
 
     /// <summary>
     /// La fonction de r�cup�rer la position du cube sur le board
@@ -69,59 +81,6 @@ public class PlayerMovementHandler : MonoBehaviour
             }
         }
         return new Point(indexLine, indexCube);
-    }
-
-    List<Point> UpdateMovablePosition(Point currentPosition)
-    {
-        List<Point> mouvablePositions = new List<Point>();
-        mouvablePositions.Add(new Point(currentPosition.X - 2, currentPosition.Y));
-        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y + 1));
-        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y + 2));
-        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y + 1));
-        mouvablePositions.Add(new Point(currentPosition.X + 2, currentPosition.Y));
-        mouvablePositions.Add(new Point(currentPosition.X + 1, currentPosition.Y - 1));
-        mouvablePositions.Add(new Point(currentPosition.X, currentPosition.Y - 2));
-        mouvablePositions.Add(new Point(currentPosition.X - 1, currentPosition.Y - 1));
-        Point point1 = new Point(currentPosition.X, currentPosition.Y + 1);
-        Point point2 = new Point(currentPosition.X + 1, currentPosition.Y);
-        Point point3 = new Point(currentPosition.X, currentPosition.Y - 1);
-        Point point4 = new Point(currentPosition.X - 1, currentPosition.Y);
-        List<Point> listPointDestination = new List<Point>();
-        listPointDestination.Add(point1);
-        listPointDestination.Add(point2);
-        listPointDestination.Add(point3);
-        listPointDestination.Add(point4);
-
-        List<Point> copy = new List<Point>(mouvablePositions);
-        foreach (Point point in copy)
-        {
-            if (point.X > 13 || point.X < 0 || point.Y < 0 || point.Y > 10)
-            {
-                mouvablePositions.Remove(point);
-            }
-            //verifyMovablePosition(point); 
-        }
-        if (currentPlayerID == PlayerID.Player1)
-        {
-            foreach (var point in listPointDestination)
-            {
-                if ((point.X == 10 && point.Y == 3) || (point.X == 10 && point.Y == 7))
-                {
-                    mouvablePositions.Add(point);
-                }
-            }
-        }
-        else
-        {
-            foreach (var point in listPointDestination)
-            {
-                if ((point.X == 3 && point.Y == 3) || (point.X == 3 && point.Y == 7))
-                {
-                    mouvablePositions.Add(point);
-                }
-            }
-        }
-        return mouvablePositions;
     }
 
     /// <summary>
@@ -177,15 +136,31 @@ public class PlayerMovementHandler : MonoBehaviour
         }
     }
 
+    public void undo()
+    {
+        Debug.Log("Undo" + previousPosition);
+        Debug.Log("Undo" + currentPlayer.transform.position);
+        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).name);
+        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).parent.name);
+        PlayerPrefs.SetInt("clickCounter", 0);
+        currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = previousPosition;
+        Vector3 targetPosition = new Vector3(board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.x, (float)2.1, board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.z);
+        currentPlayer.transform.position = targetPosition;
+        currentPlayer.transform.eulerAngles = previousRotation;
+        _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = false : endTurnBtnP2.GetComponent<Button>().interactable = false;
+        _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = false : undoBtnP2.GetComponent<Button>().interactable = false;
+    }
+
     private void Update()
     {
+        partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
         // Mise � jour du joueur courant
         currentPlayerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
 
         // Si le pion et la position de destination sont d�finis
         if (cubeHit != null && currentPlayer != null)
         {
-            Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
+            targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
             movePlayerHandler(targetPosition);
         }
         if (!isMoving)
@@ -208,10 +183,13 @@ public class PlayerMovementHandler : MonoBehaviour
                             {
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
+                                partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);
+                                previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btnEndturn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btnEndturn.GetComponent<Button>().interactable = true;
+                                _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = true : endTurnBtnP2.GetComponent<Button>().interactable = true;
+                                _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = true : undoBtnP2.GetComponent<Button>().interactable = true;
+                                previousRotation = currentPlayer.transform.eulerAngles;
                             }
                             else
                             {
@@ -229,7 +207,7 @@ public class PlayerMovementHandler : MonoBehaviour
                                     currentPlayer = hit.transform.gameObject;
                                     anim = currentPlayer.GetComponent<Animator>();
                                     currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
-                                    List<Point> mouvablePositions = UpdateMovablePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
+                                    List<Point> mouvablePositions = partie.canMovePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
                                     foreach (var item in mouvablePositions)
                                     {
                                         Transform cube = board.transform.GetChild(item.X).GetChild(item.Y);
@@ -237,8 +215,8 @@ public class PlayerMovementHandler : MonoBehaviour
                                         cube.gameObject.layer = 0;
                                         Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
                                     }
-                                    GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                    btn.GetComponent<Button>().interactable = false;
+                                    _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = false : endTurnBtnP2.GetComponent<Button>().interactable = false;
+                                    _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = false : undoBtnP2.GetComponent<Button>().interactable = false;
                                 }
                             }
                         }
