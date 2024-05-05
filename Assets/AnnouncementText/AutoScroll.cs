@@ -5,7 +5,6 @@ using TMPro;
 public class AutoScroll : MonoBehaviour
 {
     float speed=200.0f ;
-    float textPosBegin=-480.0f;
     float boundaryTextEnd=1480.0f;
     Vector3 restart;
     RectTransform myGorectTransform;
