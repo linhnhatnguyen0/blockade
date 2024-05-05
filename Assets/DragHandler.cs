@@ -10,8 +10,12 @@ using UnityEngine.UI;
 public class DragHandler : MonoBehaviour
 {
     public GameObject wallPreviewPrefab;
-    public GameObject wallPutterPrefab;
+    
     public bool isHorizontal;
+    public Texture2D DefaultTexture;
+    public Texture2D CancelTexture;
+    private CursorMode cursorMode = CursorMode.Auto;
+    private Vector2 hotSpot= Vector2.zero;
     private Transform closestPoint;
     private GameObject wall;
     Vector3 mOffset;
@@ -78,7 +82,10 @@ public class DragHandler : MonoBehaviour
         }
         else
         {
+            //afficher croix sur curseur
+            
             wall.GetComponent<Renderer>().material.color = Color.red;
+            Cursor.SetCursor(CancelTexture,Vector2.zero,cursorMode);
         }
     }
 
@@ -86,6 +93,9 @@ public class DragHandler : MonoBehaviour
     private void OnMouseUp()
     {
         Destroy(GameObject.FindGameObjectWithTag("WallDrag"));
+        //Remettre curseur normal
+        Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
+        //Pas le droit de placer ici (IG)
         if (wall.GetComponent<Renderer>().material.color == Color.red)
         {
             Destroy(wall);

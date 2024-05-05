@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPreviewPrefab: {fileID: 2706679320443213187, guid: e7f45e7b7c1a5af4abfa23f9231b7c25, type: 3}
-  wallPutterPrefab: {fileID: 2706679320443213187, guid: 77e09d3df316de143af2dfc093395cb1, type: 3}
   isHorizontal: 0
+  DefaultTexture: {fileID: 2800000, guid: a77e2ddfb5a67a9438dabde653b15f64, type: 3}
+  CancelTexture: {fileID: 2800000, guid: 1e438f2d954baef4eb69957a74ffaddb, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 55
