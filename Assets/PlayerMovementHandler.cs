@@ -82,32 +82,37 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         return new Point(indexLine, indexCube);
     }
-
+    public static Vector3 GetCubePositionFromBoard(Point cube)
+    {
+        GameObject board = GameObject.Find("Board");
+        return board.transform.GetChild(cube.X).GetChild(cube.Y).position;
+    }
     /// <summary>
     /// La fonction de gestion du rotation et du mouvement du pion
     /// </summary>
-    /// <param name="targetPosition"></param>
-    void movePlayerHandler(Vector3 targetPosition)
+    /// <param name="targetPawn" name="targetPosition"></param>
+    public void movePlayerHandler(GameObject targetPawn, Vector3 targetPosition)
     {
-        Vector3 direction = (targetPosition - currentPlayer.transform.position).normalized;
+        anim = targetPawn.GetComponent<Animator>();
+        Vector3 direction = (targetPosition - targetPawn.transform.position).normalized;
         if (direction != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            currentPlayer.transform.rotation = Quaternion.RotateTowards(currentPlayer.transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            if (currentPlayer.transform.rotation == toRotation)
+            targetPawn.transform.rotation = Quaternion.RotateTowards(targetPawn.transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            if (targetPawn.transform.rotation == toRotation)
             {
-                currentPlayer.transform.position = Vector3.MoveTowards(currentPlayer.transform.position, targetPosition, Time.deltaTime * speed);
+                targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
                 isMoving = true;
                 anim.SetBool("isFlying", true);
             }
         }
         else
         {
-            currentPlayer.transform.position = Vector3.MoveTowards(currentPlayer.transform.position, targetPosition, Time.deltaTime * speed);
+            targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
             isMoving = true;
             anim.SetBool("isFlying", true);
         }
-        if (currentPlayer.transform.position == targetPosition)
+        if (targetPawn.transform.position == targetPosition)
         {
             cubeHit = null;
             anim.SetBool("isFlying", false);
@@ -138,10 +143,6 @@ public class PlayerMovementHandler : MonoBehaviour
 
     public void undo()
     {
-        Debug.Log("Undo" + previousPosition);
-        Debug.Log("Undo" + currentPlayer.transform.position);
-        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).name);
-        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).parent.name);
         PlayerPrefs.SetInt("clickCounter", 0);
         currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = previousPosition;
         Vector3 targetPosition = new Vector3(board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.x, (float)2.1, board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.z);
@@ -161,7 +162,7 @@ public class PlayerMovementHandler : MonoBehaviour
         if (cubeHit != null && currentPlayer != null)
         {
             targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
-            movePlayerHandler(targetPosition);
+            movePlayerHandler(currentPlayer, targetPosition);
         }
         if (!isMoving)
         {
@@ -205,7 +206,6 @@ public class PlayerMovementHandler : MonoBehaviour
                                 {
                                     PlayerPrefs.SetInt("clickCounter", 1);
                                     currentPlayer = hit.transform.gameObject;
-                                    anim = currentPlayer.GetComponent<Animator>();
                                     currentPlayerID = currentPlayer.GetComponent<PlayerPositionHandler>().playerID;
                                     List<Point> mouvablePositions = partie.canMovePosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition);
                                     foreach (var item in mouvablePositions)
