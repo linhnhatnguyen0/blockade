@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LogicScript : MonoBehaviour
 {
@@ -14,14 +15,19 @@ public class LogicScript : MonoBehaviour
     public Partie partie;
     public GameObject undoBtnP1;
     public GameObject undoBtnP2;
+    public RawImage panelImageJ1;
+    public RawImage panelImageJ2;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
         partie = new Partie();
-        int indexJ1 = PlayerPrefs.GetInt("IndexIconJ1");
-        int indexJ2 = PlayerPrefs.GetInt("IndexIconJ2");
+        int indexJ1 = PlayerPrefs.GetInt("IndexIconeJ1");
+        int indexJ2 = PlayerPrefs.GetInt("IndexIconeJ2");
+        //Debug.Log(indexJ1 + "-" + indexJ2);
+        panelImageJ1.texture = imageList[indexJ1];
+        panelImageJ2.texture = imageList[indexJ2];
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)
