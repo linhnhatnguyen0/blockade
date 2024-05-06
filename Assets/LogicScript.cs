@@ -10,6 +10,7 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p1Spawn = new List<Vector3>();
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
+    public Texture2D[] imageList;
     public Partie partie;
     public GameObject undoBtnP1;
     public GameObject undoBtnP2;
@@ -19,6 +20,8 @@ public class LogicScript : MonoBehaviour
     void Start()
     {
         partie = new Partie();
+        int indexJ1 = PlayerPrefs.GetInt("IndexIconJ1");
+        int indexJ2 = PlayerPrefs.GetInt("IndexIconJ2");
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)
