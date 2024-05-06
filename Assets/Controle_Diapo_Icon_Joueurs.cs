@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
 {
-    //public Sprite[] imageList;
     public Texture2D[] imageList;
     public RawImage panelImageJ1;
     public RawImage panelImageJ2;
@@ -30,13 +29,16 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
         if (numeroJoueur == 1)
         {
             panelImageJ1.texture = imageList[index];
+            //Debug.LogError(index);
             PlayerPrefs.SetInt("IndexIconeJ1", index);
         }
         else
         {
             panelImageJ2.texture = imageList[index];
+            //Debug.LogError(index);
             PlayerPrefs.SetInt("IndexIconeJ2", index);
         }
+        //Debug.Log(PlayerPrefs.GetInt("IndexIconeJ1") + "-" + PlayerPrefs.GetInt("IndexIconeJ1"));
     }
 
     // Méthode pour afficher le matériau à l'index
@@ -49,7 +51,7 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
             index = (index + 1) % imageList.Length;
             //Debug.LogError(index
             AfficherMaterialActuel();
-            PlayerPrefs.SetInt("IndexIconeJ1", index);
+            //PlayerPrefs.SetInt("IndexIconeJ1", index);
         }
         else
         {
@@ -58,7 +60,7 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
             index = (index + 1) % imageList.Length;
             //Debug.LogError(index
             AfficherMaterialActuel();
-            PlayerPrefs.SetInt("IndexIconeJ2", index);
+            //PlayerPrefs.SetInt("IndexIconeJ2", index);
         }
         //Debug.LogError(index);
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14429,7 +14429,73 @@ PrefabInstance:
     - {fileID: 5905096707873463257, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
     - {fileID: 1030934360011113825, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
     - {fileID: 3300787027958195080, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+    - {fileID: 7540099398826885892, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+    - {fileID: 1454653529637985188, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+--- !u!1 &1370418372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7612926800894547731, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1370418373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370418372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!1 &1370418374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1542185110473935501, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
+  m_PrefabInstance: {fileID: 1370418371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1370418375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370418374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1373372104
 GameObject:
   m_ObjectHideFlags: 0
@@ -20257,8 +20323,24 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 447272d5916c0734a876cfbe785794c3, type: 2}
   - {fileID: 2100000, guid: 5c02dae6770af354d97ceaacb0dcfaa3, type: 2}
   - {fileID: 2100000, guid: 00494841d457c5e40beb347b6483f7c9, type: 2}
+  imageList:
+  - {fileID: 2800000, guid: 0ab6d802107a9e8488769130fc71ce6c, type: 3}
+  - {fileID: 2800000, guid: 4dfa1b3b50740d445b41bcf893c88563, type: 3}
+  - {fileID: 2800000, guid: 05a898208bdd34343b4d2be289c749d6, type: 3}
+  - {fileID: 2800000, guid: ec30c1585983a5949ba598ccba8dc99d, type: 3}
+  - {fileID: 2800000, guid: 48a13ee30b77c5c459b8005216379bc0, type: 3}
+  - {fileID: 2800000, guid: f2817f2c2cf99ae4b843f5456e117f73, type: 3}
+  - {fileID: 2800000, guid: df905d5dac201c946b7d1877cc5c7039, type: 3}
+  - {fileID: 2800000, guid: 905dddc0a176280479ab4ef4a6fd31f9, type: 3}
+  - {fileID: 2800000, guid: 0e9016a25f1775243ad83706eaa42ee0, type: 3}
+  - {fileID: 2800000, guid: dde1f80986a36f942acdd353578fb9ec, type: 3}
+  - {fileID: 2800000, guid: fca4d33e310ea344cbfb29134c353ef6, type: 3}
+  - {fileID: 2800000, guid: 9a0184ef1de52064b91649098e0abb4a, type: 3}
+  - {fileID: 2800000, guid: 33da023565e8ce74f90bb15ab4ba5165, type: 3}
   undoBtnP1: {fileID: 2008155508}
   undoBtnP2: {fileID: 1573764878}
+  panelImageJ1: {fileID: 1370418375}
+  panelImageJ2: {fileID: 1370418373}
 --- !u!4 &1888136520
 Transform:
   m_ObjectHideFlags: 0
