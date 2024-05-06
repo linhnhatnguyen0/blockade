@@ -39,6 +39,7 @@ public class Controle_Diapo_Textures : MonoBehaviour
     void AfficherMaterialActuel()
     {
         panelImage.texture = textures[index];
+        //Debug.LogError(panelImage.texture);
         PlayerPrefs.SetInt("IndexSol", index);
     }
 
