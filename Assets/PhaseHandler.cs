@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using System.Threading.Tasks;
 using TMPro;
 
+
 public class PhaseHandler : MonoBehaviour
 {
+    public Announcer announcer;
+    
     private int state = 0;
     public GameObject isMyTurnBtnP1;
     public GameObject isMyTurnBtnP2;
@@ -16,6 +19,8 @@ public class PhaseHandler : MonoBehaviour
     public GameObject vp2;
     public GameObject endturn_btnP1;
     public GameObject endturn_btnP2;
+    public GameObject undo_btnP1;
+    public GameObject undo_btnP2;
     // Phase Bar
     public GameObject phaseBar1;
     public GameObject phaseBar2;
@@ -34,6 +39,8 @@ public class PhaseHandler : MonoBehaviour
 
     void Start()
     {
+        //PAWN
+        announcer.Message(1,1);
         PlayerPrefs.SetInt("currentPhase", 0);
         changeWallButtonColor(false, false, false, false);
         isMyTurnBtnP1.SetActive(true);
@@ -42,25 +49,34 @@ public class PhaseHandler : MonoBehaviour
         phaseBar2.GetComponent<Image>().fillAmount = 0;
         endturn_btnP1.GetComponent<Button>().interactable = false;
         endturn_btnP2.GetComponent<Button>().interactable = false;
+        undo_btnP1.GetComponent<Button>().interactable = false;
+        undo_btnP2.GetComponent<Button>().interactable = false;
     }
     public void changePhaseHandler()
     {
         endturn_btnP1.GetComponent<Button>().interactable = false;
         endturn_btnP2.GetComponent<Button>().interactable = false;
+        undo_btnP1.GetComponent<Button>().interactable = false;
+        undo_btnP2.GetComponent<Button>().interactable = false;
         state++;
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
         if (state == 1)
         {
+            //WALL
+            
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
+                announcer.Message(2,1);
                 changeWallButtonColor(true, true, false, false);
             }
             else
             {
+                announcer.Message(2,2);
                 changeWallButtonColor(false, false, true, true);
             }
+            
         }
         if (state == 2)
         {
@@ -71,12 +87,15 @@ public class PhaseHandler : MonoBehaviour
     }
     IEnumerator DelayResetState()
     {
-        yield return new WaitForSeconds(1); // waits 3 seconds
+        yield return new WaitForSeconds(1); // waits 1 seconds
         state = 0;
+        //PAWN
+        announcer.Message(1,PlayerPrefs.GetInt("currentPlayer"));
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
+            announcer.Message(1,2);
             PlayerPrefs.SetInt("currentPlayer", 2);
             isMyTurnBtnP1.SetActive(false);
             isMyTurnBtnP2.SetActive(true);
@@ -88,6 +107,7 @@ public class PhaseHandler : MonoBehaviour
         }
         else
         {
+            announcer.Message(1,1);
             PlayerPrefs.SetInt("currentPlayer", 1);
             isMyTurnBtnP1.SetActive(true);
             isMyTurnBtnP2.SetActive(false);
@@ -133,6 +153,22 @@ public class PhaseHandler : MonoBehaviour
 
     public void changeWallButtonColor(bool hp1b, bool vp1b, bool hp2b, bool vp2b)
     {
+        if (vp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text == "0")
+        {
+            vp1b = false;
+        }
+        if (hp1.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text == "0")
+        {
+            hp1b = false;
+        }
+        if (vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text == "0")
+        {
+            vp2b = false;
+        }
+        if (hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text == "0")
+        {
+            hp2b = false;
+        }
         hp1.GetComponent<Button>().interactable = hp1b;
         vp1.GetComponent<Button>().interactable = vp1b;
         hp2.GetComponent<Button>().interactable = hp2b;

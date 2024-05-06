@@ -11,6 +11,8 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
     public Partie partie;
+    public GameObject undoBtnP1;
+    public GameObject undoBtnP2;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur

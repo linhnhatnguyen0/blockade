@@ -24,6 +24,10 @@ public class PlayerMovementHandler : MonoBehaviour
     private GameObject board;   // Le plateau de jeu
     public GameObject plate;    // Le prefab de la position mouvable
     public LayerMask layerMask;
+    public GameObject endTurnBtnP1;
+    public GameObject endTurnBtnP2;
+    public GameObject undoBtnP1;
+    public GameObject undoBtnP2;
 
     private float speed = 7f;   // La vitesse de d�placement
     private float rotationSpeed = 500f; // La vitesse de rotation
@@ -39,6 +43,11 @@ public class PlayerMovementHandler : MonoBehaviour
     private Partie partie;
 
     private bool isMoving = false;
+
+    private Point previousPosition;
+    private Vector3 previousRotation;
+
+    private Vector3 targetPosition;
     void Start()
     {
         board = GameObject.Find("Board");
@@ -127,6 +136,21 @@ public class PlayerMovementHandler : MonoBehaviour
         }
     }
 
+    public void undo()
+    {
+        Debug.Log("Undo" + previousPosition);
+        Debug.Log("Undo" + currentPlayer.transform.position);
+        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).name);
+        Debug.Log("Undo" + board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).parent.name);
+        PlayerPrefs.SetInt("clickCounter", 0);
+        currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = previousPosition;
+        Vector3 targetPosition = new Vector3(board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.x, (float)2.1, board.transform.GetChild(previousPosition.X).GetChild(previousPosition.Y).position.z);
+        currentPlayer.transform.position = targetPosition;
+        currentPlayer.transform.eulerAngles = previousRotation;
+        _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = false : endTurnBtnP2.GetComponent<Button>().interactable = false;
+        _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = false : undoBtnP2.GetComponent<Button>().interactable = false;
+    }
+
     private void Update()
     {
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
@@ -136,7 +160,7 @@ public class PlayerMovementHandler : MonoBehaviour
         // Si le pion et la position de destination sont d�finis
         if (cubeHit != null && currentPlayer != null)
         {
-            Vector3 targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
+            targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
             movePlayerHandler(targetPosition);
         }
         if (!isMoving)
@@ -160,10 +184,12 @@ public class PlayerMovementHandler : MonoBehaviour
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
                                 partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);
+                                previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();
-                                GameObject btnEndturn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                btnEndturn.GetComponent<Button>().interactable = true;
+                                _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = true : endTurnBtnP2.GetComponent<Button>().interactable = true;
+                                _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = true : undoBtnP2.GetComponent<Button>().interactable = true;
+                                previousRotation = currentPlayer.transform.eulerAngles;
                             }
                             else
                             {
@@ -189,8 +215,8 @@ public class PlayerMovementHandler : MonoBehaviour
                                         cube.gameObject.layer = 0;
                                         Instantiate(plate, new Vector3(cube.transform.position.x, cube.transform.position.y + (float)1.1, cube.transform.position.z), Quaternion.identity).tag = "Plate";
                                     }
-                                    GameObject btn = currentPlayerID == PlayerID.Player1 ? GameObject.Find("endturn_btnP1") : GameObject.Find("endturn_btnP2");
-                                    btn.GetComponent<Button>().interactable = false;
+                                    _ = currentPlayerID == PlayerID.Player1 ? endTurnBtnP1.GetComponent<Button>().interactable = false : endTurnBtnP2.GetComponent<Button>().interactable = false;
+                                    _ = currentPlayerID == PlayerID.Player1 ? undoBtnP1.GetComponent<Button>().interactable = false : undoBtnP2.GetComponent<Button>().interactable = false;
                                 }
                             }
                         }
