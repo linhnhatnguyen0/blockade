@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10061,42 +10061,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7259943123354568998, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
   m_PrefabInstance: {fileID: 1370418371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &992725283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992725278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f82e22b7713a2e4196c4f50e2f5fdd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  announcer: {fileID: 1617808776}
-  isMyTurnBtnP1: {fileID: 670555235}
-  isMyTurnBtnP2: {fileID: 80720296}
-  hp1: {fileID: 1679487645}
-  vp1: {fileID: 1158068778}
-  hp2: {fileID: 1192338868}
-  vp2: {fileID: 1437309349}
-  endturn_btnP1: {fileID: 992725278}
-  endturn_btnP2: {fileID: 2065233589}
-  undo_btnP1: {fileID: 2008155508}
-  undo_btnP2: {fileID: 1573764878}
-  phaseBar1: {fileID: 1658019137}
-  phaseBar2: {fileID: 1605902775}
-  phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
-  phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
-  phaseBarIconPion: {fileID: 1685113146}
-  phaseBarIconWall: {fileID: 1470782423}
-  phaseBarIconValid: {fileID: 1702915937}
-  phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
-  phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
-  phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
-  phaseBarIconWallP2: {fileID: 21300000, guid: 1556e8af3605f714997e5da4c101d243, type: 3}
-  phaseBarIconValidP1: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
-  phaseBarIconValidP2: {fileID: 21300000, guid: 98d5c21c18d2c4449a75b6ccc943f93a, type: 3}
 --- !u!65 &992725289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10155,6 +10119,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &992725296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992725278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd5a79303351b54f9e650573b8ccb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseHandler: {fileID: 1755727331}
 --- !u!1001 &1005756248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13841,18 +13818,18 @@ PrefabInstance:
     - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 992725283}
+      objectReference: {fileID: 992725296}
     - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: changePhaseHandler
+      value: ChangePhase
       objectReference: {fileID: 0}
     - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PhaseHandler, Assembly-CSharp
+      value: validBtnHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 629372998835320012, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -14185,18 +14162,18 @@ PrefabInstance:
     - target: {fileID: 6013478334148047249, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2065233594}
+      objectReference: {fileID: 2065233607}
     - target: {fileID: 6013478334148047249, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6013478334148047249, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: changePhaseHandler
+      value: ChangePhase
       objectReference: {fileID: 0}
     - target: {fileID: 6013478334148047249, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PhaseHandler, Assembly-CSharp
+      value: validBtnHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6013478334148047249, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -19173,6 +19150,74 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04000001, y: 0.04, z: 0.03999999}
   m_Center: {x: 0.00000008940697, y: 0.00000011920929, z: 0}
+--- !u!1 &1755727331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1755727333}
+  - component: {fileID: 1755727332}
+  m_Layer: 0
+  m_Name: PhaseHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1755727332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755727331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f82e22b7713a2e4196c4f50e2f5fdd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  announcer: {fileID: 1617808776}
+  isMyTurnBtnP1: {fileID: 670555235}
+  isMyTurnBtnP2: {fileID: 80720296}
+  hp1: {fileID: 1679487645}
+  vp1: {fileID: 1158068778}
+  hp2: {fileID: 1192338868}
+  vp2: {fileID: 1437309349}
+  endturn_btnP1: {fileID: 992725278}
+  endturn_btnP2: {fileID: 2065233589}
+  undo_btnP1: {fileID: 2008155508}
+  undo_btnP2: {fileID: 1573764878}
+  phaseBar1: {fileID: 1658019137}
+  phaseBar2: {fileID: 1605902775}
+  phaseBarP1: {fileID: 21300000, guid: d0c7910c4b5ad3f46bf8f964ade34111, type: 3}
+  phaseBarP2: {fileID: 21300000, guid: 98e12d9c64775ab458c439c9202e80c3, type: 3}
+  phaseBarIconPion: {fileID: 1685113146}
+  phaseBarIconWall: {fileID: 1470782423}
+  phaseBarIconValid: {fileID: 1702915937}
+  phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
+  phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
+  phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
+  phaseBarIconWallP2: {fileID: 21300000, guid: 1556e8af3605f714997e5da4c101d243, type: 3}
+  phaseBarIconValidP1: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
+  phaseBarIconValidP2: {fileID: 21300000, guid: 98d5c21c18d2c4449a75b6ccc943f93a, type: 3}
+--- !u!4 &1755727333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755727331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 638.12195, y: 362.5985, z: 1390.0411}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1783259085
 GameObject:
   m_ObjectHideFlags: 0
@@ -21952,42 +21997,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6895828555675644225, guid: 7c7150dc4cde54e41b50376ff3319ba0, type: 3}
   m_PrefabInstance: {fileID: 1370418371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2065233594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2065233589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f82e22b7713a2e4196c4f50e2f5fdd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  announcer: {fileID: 1617808776}
-  isMyTurnBtnP1: {fileID: 670555235}
-  isMyTurnBtnP2: {fileID: 80720296}
-  hp1: {fileID: 1679487645}
-  vp1: {fileID: 1158068778}
-  hp2: {fileID: 1192338868}
-  vp2: {fileID: 1437309349}
-  endturn_btnP1: {fileID: 992725278}
-  endturn_btnP2: {fileID: 2065233589}
-  undo_btnP1: {fileID: 2008155508}
-  undo_btnP2: {fileID: 1573764878}
-  phaseBar1: {fileID: 1658019137}
-  phaseBar2: {fileID: 1605902775}
-  phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
-  phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
-  phaseBarIconPion: {fileID: 1685113146}
-  phaseBarIconWall: {fileID: 1470782423}
-  phaseBarIconValid: {fileID: 1702915937}
-  phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
-  phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
-  phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
-  phaseBarIconWallP2: {fileID: 21300000, guid: 1556e8af3605f714997e5da4c101d243, type: 3}
-  phaseBarIconValidP1: {fileID: 21300000, guid: 530f0eddbc623e646b176729e685cee3, type: 3}
-  phaseBarIconValidP2: {fileID: 21300000, guid: 98d5c21c18d2c4449a75b6ccc943f93a, type: 3}
 --- !u!65 &2065233600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22046,6 +22055,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2065233607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065233589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd5a79303351b54f9e650573b8ccb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseHandler: {fileID: 1755727331}
 --- !u!1001 &2073597498
 PrefabInstance:
   m_ObjectHideFlags: 0
