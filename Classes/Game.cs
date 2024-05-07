@@ -10,6 +10,7 @@ public class Game{
         self.player1 = p1;
         self.player2 = p2;
     }
+<<<<<<< HEAD
 
     public boolean chooseMoove(int index, Pawn: pawn){
         MoveType[] ListMoove = getAvailableMoove(pawn);
@@ -36,6 +37,8 @@ public class Game{
     public getPawnByCase(int x, int y){
         
     }
+=======
+>>>>>>> b7c2829f614984955d45c79e9d8090d7ea9c72b0
         
     public moveType[] getAvailableMove(Pawn pawn){
         int x = pawn.x
