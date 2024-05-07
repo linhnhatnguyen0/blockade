@@ -39,60 +39,8 @@ public class Pawn {
         set { y = value; }
     }
 
-    public void move((int _x, int _y)){
-        switch (type)
-        {
-            case MoveType.top:
-                y += 2;
-                break;
-
-            case MoveType.topRight:
-                x += 1;
-                y += 1;
-                break;
-
-            case MoveType.right:
-                x += 2;
-                break;
-
-            case MoveType.BottomRight:
-                x += 1;
-                y -= 1;
-                break;
-
-            case MoveType.bottom:
-                y -= 2;
-                break;
-
-            case MoveType.bottomLeft:
-                x -= 1;
-                y -= 1;
-                break;
-
-            case MoveType.left:
-                x -= 2;
-                break;
-
-            case MoveType.topLeft:
-                x -= 1;
-                y += 1;
-                break;
-
-            case MoveType.closeBottom:
-                y -= 1;
-                break;
-
-            case MoveType.closeTop:
-                y += 1;
-                break;    
-
-            case MoveType.closeLeft:
-                x -= 1;
-                break;
-
-            case MoveType.closeRight:
-                x += 1;
-                break;
-        }
+    public void move(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 }
