@@ -10,22 +10,7 @@ public class Game{
         self.player1 = p1;
         self.player2 = p2;
     }
-<<<<<<< HEAD
-
-    public boolean chooseMoove(int index, Pawn: pawn){
-        MoveType[] ListMoove = getAvailableMoove(pawn);
-        if (index > ListMoove.Length-1){Return False;}
-        pawn.moove(ListMoove[index]);
-        Return True;
-    }
-
-   public boolean ChooseWall(int index, Player p, boolean vertical){
-        (int,int)[] ListWall = getAvailableWall(p,vertical);
-        if (index > ListWall.Length-1){Return False;}
-        p.placewall(ListWall[index][0],ListWall[index][1],vertical);
-    }
-
-    public CasehasPawn(int x, int y){
+    public boolean CasehasPawn(int x, int y){
         Player p1 = player1;
         Player p2 = player2; 
         if(p2.pawn1.x == x && p2.pawn1.y == y || p2.pawn2.x == x && p2.pawn2.y == y || p1.pawn1.x == x && p1.pawn1.y == y || p1.pawn2.x == x && p1.pawn2.y == y){
@@ -34,12 +19,23 @@ public class Game{
         return  false;
     }
 
-    public getPawnByCase(int x, int y){
-        
+    public Pawn getPawnByCase(int x, int y){
+        Player p1 = player1;
+        Player p2 = player2;
+        if(p1.pawn1.x = x && p1.pawn1.y == y){
+            return p1.pawn1
+        }
+        else if (p1.pawn2.x = x && p1.pawn2.y == y){
+            return p1.pawn2
+        }
+        else if (p2 == p2.pawn1.x && p2.pawn2.y == y){
+            return p2.pawn1
+        }
+        else if (p2.pawn2.x = x && p2.pawn2.y == y){
+            return p2.pawn2
+        }
     }
-=======
->>>>>>> b7c2829f614984955d45c79e9d8090d7ea9c72b0
-        
+    
     public moveType[] getAvailableMove(Pawn pawn){
         int x = pawn.x
         int y = pawn.y
@@ -187,7 +183,7 @@ public class Game{
         return false;
     }
 
-    public boolean getAvailableWall(int x, int y, boolean vertical) {
+    public boolean canPlaceWall(int x, int y, boolean vertical) {
 
         if (x < 0 or x > board.board.Length) return false;
 
