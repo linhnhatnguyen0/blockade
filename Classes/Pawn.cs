@@ -30,11 +30,4 @@ public class Pawn {
         
         set { y = value; }
     }
-    
-    public bool victoire(int _x, int _y){
-        if(_x == 4 && _y == 11 || _x == 8 && _y == 11){
-            return true;
-        }
-        else return false;
-    }
 }
