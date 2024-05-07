@@ -10,6 +10,7 @@ public class Game{
         self.player1 = p1;
         self.player2 = p2;
     }
+
     public bool CasehasPawn(int x, int y){
         Player p1 = player1;
         Player p2 = player2; 
@@ -36,7 +37,7 @@ public class Game{
         }
     }
     
-    public moveType[] getAvailableMove(Pawn pawn){
+    public (int,int) getAvailableMove(Pawn pawn){
         int x = pawn.x
         int y = pawn.y
         Player p1 = player1;
@@ -45,7 +46,7 @@ public class Game{
         bool topLeft = false
         bool bottomLeft = false
         bool bottomRight = false
-        (int,int)[] = movesPossible
+        (int,int)[] movesPossible = new (int,int)[]
         //top
         if(!board.board[x][y].hasTopWall || y+1 >= 0){
             if(!board.board[x][y+1].hastopWall){
@@ -194,7 +195,21 @@ public class Game{
         return true;
     }
         
-    public void canMove(int y, int x){
-            
+    public void placeWall(Player p, int x, int y, bool isHorizontal){
+        Wall newWall = new Wall;
+        if (isHorizontal){
+            p.HorizontalWallLeft = p.HorizontalWallLeft-1;
+            board[x,y].bottomWall = newWall;
+            board[x-1,y].topWall = newWall;
+            board[x,y+1].bottomWall = newWall;
+            board[x-1,y+1].TopWall = newWall;
+        }
+        else{
+            p.VerticalWallLeft = p.VerticalWallLeft-1;
+            board[x,y].rightWall = newWall;
+            board[x+1,y].leftWall = newWall;
+            board[x,y-1].rightWall = newWall;
+            board[x+1,y-1].leftWall = newWall;
+        }
     }
 }
