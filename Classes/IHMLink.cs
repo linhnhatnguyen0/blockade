@@ -21,7 +21,7 @@ public class IHMLink
 
     public void updatePawnPosition(int xP, int yP, int x, int y)
     {
-        game.movePawn(getPawnByCase(xP,yP),x,y);
+        getPawnByCase(xP,yP).move(x,y);
     }
 
     public bool canPlaceWall(int x, int y, bool isHorizontal)
@@ -29,12 +29,12 @@ public class IHMLink
         return game.canPlaceWall(x,y,isHorizontal);
     }
 
-    public void placeWall(int x, int y, bool isHorizontal, int player)
+    public void placeWall(int x, int y, bool isHorizontal)
     {
-        if (player == 1){
+        if (PlayerPrefs.GetInt("currentPlayer") == 1){
             game.placeWall(game.p1,x,y,isHorizontal);
         }
-        else{
+        else { 
             game.placeWall(game.p2,x,y,isHorizontal);
         }
         
