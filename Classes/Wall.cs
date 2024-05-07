@@ -1,22 +1,24 @@
 using Blockade
-public enum WallType
-{
-    vertical,
-    horizontal
-}
 
-public class Wall
-{
-    private wallType type;
+public class Wall {
+    
+    public enum WallType {
 
-    public Wall(wallType type)
-    {
+        vertical,
+        horizontal
+    }
+    
+    public WallType type;
+
+    public Wall(WallType type) {
+
         this.type = type;
     }
 
-    public wallType Type
-    {
+    public WallType Type {
+
         get { return type; }
+        
         set { type = value; }
     }
 }
