@@ -3,44 +3,41 @@ using Blockade
 public class Case {
     
     private Wall topWall;
-    private Wall leftWall;
     private Wall rightWall;
     private Wall bottomWall;
-    private bool StartingCase;
+    private Wall leftWall;
 
-    public Case(bool isBeginning){
-        this.beginning = isBeginning;
-    }
+    private bool startingCase;
 
-    public bool hasWall(){
-        if(topWall == null) return false;
-        if(leftWall == null) return false;
-        if(rightWall == null) return false;
-        if(bottomWall == null) return false;
-        return true;
-    }
-
-    public bool hasPawn(){
+    public Case(bool startingCase) {
         
+        this.startingCase = startingCase;
     }
 
     public bool hasTopWall() {
-        if(topWall == null)return false;
-        return true;
+
+        return topWall != null;
     }
 
     public bool hasRightWall() {
-        if(rightWall == null) return false;
-        return true;
+        
+        return rightWall != null;
     }
 
     private bool hasBottomWall() {
-        if (bottomWall == null) return false;
-        return true;
+        
+        return bottomWall != null;
     }
 
     private bool hasLeftWall() {
-        if (leftWall == null) return false;
-        return true;
+        
+        return leftWall != null;
+    }
+
+    public bool StartingCase {
+
+        get { return StartingCase; }
+        
+        set { StartingCase = value; }
     }
 }
