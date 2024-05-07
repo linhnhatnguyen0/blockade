@@ -12,11 +12,11 @@ public class Case {
     }
 
     public bool hasWall(){
-        if(topWall == null) return true;
-        if(leftWall == null) return true;
-        if(rightWall == null) return true;
-        if(bottomWall == null) return true;
-        return false;
+        if(topWall == null) return false;
+        if(leftWall == null) return false;
+        if(rightWall == null) return false;
+        if(bottomWall == null) return false;
+        return true;
     }
 
     public bool hasPawn(){
