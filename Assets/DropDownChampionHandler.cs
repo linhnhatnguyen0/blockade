@@ -14,23 +14,23 @@ public class DropDownChampionHandler : MonoBehaviour
         {
             case 0:
                 Debug.Log("Squid");
-                PlayerPrefs.SetInt("Player1", 0);
-                Debug.Log("Player1: " + PlayerPrefs.GetInt("Player1"));
+                PlayerPrefs.SetInt("SpawnCharacterP1", 0);
+                Debug.Log("SpawnCharacterP1: " + PlayerPrefs.GetInt("SpawnCharacterP1"));
                 break;
             case 1:
                 Debug.Log("Sparrow");
-                PlayerPrefs.SetInt("Player1", 1);
-                Debug.Log("Player1: " + PlayerPrefs.GetInt("Player1"));
+                PlayerPrefs.SetInt("SpawnCharacterP1", 1);
+                Debug.Log("SpawnCharacterP1: " + PlayerPrefs.GetInt("SpawnCharacterP1"));
                 break;
             case 2:
                 Debug.Log("Pudu");
-                PlayerPrefs.SetInt("Player1", 2);
-                Debug.Log("Player1: " + PlayerPrefs.GetInt("Player1"));
+                PlayerPrefs.SetInt("SpawnCharacterP1", 2);
+                Debug.Log("SpawnCharacterP1: " + PlayerPrefs.GetInt("SpawnCharacterP1"));
                 break;
             case 3:
                 Debug.Log("Gekko");
-                PlayerPrefs.SetInt("Player1", 3);
-                Debug.Log("Player1: " + PlayerPrefs.GetInt("Player1"));
+                PlayerPrefs.SetInt("SpawnCharacterP1", 3);
+                Debug.Log("SpawnCharacterP1: " + PlayerPrefs.GetInt("SpawnCharacterP1"));
                 break;
             default:
                 Debug.Log("Default");
@@ -44,23 +44,23 @@ public class DropDownChampionHandler : MonoBehaviour
         {
             case 0:
                 Debug.Log("Squid");
-                PlayerPrefs.SetInt("Player2", 0);
-                Debug.Log("Player2: " + PlayerPrefs.GetInt("Player2"));
+                PlayerPrefs.SetInt("SpawnCharacterP2", 0);
+                Debug.Log("SpawnCharacterP2: " + PlayerPrefs.GetInt("SpawnCharacterP2"));
                 break;
             case 1:
                 Debug.Log("Sparrow");
-                PlayerPrefs.SetInt("Player2", 1);
-                Debug.Log("Player2: " + PlayerPrefs.GetInt("Player2"));
+                PlayerPrefs.SetInt("SpawnCharacterP2", 1);
+                Debug.Log("SpawnCharacterP2: " + PlayerPrefs.GetInt("SpawnCharacterP2"));
                 break;
             case 2:
                 Debug.Log("Pudu");
-                PlayerPrefs.SetInt("Player2", 2);
-                Debug.Log("Player2: " + PlayerPrefs.GetInt("Player2"));
+                PlayerPrefs.SetInt("SpawnCharacterP2", 2);
+                Debug.Log("SpawnCharacterP2: " + PlayerPrefs.GetInt("SpawnCharacterP2"));
                 break;
             case 3:
                 Debug.Log("Gekko");
-                PlayerPrefs.SetInt("Player2", 3);
-                Debug.Log("Player2: " + PlayerPrefs.GetInt("Player2"));
+                PlayerPrefs.SetInt("SpawnCharacterP2", 3);
+                Debug.Log("SpawnCharacterP2: " + PlayerPrefs.GetInt("SpawnCharacterP2"));
                 break;
             default:
                 Debug.Log("Default");
@@ -75,7 +75,7 @@ public class DropDownChampionHandler : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("Player1", 0);
-        PlayerPrefs.SetInt("Player2", 0);
+        PlayerPrefs.SetInt("SpawnCharacterP1", 0);
+        PlayerPrefs.SetInt("SpawnCharacterP2", 0);
     }
 }
