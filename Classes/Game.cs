@@ -10,7 +10,7 @@ public class Game{
         self.player1 = p1;
         self.player2 = p2;
     }
-    public boolean CasehasPawn(int x, int y){
+    public bool CasehasPawn(int x, int y){
         Player p1 = player1;
         Player p2 = player2; 
         if(p2.pawn1.x == x && p2.pawn1.y == y || p2.pawn2.x == x && p2.pawn2.y == y || p1.pawn1.x == x && p1.pawn1.y == y || p1.pawn2.x == x && p1.pawn2.y == y){
