@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using Game;
 using Player;
 
-public class Benjamin
+public class IHMLink
 {
 
     public Game game;
 
-    public Benjamin()
+    public IHMLink()
     {
         Player p1 = new Player();
         Player p2 = new Player();
@@ -26,11 +26,17 @@ public class Benjamin
 
     public bool canPlaceWall(int x, int y, bool isHorizontal)
     {
-        return false;
+        return game.canPlaceWall(x,y,isHorizontal);
     }
 
-    public void placeWall(int x, int y, bool isHorizontal)
+    public void placeWall(int x, int y, bool isHorizontal, int player)
     {
-        // Place un mur
+        if (player == 1){
+            game.placeWall(game.p1,x,y,isHorizontal);
+        }
+        else{
+            game.placeWall(game.p2,x,y,isHorizontal);
+        }
+        
     }
 }
