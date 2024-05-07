@@ -10,19 +10,6 @@ public class Game{
         self.player1 = p1;
         self.player2 = p2;
     }
-
-    public boolean chooseMoove(int index, Pawn: pawn){
-        MoveType[] ListMoove = getAvailableMoove(pawn);
-        if (index > ListMoove.Length-1){Return False;}
-        pawn.moove(ListMoove[index]);
-        Return True;
-    }
-
-   public boolean ChooseWall(int index, Player p, boolean vertical){
-        (int,int)[] ListWall = getAvailableWall(p,vertical);
-        if (index > ListWall.Length-1){Return False;}
-        p.placewall(ListWall[index][0],ListWall[index][1],vertical);
-    }
         
     public moveType[] getAvailableMove(Pawn pawn){
         int x = pawn.x
