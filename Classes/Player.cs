@@ -8,8 +8,8 @@ public class Player {
         O
     }
 
-    protected Wall nbVerticalWallsRemaining;
-    protected Wall nbHorizonalWallsRemaining;
+    protected int verticalWallLeft;
+    protected int horizontalWallLeft;
 
     protected Pawn pawn1;
     protected Pawn pawn2;
@@ -29,5 +29,19 @@ public class Player {
             this.pawn1 = new Pawn(4, 11);
             this.pawn2 = new Pawn(8, 11);
         }
+    }
+
+    public int VerticalWallLeft {
+
+        get { return verticalWallLeft; }
+        
+        set { verticalWallLeft = value; }
+    }
+
+    public int HorizontalWallLeft {
+
+        get { return horizontalWallLeft; }
+        
+        set { horizontalWallLeft = value; }
     }
 }
