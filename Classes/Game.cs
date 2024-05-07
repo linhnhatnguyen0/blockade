@@ -23,15 +23,30 @@ public class Game{
         if (index > ListWall.Length-1){Return False;}
         p.placewall(ListWall[index][0],ListWall[index][1],vertical);
     }
+
+    public CasehasPawn(int x, int y){
+        Player p1 = player1;
+        Player p2 = player2; 
+        if(p2.pawn1.x == x && p2.pawn1.y == y || p2.pawn2.x == x && p2.pawn2.y == y || p1.pawn1.x == x && p1.pawn1.y == y || p1.pawn2.x == x && p1.pawn2.y == y){
+            return true 
+        }
+        return  false;
+    }
+
+    public getPawnByCase(int x, int y){
+        
+    }
         
     public moveType[] getAvailableMove(Pawn pawn){
         int x = pawn.x
         int y = pawn.y
+        Player p1 = player1;
+        Player p2 = player2; 
         bool topRight = false
         bool topLeft = false
         bool bottomLeft = false
         bool bottomRight = false
-        MoveType[] = movesPossible
+        (int,int)[] = movesPossible
         //top
         if(!board.board[x][y].hasTopWall || y+1 >= 0){
             if(!board.board[x][y+1].hastopWall){
@@ -44,6 +59,17 @@ public class Game{
             //verif 1/2 pour top left
             if(!board.board[x][y+1].hasLeftWall){
                 topLeft = true
+            }
+            //verif pour avancer de 1 au top
+            if(caseHasPawn(x,y+2) && !casehasPawn(x,y+1)){
+                movesPossible.append((x,y+1))
+            }
+            //si 2 pions consécutif au top
+            if(caseHasPawn(x,y+1) && casehasPawn(x,y+2))
+            {
+                movesPossible.append((x,y+3))
+                movesPossible.append((x-1,y+2))
+                movesPossible.append((x+1,y+2))
             }
         }
         //bottom
@@ -60,6 +86,18 @@ public class Game{
             if(!board.board[x][y-1].hasRightWall){
                 bottomLeft = true
             }
+
+            //verif pour avancer de 1 au bottom
+            if(caseHasPawn(x,y-2) && !casehasPawn(x,y-1)){
+                movesPossible.append((x,y-1))
+            }
+            //si 2 pions consécutif au top
+            if(caseHasPawn(x,y-1) && casehasPawn(x,y-2))
+            {
+                movesPossible.append((x,y-3))
+                movesPossible.append((x-1,y-2))
+                movesPossible.append((x+1,y-2))
+            }
         }
         //left
         if(!board.board[x][y].hasLeftWall || x-1 >= 0){
@@ -75,6 +113,18 @@ public class Game{
             if(!board.board[x-1][y].hasTopWall){
                 topLeft = true
             }
+
+            //verif pour avancer de 1 a gauche
+            if(caseHasPawn(x,y-2) && !casehasPawn(x,y-1)){
+                movesPossible.append((x,y-1))
+            }
+            //si 2 pions consécutif a gauche    
+            if(caseHasPawn(x-1,y) && casehasPawn(x-2,y))
+            {
+                movesPossible.append((x-3,y))
+                movesPossible.append((x-2,y-1))
+                movesPossible.append((x-2,y+1))
+            }
         }
         //right
         if(!board.board[x][y].hasRightWall || x+1 <= 11){
@@ -89,6 +139,18 @@ public class Game{
             //verif 2/2 pour bottom right
             if(!board.board[x+1][y].hasBottomWall){
                     bottomRight = true
+            }
+
+            //verif pour avancer de 1 a droite
+            if(caseHasPawn(x-2,y) && !casehasPawn(x-1,y)){
+                movesPossible.append((x-1,y))
+            }
+            //si 2 pions consécutif a droite  
+            if(caseHasPawn(x+1,y) && casehasPawn(x+2,y))
+            {
+                movesPossible.append((x+3,y))
+                movesPossible.append((x+2,y-1))
+                movesPossible.append((x+2,y+1))
             }
         }
         if(bottomLeft) movesPossible.append((x-1,y-1))
