@@ -184,4 +184,9 @@ public class PhaseHandler : MonoBehaviour
         hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorH2;
         vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorV2;
     }
+    
+    public void victore()
+    {
+        
+    }
 }
