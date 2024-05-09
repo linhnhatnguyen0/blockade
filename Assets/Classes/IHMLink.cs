@@ -12,14 +12,12 @@ namespace Blockade
 
         public IHMLink()
         {
-            Player p1 = new Player(Player.PlayerType.X);
-            Player p2 = new Player(Player.PlayerType.O);
-            this.game = new Game(p1, p2);
+            this.game = new Game();
         }
 
         public List<Point> canMovePosition(Point currentPosition)
         {
-            (int,int)[] possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
+            List<(int,int)> possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
             return possiblemove.Select(t => new Point(t.Item1, t.Item2)).ToList();
         }
 
@@ -37,6 +35,7 @@ namespace Blockade
         {
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
+                Debug.Log(game.Player1);
                 game.placeWall(game.Player1, x, y, isHorizontal);
             }
             else

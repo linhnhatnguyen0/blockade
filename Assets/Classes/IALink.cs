@@ -10,7 +10,7 @@ namespace Blockade
         public void NewGame(Player p1, Player p2)
         {
             if (game != null)
-                game = new Game(p1, p2);
+                game = new Game();
         }
     }
 }

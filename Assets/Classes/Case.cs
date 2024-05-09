@@ -10,10 +10,10 @@ namespace Blockade
 
         private bool startingCase;
 
-        public Case(bool startingCase)
+        public Case()
         {
 
-            this.startingCase = startingCase;
+            this.startingCase = false;
         }
 
         public bool hasTopWall()
@@ -43,18 +43,42 @@ namespace Blockade
         public bool StartingCase
         {
 
-            get { return StartingCase; }
+            get { return startingCase; }
 
-            set { StartingCase = value; }
+            set { startingCase = value; }
         }
 
-        public Wall TopWall { get; set; }
+        public Wall TopWall
+        {
 
-        public Wall RightWall { get; set; }
+            get { return topWall; }
 
-        public Wall LeftWall { get; set; }
+            set { topWall = value; }
+        }
 
-        public Wall BottomWall { get; set; }
+        public Wall RightWall
+        {
+
+            get { return rightWall; }
+
+            set { rightWall = value; }
+        }
+
+        public Wall LeftWall
+        {
+
+            get { return leftWall; }
+
+            set { leftWall = value; }
+        }
+
+        public Wall BottomWall
+        {
+
+            get { return bottomWall; }
+
+            set { bottomWall = value; }
+        }
     }
 }
 

@@ -41,14 +41,14 @@ namespace Blockade
             if (type == PlayerType.X)
             {
 
-                this.pawn1 = new Pawn(4, 4);
-                this.pawn2 = new Pawn(8, 4);
+                this.pawn1 = new Pawn(3, 3);
+                this.pawn2 = new Pawn(3, 7);
             }
             else
             {
 
-                this.pawn1 = new Pawn(4, 11);
-                this.pawn2 = new Pawn(8, 11);
+                this.pawn1 = new Pawn(10, 3);
+                this.pawn2 = new Pawn(10, 7);
             }
         }
 

@@ -2,19 +2,33 @@ namespace Blockade {
     public class Board
     {
 
-        private Case[,] board;
+        private Case[,] gsboard;
 
-        public Case[,] gsBoard { get; set; }
+        public Case[,] gsBoard
+        {
+
+            get { return gsboard; }
+
+            set { gsboard = value; }
+        }
 
         public Board()
         {
 
-            board = new Case[14, 11];
+            gsboard = new Case[14, 11];
 
-            board[4, 4].StartingCase = true;
-            board[8, 4].StartingCase = true;
-            board[4, 11].StartingCase = true;
-            board[8, 11].StartingCase = true;
+            for (int i = 0; i < 14; i++)
+            {
+                for (int j = 0; j < 11; j++)
+                {
+                    gsboard[i, j] = new Case();
+                }
+            }
+
+            gsboard[3, 3].StartingCase = true;
+            gsboard[3, 7].StartingCase = true;
+            gsboard[10, 3].StartingCase = true;
+            gsboard[10, 7].StartingCase = true;
         }
     }
 }
