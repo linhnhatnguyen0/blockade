@@ -1,33 +1,41 @@
-using Blockade
+namespace Blockade
+{
+    public class Pawn
+    {
 
-public class Pawn {
+        private int x;
+        private int y;
 
-    private int x;
-    private int y;
+        public Pawn(int _x, int _y)
+        {
 
-    public Pawn(int _x, int _y) {
+            x = _x;
+            y = _y;
+        }
 
-        x = _x;
-        y = _y;
-    }
+        public void move(int _x, int _y)
+        {
 
-    public void move(int _x, int _y) {
-        
-        x = _x;
-        y = _y;
-    }
+            x = _x;
+            y = _y;
+        }
 
-    public int X {
+        public int X
+        {
 
-        get { return x; }
-        
-        set { x = value; }
-    }
+            get { return x; }
 
-    public int Y {
+            set { x = value; }
+        }
 
-        get { return y; }
-        
-        set { y = value; }
+        public int Y
+        {
+
+            get { return y; }
+
+            set { y = value; }
+        }
     }
 }
+
+

@@ -1,16 +1,17 @@
-using Game;
-using Player;
 using System.Collections.Generic;
 
-
-public class IaLink
+namespace Blockade
 {
-    public Game game;
-
-
-    public void NewGame(Player p1, Player p2)
+    public class IaLink
     {
-        if (game != null)
-            game = new Game(p1, p2);
+        public Game game;
+
+
+        public void NewGame(Player p1, Player p2)
+        {
+            if (game != null)
+                game = new Game(p1, p2);
+        }
     }
 }
+

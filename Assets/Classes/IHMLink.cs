@@ -1,42 +1,50 @@
 using System.Collections.Generic;
-using Game;
-using Player;
+using System.Linq;
+using UnityEngine;
 
-public class IHMLink
+namespace Blockade
 {
 
-    public Game game;
-
-    public IHMLink()
+    public class IHMLink
     {
-        Player p1 = new Player();
-        Player p2 = new Player();
-        this.game = new Game(p1,p2);
-    }
 
-    public List<Point> canMovePosition(Point currentPosition)
-    {
-        return game.getAvailableMove(getPawnByCase(Point.x,Point.y));
-    }
+        public Game game;
 
-    public void updatePawnPosition(int xP, int yP, int x, int y)
-    {
-        getPawnByCase(xP,yP).move(x,y);
-    }
-
-    public bool canPlaceWall(int x, int y, bool isHorizontal)
-    {
-        return game.canPlaceWall(x,y,isHorizontal);
-    }
-
-    public void placeWall(int x, int y, bool isHorizontal)
-    {
-        if (PlayerPrefs.GetInt("currentPlayer") == 1){
-            game.placeWall(game.p1,x,y,isHorizontal);
+        public IHMLink()
+        {
+            Player p1 = new Player(Player.PlayerType.X);
+            Player p2 = new Player(Player.PlayerType.O);
+            this.game = new Game(p1, p2);
         }
-        else { 
-            game.placeWall(game.p2,x,y,isHorizontal);
+
+        public List<Point> canMovePosition(Point currentPosition)
+        {
+            (int,int)[] possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
+            return possiblemove.Select(t => new Point(t.Item1, t.Item2)).ToList();
         }
-        
+
+        public void updatePawnPosition(int xP, int yP, int x, int y)
+        {
+            game.getPawnByCase(xP, yP).move(x, y);
+        }
+
+        public bool canPlaceWall(int x, int y, bool isHorizontal)
+        {
+            return game.canPlaceWall(x, y, isHorizontal);
+        }
+
+        public void placeWall(int x, int y, bool isHorizontal)
+        {
+            if (PlayerPrefs.GetInt("currentPlayer") == 1)
+            {
+                game.placeWall(game.Player1, x, y, isHorizontal);
+            }
+            else
+            {
+                game.placeWall(game.Player2, x, y, isHorizontal);
+            }
+
+        }
     }
 }
+

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Blockade;
 
 public class LogicScript : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LogicScript : MonoBehaviour
     private List<Vector3> p2Spawn = new List<Vector3>();
     public Material[] materials; // Liste des materials
     public Texture2D[] imageList;
-    public Partie partie;
+    public IHMLink partie;
     public GameObject undoBtnP1;
     public GameObject undoBtnP2;
     public RawImage panelImageJ1;
@@ -22,7 +23,7 @@ public class LogicScript : MonoBehaviour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
     void Start()
     {
-        partie = new Partie();
+        partie = new IHMLink();
         int indexJ1 = PlayerPrefs.GetInt("IndexIconeJ1");
         int indexJ2 = PlayerPrefs.GetInt("IndexIconeJ2");
         //Debug.Log(indexJ1 + "-" + indexJ2);

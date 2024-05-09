@@ -1,50 +1,60 @@
-using Blockade
-
-public class Case
+namespace Blockade
 {
-
-    private Wall topWall;
-    private Wall rightWall;
-    private Wall bottomWall;
-    private Wall leftWall;
-
-    private bool startingCase;
-
-    public Case(bool startingCase)
+    public class Case
     {
 
-        this.startingCase = startingCase;
-    }
+        private Wall topWall;
+        private Wall rightWall;
+        private Wall bottomWall;
+        private Wall leftWall;
 
-    public bool hasTopWall()
-    {
+        private bool startingCase;
 
-        return topWall != null;
-    }
+        public Case(bool startingCase)
+        {
 
-    public bool hasRightWall()
-    {
+            this.startingCase = startingCase;
+        }
 
-        return rightWall != null;
-    }
+        public bool hasTopWall()
+        {
 
-    public bool hasBottomWall()
-    {
+            return topWall != null;
+        }
 
-        return bottomWall != null;
-    }
+        public bool hasRightWall()
+        {
 
-    public bool hasLeftWall()
-    {
+            return rightWall != null;
+        }
 
-        return leftWall != null;
-    }
+        public bool hasBottomWall()
+        {
 
-    public bool StartingCase
-    {
+            return bottomWall != null;
+        }
 
-        get { return StartingCase; }
+        public bool hasLeftWall()
+        {
 
-        set { StartingCase = value; }
+            return leftWall != null;
+        }
+
+        public bool StartingCase
+        {
+
+            get { return StartingCase; }
+
+            set { StartingCase = value; }
+        }
+
+        public Wall TopWall { get; set; }
+
+        public Wall RightWall { get; set; }
+
+        public Wall LeftWall { get; set; }
+
+        public Wall BottomWall { get; set; }
     }
 }
+

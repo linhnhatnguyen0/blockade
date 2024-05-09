@@ -1,24 +1,30 @@
-using Blockade
+namespace Blockade
+{
+    public class Wall
+    {
 
-public class Wall {
-    
-    public enum WallType {
+        public enum WallType
+        {
 
-        vertical,
-        horizontal
-    }
-    
-    public WallType type;
+            vertical,
+            horizontal
+        }
 
-    public Wall(WallType type) {
+        public WallType type;
 
-        this.type = type;
-    }
+        public Wall(WallType type)
+        {
 
-    public WallType Type {
+            this.type = type;
+        }
 
-        get { return type; }
-        
-        set { type = value; }
+        public WallType Type
+        {
+
+            get { return type; }
+
+            set { type = value; }
+        }
     }
 }
+
