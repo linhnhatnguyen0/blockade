@@ -11,16 +11,21 @@ public class MusicScript : MonoBehaviour
     private void Awake(){
         if (instance == null){
             Debug.Log("in =null");
+            Debug.Log(menu_music);
             current_music=menu_music;
             instance=this;
-            stopit();
+            //stopit();
             DontDestroyOnLoad(gameObject);
         }else
         {
+            /*
             Debug.Log("in =else");
+            Debug.Log(game_music);
             current_music=game_music;
-            //stopit();
-            //Destroy(gameObject);
+            stopit();
+            */
+            Debug.Log(this);
+            Destroy(gameObject);
             //src.clip=game_music;
             //src.Play();
             //Debug.Log(""+src.clip.name);
@@ -29,6 +34,7 @@ public class MusicScript : MonoBehaviour
         
     }
     private void Start(){
+        //Debug.Log(menu_music);
         src.clip=current_music;
         
         src.Play();
@@ -36,6 +42,8 @@ public class MusicScript : MonoBehaviour
         
     }
     private void stopit(){
-        src.Stop();
+        Debug.Log("We are in function");
+        current_music=game_music;
+        src.clip=current_music;
     }
 }
