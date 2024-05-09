@@ -1,10 +1,14 @@
-using Blockade
+using Blockade;
 
-public class Board {
+public class Board
+{
 
-    private Case[ , ] board;
+    private Case[,] board;
 
-    public Board() {
+    public Case[,] gsBoard { get; set; }
+
+    public Board()
+    {
 
         board = new Case[14, 11];
 

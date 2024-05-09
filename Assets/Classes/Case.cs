@@ -1,7 +1,8 @@
 using Blockade
 
-public class Case {
-    
+public class Case
+{
+
     private Wall topWall;
     private Wall rightWall;
     private Wall bottomWall;
@@ -9,35 +10,41 @@ public class Case {
 
     private bool startingCase;
 
-    public Case(bool startingCase) {
-        
+    public Case(bool startingCase)
+    {
+
         this.startingCase = startingCase;
     }
 
-    public bool hasTopWall() {
+    public bool hasTopWall()
+    {
 
         return topWall != null;
     }
 
-    public bool hasRightWall() {
-        
+    public bool hasRightWall()
+    {
+
         return rightWall != null;
     }
 
-    private bool hasBottomWall() {
-        
+    public bool hasBottomWall()
+    {
+
         return bottomWall != null;
     }
 
-    private bool hasLeftWall() {
-        
+    public bool hasLeftWall()
+    {
+
         return leftWall != null;
     }
 
-    public bool StartingCase {
+    public bool StartingCase
+    {
 
         get { return StartingCase; }
-        
+
         set { StartingCase = value; }
     }
 }

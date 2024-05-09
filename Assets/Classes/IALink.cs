@@ -1,8 +1,9 @@
 using Game;
 using Player;
+using System.Collections.Generic;
 
 
-    public class IaLink
+public class IaLink
 {
     public Game game;
 
