@@ -1,11 +1,12 @@
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
+using Blockade;
 
 public class IAHandler : MonoBehaviour
 {
     private GameObject playerMouvementHandler;
     private GameObject phaseHandler;
-    public Partie partie;
+    public IHMLink partie;
     public GameObject wallPrefab;
     private void Start()
     {

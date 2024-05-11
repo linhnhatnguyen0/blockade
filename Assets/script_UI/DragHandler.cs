@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Blockade;
 
 public class DragHandler : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class DragHandler : MonoBehaviour
     private GameObject endturn_btnP1;
     private GameObject endturn_btnP2;
 
-    private Partie partie;
+    private IHMLink partie;
     private int closestPointIndex;
     private Point cubeTopLeftPosition;
 

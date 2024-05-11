@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Blockade;
 
 public struct Point
 {
@@ -40,7 +41,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private PlayerID currentPlayerID;
 
-    private Partie partie;
+    private IHMLink partie;
 
     private bool isMoving = false;
 
