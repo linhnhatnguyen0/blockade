@@ -20927,7 +20927,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -21032,12 +21032,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932412366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab6e4476801c96646a7561dd7b5f23e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 55f9871935abcc24e90c02c283ef8530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   src: {fileID: 1932412367}
-  menu_music: {fileID: 0}
-  game_music: {fileID: 0}
+  game_music: {fileID: 8300000, guid: 3cb3d1264573dca42b505267c5ec3f71, type: 3}
+  go: {fileID: 1932412366}
 --- !u!1 &1938166134
 GameObject:
   m_ObjectHideFlags: 0
