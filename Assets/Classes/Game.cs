@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Blockade
 {
@@ -69,7 +68,6 @@ namespace Blockade
 
         public List<(int,int)> getAvailableMove(Pawn Pawn)
         {
-            Debug.Log("Début Get Available moove");
             int x = Pawn.X;
             int y = Pawn.Y;
             Player p1 = player1;
@@ -85,13 +83,11 @@ namespace Blockade
                 //verif 1/2 pour top right
                 if (!board.gsBoard[x, y - 1].hasRightWall())
                 {
-                    Debug.Log("Top : Top Right");
                     topRight = true;
                 }
                 //verif 1/2 pour top left
                 if (!board.gsBoard[x, y - 1].hasLeftWall())
                 {
-                    Debug.Log("Top : Top Left");
                     topLeft = true;
                 }
                 if (y - 2 >= 0)
@@ -120,13 +116,11 @@ namespace Blockade
                 //verif 1/2 pour bottom right
                 if (!board.gsBoard[x, y + 1].hasRightWall())
                 {
-                    Debug.Log("Bot : Bot Right");
                     bottomRight = true;
                 }
                 //verif 1/2 pour bottom left
                 if (!board.gsBoard[x, y + 1].hasLeftWall())
                 {
-                    Debug.Log("Bot : Bot Left");
                     bottomLeft = true;
                 }
                 if (y + 2 < 11)
@@ -155,13 +149,11 @@ namespace Blockade
                 //verif 2/2 pour bottom left
                 if (!board.gsBoard[x - 1, y].hasBottomWall())
                 {
-                    Debug.Log("Left : Bot Left");
                     bottomLeft = true;
                 }
                 //verif 2/2 pour top left
                 if (!board.gsBoard[x - 1, y].hasTopWall())
                 {
-                    Debug.Log("Left : Top Right");
                     topLeft = true;
                 }
 
@@ -191,13 +183,11 @@ namespace Blockade
                 //verif 2/2 pour top right
                 if (!board.gsBoard[x + 1, y].hasTopWall())
                 {
-                    Debug.Log("Right : Top Right");
                     topRight = true;
                 }
                 //verif 2/2 pour bottom right
                 if (!board.gsBoard[x + 1, y].hasBottomWall())
                 {
-                    Debug.Log("Right : Bot Right");
                     bottomRight = true;
                 }
                 if (x + 2 < 14)
