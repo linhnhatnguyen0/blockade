@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Blockade;
 
 public class DragHandler : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class DragHandler : MonoBehaviour
     private GameObject endturn_btnP1;
     private GameObject endturn_btnP2;
 
-    private Partie partie;
+    private IHMLink partie;
     private int closestPointIndex;
     private Point cubeTopLeftPosition;
 
@@ -77,10 +78,11 @@ public class DragHandler : MonoBehaviour
         wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
         closestPointIndex = int.Parse(Regex.Match(closestPoint.name, @"\d+").Value);
-        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10);
+        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10 - 1);
         if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
         {
             wall.GetComponent<Renderer>().material.color = Color.green;
+            Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
         }
         else
         {
