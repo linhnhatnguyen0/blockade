@@ -80,6 +80,7 @@ public class DragHandler : MonoBehaviour
         if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
         {
             wall.GetComponent<Renderer>().material.color = Color.green;
+            Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
         }
         else
         {
