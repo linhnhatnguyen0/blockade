@@ -79,11 +79,11 @@ namespace Blockade
             bool bottomRight = false;
             List<(int,int)> movesPossible = new List<(int, int)>();
             //top
-            if (!board.gsBoard[x, y].hasTopWall() || y + 1 >= 0)
+            if (!board.gsBoard[x, y].hasTopWall() && y + 1 >= 0)
             {
-                if (!board.gsBoard[x, y + 1].hasTopWall())
+                if (!board.gsBoard[x, y - 1].hasTopWall())
                 {
-                    movesPossible.Add((x, y + 2));
+                    movesPossible.Add((x, y - 2));
                 }
                 //verif 1/2 pour top right
                 if (!board.gsBoard[x, y + 1].hasRightWall())
@@ -91,43 +91,11 @@ namespace Blockade
                     topRight = true;
                 }
                 //verif 1/2 pour top left
-                if (!board.gsBoard[x, y + 1].hasLeftWall())
+                if (!board.gsBoard[x, y - 1].hasLeftWall())
                 {
                     topLeft = true;
                 }
                 //verif pour avancer de 1 au top
-                if (CasehasPawn(x, y + 2) && !CasehasPawn(x, y + 1))
-                {
-                    movesPossible.Add((x, y + 1));
-                }
-                //si 2 pions consécutif au top
-                if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2))
-                {
-                    movesPossible.Add((x, y + 3));
-                    movesPossible.Add((x - 1, y + 2));
-                    movesPossible.Add((x + 1, y + 2));
-                }
-            }
-            //bottom
-            if (!board.gsBoard[x, y].hasBottomWall() || y - 1 <= 14)
-            {
-
-                if (!board.gsBoard[x, y - 1].hasBottomWall())
-                {
-                    movesPossible.Add((x, y - 2));
-                }
-                //verif 1/2 pour bottom right
-                if (!board.gsBoard[x, y - 1].hasRightWall())
-                {
-                    bottomRight = true;
-                }
-                //verif 1/2 pour bottom left
-                if (!board.gsBoard[x, y - 1].hasRightWall())
-                {
-                    bottomLeft = true;
-                }
-
-                //verif pour avancer de 1 au bottom
                 if (CasehasPawn(x, y - 2) && !CasehasPawn(x, y - 1))
                 {
                     movesPossible.Add((x, y - 1));
@@ -140,8 +108,40 @@ namespace Blockade
                     movesPossible.Add((x + 1, y - 2));
                 }
             }
+            //bottom
+            if (!board.gsBoard[x, y].hasBottomWall() && y + 1 <= 14)
+            {
+
+                if (!board.gsBoard[x, y + 1].hasBottomWall())
+                {
+                    movesPossible.Add((x, y + 2));
+                }
+                //verif 1/2 pour bottom right
+                if (!board.gsBoard[x, y + 1].hasRightWall())
+                {
+                    bottomRight = true;
+                }
+                //verif 1/2 pour bottom left
+                if (!board.gsBoard[x, y + 1].hasLeftWall())
+                {
+                    bottomLeft = true;
+                }
+
+                //verif pour avancer de 1 au bottom
+                if (CasehasPawn(x, y + 2) && !CasehasPawn(x, y + 1))
+                {
+                    movesPossible.Add((x, y + 1));
+                }
+                //si 2 pions consécutif au top
+                if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2))
+                {
+                    movesPossible.Add((x, y + 3));
+                    movesPossible.Add((x - 1, y + 2));
+                    movesPossible.Add((x + 1, y + 2));
+                }
+            }
             //left
-            if (!board.gsBoard[x, y].hasLeftWall() || x - 1 >= 0)
+            if (!board.gsBoard[x, y].hasLeftWall() && x - 1 >= 0)
             {
 
                 if (!board.gsBoard[x - 1, y].hasLeftWall())
@@ -160,9 +160,9 @@ namespace Blockade
                 }
 
                 //verif pour avancer de 1 a gauche
-                if (CasehasPawn(x, y - 2) && !CasehasPawn(x, y - 1))
+                if (CasehasPawn(x-2, y) && !CasehasPawn(x-1, y))
                 {
-                    movesPossible.Add((x, y - 1));
+                    movesPossible.Add((x-1, y ));
                 }
                 //si 2 pions consécutif a gauche    
                 if (CasehasPawn(x - 1, y) && CasehasPawn(x - 2, y))
@@ -173,10 +173,10 @@ namespace Blockade
                 }
             }
             //right
-            if (!board.gsBoard[x, y].hasRightWall() || x + 1 <= 11)
+            if (!board.gsBoard[x, y].hasRightWall() && x + 1 <= 11)
             {
 
-                if (!board.gsBoard[x, y].hasRightWall())
+                if (!board.gsBoard[x+1, y].hasRightWall())
                 {
                     movesPossible.Add((x + 2, y));
                 }
@@ -192,9 +192,9 @@ namespace Blockade
                 }
 
                 //verif pour avancer de 1 a droite
-                if (CasehasPawn(x - 2, y) && !CasehasPawn(x - 1, y))
+                if (CasehasPawn(x + 2, y) && !CasehasPawn(x + 1, y))
                 {
-                    movesPossible.Add((x - 1, y));
+                    movesPossible.Add((x + 1, y));
                 }
                 //si 2 pions consécutif a droite  
                 if (CasehasPawn(x + 1, y) && CasehasPawn(x + 2, y))
@@ -213,16 +213,29 @@ namespace Blockade
         }
 
 
-        public bool canPlaceWall(int x, int y, bool vertical)
+        public bool canPlaceWall(int x, int y, bool isHorizontal)
         {
 
             if (x < 0 || x > board.gsBoard.Length) return false;
 
             if (y < 0 || y > board.gsBoard.Length) return false;
 
+            // voir si il y a déjà un mur
+            
+
             // voir si on bloque
 
             return true;
+        }
+
+        private bool IsVerticalWallHere(int x, int y)
+        {
+            return (board.gsBoard[x, y].hasRightWall()) || (board.gsBoard[x, y + 1].hasRightWall());
+        }
+
+        private bool IsHorizontalWallHere(int x, int y)
+        {
+            return (board.gsBoard[x, y].hasBottomWall()) || (board.gsBoard[x, y+1].hasBottomWall());
         }
 
         public void placeWall(Player p, int x, int y, bool isHorizontal)
@@ -233,9 +246,9 @@ namespace Blockade
                 Wall newWall = new Wall(Wall.WallType.horizontal);
                 p.HorizontalWallLeft--;
                 board.gsBoard[x, y].BottomWall = newWall;
-                board.gsBoard[x - 1, y].TopWall = newWall;
+                board.gsBoard[x + 1, y].TopWall = newWall;
                 board.gsBoard[x, y + 1].BottomWall = newWall;
-                board.gsBoard[x - 1, y + 1].TopWall = newWall;
+                board.gsBoard[x + 1, y + 1].TopWall = newWall;
             }
             else
             {
@@ -243,8 +256,8 @@ namespace Blockade
                 p.VerticalWallLeft--;
                 board.gsBoard[x, y].RightWall= newWall;
                 board.gsBoard[x + 1, y].LeftWall = newWall;
-                board.gsBoard[x, y - 1].RightWall = newWall;
-                board.gsBoard[x + 1, y - 1].LeftWall = newWall;
+                board.gsBoard[x, y + 1].RightWall = newWall;
+                board.gsBoard[x + 1, y + 1].LeftWall = newWall;
             }
         }
     }
