@@ -18,7 +18,7 @@ namespace Blockade
         public List<Point> canMovePosition(Point currentPosition)
         {
             Debug.Log("X: " + currentPosition.X + " Y:" + currentPosition.Y);
-            List<(int,int)> possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
+           List<(int,int)> possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
             return possiblemove.Select(t => new Point(t.Item1, t.Item2)).ToList();
         }
 

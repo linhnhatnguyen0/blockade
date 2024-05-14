@@ -56,7 +56,7 @@ namespace Blockade
             {
                 return p1.Pawn2;
             }
-            else if (p2.Pawn1.X == x && p2.Pawn2.Y == y)
+            else if (p2.Pawn1.X == x && p2.Pawn1.Y == y)
             {
                 return p2.Pawn1;
             }
