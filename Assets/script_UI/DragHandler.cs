@@ -76,7 +76,7 @@ public class DragHandler : MonoBehaviour
         wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
         closestPointIndex = int.Parse(Regex.Match(closestPoint.name, @"\d+").Value);
-        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10);
+        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10 - 1);
         if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
         {
             wall.GetComponent<Renderer>().material.color = Color.green;
