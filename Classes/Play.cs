@@ -39,25 +39,47 @@ namespace Blockade
 
         private void MovePawn(Player player)
         {
-            // Exemple de logique pour déplacer un pion. Remplacer par une gestion d'entrée réelle.
-            Pawn pawnToMove = player.Pawn1;
+            // Demande à l'utilisateur quel pion il veut déplacer
+            Console.WriteLine("Choisissez le pion à déplacer (1 ou 2): ");
+            string pawnChoice = Console.ReadLine();
+            Pawn pawnToMove = (pawnChoice == "1") ? player.Pawn1 : player.Pawn2;
+
+            // Affiche les mouvements possibles
             List<(int, int)> availableMoves = game.getAvailableMove(pawnToMove);
-            
-            if (availableMoves.Count > 0)
+            if (availableMoves.Count == 0)
             {
-                (int newX, int newY) = availableMoves[0]; // Exemple de déplacement
-                pawnToMove.X = newX;
-                pawnToMove.Y = newY;
-                Console.WriteLine($"{player.PlayerType} a déplacé un pion à ({newX}, {newY})");
+                Console.WriteLine("Aucun mouvement disponible pour ce pion.");
+                return;
             }
+
+            Console.WriteLine("Mouvements disponibles: ");
+            for (int i = 0; i < availableMoves.Count; i++)
+            {
+                Console.WriteLine($"{i}: ({availableMoves[i].Item1}, {availableMoves[i].Item2})");
+            }
+
+            // Demande à l'utilisateur de choisir un mouvement
+            Console.WriteLine("Choisissez un mouvement: ");
+            string moveChoice = Console.ReadLine();
+            int moveIndex = int.Parse(moveChoice);
+            (int newX, int newY) = availableMoves[moveIndex];
+
+            // Déplace le pion
+            pawnToMove.X = newX;
+            pawnToMove.Y = newY;
+            Console.WriteLine($"{player.PlayerType} a déplacé un pion à ({newX}, {newY})");
         }
 
         private void PlaceWall(Player player)
         {
-            // Exemple de logique pour placer un mur. Remplacer par une gestion d'entrée réelle.
-            int x = 1; // Coordonnées d'exemple
-            int y = 1; // Coordonnées d'exemple
-            bool isHorizontal = true; // Orientation de mur d'exemple
+            // Demande à l'utilisateur où placer le mur
+            Console.WriteLine("Entrez les coordonnées pour placer un mur:");
+            Console.WriteLine("X: ");
+            int x = int.Parse(Console.ReadLine());
+            Console.WriteLine("Y: ");
+            int y = int.Parse(Console.ReadLine());
+            Console.WriteLine("Le mur est-il horizontal? (oui/non): ");
+            bool isHorizontal = Console.ReadLine().ToLower() == "oui";
 
             if (game.canPlaceWall(x, y, isHorizontal))
             {
