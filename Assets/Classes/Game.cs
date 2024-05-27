@@ -112,9 +112,9 @@ namespace Blockade
                     //si 2 pions consécutif au top
                     if (CasehasPawn(x, y - 1) && CasehasPawn(x, y - 2) && y - 3 >= 0)
                     {
-                        movesPossible.Add((x, y - 3));
-                        movesPossible.Add((x - 1, y - 2));
-                        movesPossible.Add((x + 1, y - 2));
+                        if(!CasehasPawn(x, y - 3)) movesPossible.Add((x, y - 3));
+                        if(!CasehasPawn(x - 1, y - 2)) movesPossible.Add((x - 1, y - 2));
+                        if(!CasehasPawn(x + 1, y - 2)) movesPossible.Add((x + 1, y - 2));
                     }
                 }
             }
@@ -143,11 +143,11 @@ namespace Blockade
                         movesPossible.Add((x, y + 1));
                     }
                     //si 2 pions consécutif au bot
-                    if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2) && y + 3 < 11)
+                    if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2) && y + 3 < 11 )
                     {
-                        movesPossible.Add((x, y + 3));
-                        movesPossible.Add((x - 1, y + 2));
-                        movesPossible.Add((x + 1, y + 2));
+                        if(!CasehasPawn(x, y + 3)) movesPossible.Add((x, y + 3));
+                        if(!CasehasPawn(x - 1, y + 2)) movesPossible.Add((x - 1, y + 2));
+                        if(!CasehasPawn(x + 1, y + 2)) movesPossible.Add((x + 1, y + 2));
                     }
                 }
             }
@@ -179,9 +179,10 @@ namespace Blockade
                     //si 2 pions consécutif a gauche    
                     if (CasehasPawn(x - 1, y) && CasehasPawn(x - 2, y) && x - 3 >= 0)
                     {
-                        movesPossible.Add((x - 3, y));
-                        movesPossible.Add((x - 2, y - 1));
-                        movesPossible.Add((x - 2, y + 1));
+                        if(!CasehasPawn(x - 3, y)) movesPossible.Add((x - 3, y ));
+                        if(!CasehasPawn(x - 2, y - 1)) movesPossible.Add((x - 2, y - 1));
+                        if(!CasehasPawn(x - 2, y + 1)) movesPossible.Add((x - 2, y + 1));
+
                     }
                 }
             }
@@ -212,9 +213,9 @@ namespace Blockade
                     //si 2 pions consécutif a droite  
                     if (CasehasPawn(x + 1, y) && CasehasPawn(x + 2, y))
                     {
-                        movesPossible.Add((x + 3, y));
-                        movesPossible.Add((x + 2, y - 1));
-                        movesPossible.Add((x + 2, y + 1));
+                        if(!CasehasPawn(x + 3, y)) movesPossible.Add((x + 3, y));
+                        if(!CasehasPawn(x + 2, y - 1)) movesPossible.Add((x + 2, y - 1));
+                        if(!CasehasPawn(x + 2, y + 1)) movesPossible.Add((x + 2, y + 1));
                     }
                 }
             }
