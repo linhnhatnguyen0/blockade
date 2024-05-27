@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Analytics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Blockade
 {
@@ -49,6 +50,62 @@ namespace Blockade
                 return true;
             }
             return false;
+        }
+
+        public bool wallBetweenStraight(int x, int y, int xEnd, int yEnd){
+            if(xEnd == x+1 && yEnd == y){ // verif a droite
+                return board.gsBoard[x,y].hasRightWall();
+            }
+            else if(xEnd == x-1 && yEnd == y){ //verif a gauche
+                return board.gsBoard[x,y].hasLeftWall();
+            }
+            else if(xEnd == x && yEnd == y+1){ //verif en haut
+                return board.gsBoard[x,y].hasTopWall();
+            }
+            else if(xEnd == x && yEnd == y-1){ //verif en bas
+                return board.gsBoard[x,y].hasBottomWall();
+            }
+            return true;
+        }
+
+        public bool wallBetweenDiagonal(int x, int y,int xEnd,int yEnd){
+            if(xEnd == x+1 && yEnd == y+1){ //verif en haut a droite
+                if(!wallBetweenStraight(x,y,x+1,y)){
+                    if(!wallBetweenStraight(x+1,y,x+1,y+1)) return false;
+                } 
+                if(!wallBetweenStraight(x,y,x,y+1)){
+                    if(!wallBetweenStraight(x,y+1,x+1,y+1)) return false;
+                }
+                return true;
+            }
+            else if(xEnd == x-1 && yEnd == y+1){ //verif en haut a gauche
+                if(!wallBetweenStraight(x,y,x-1,y)){
+                    if(!wallBetweenStraight(x-1,y,x-1,y+1)) return false;
+                } 
+                if(!wallBetweenStraight(x,y,x,y+1)){
+                    if(!wallBetweenStraight(x,y+1,x-1,y+1)) return false;
+                }
+                return true;
+            }
+            else if(xEnd == x+1 && yEnd == y-1){ // verif en bas a droite
+                if(!wallBetweenStraight(x,y,x+1,y)){
+                    if(!wallBetweenStraight(x+1,y,x+1,y-1)) return false;
+                } 
+                if(!wallBetweenStraight(x,y,x,y-1)){
+                    if(!wallBetweenStraight(x,y-1,x+1,y-1)) return false;
+                }
+                return true;
+            }
+            else if(xEnd == x-1 && yEnd == y-1){ // verif en bas a gauche
+                if(!wallBetweenStraight(x,y,x-1,y)){
+                    if(!wallBetweenStraight(x-1,y,x-1,y-1)) return false;
+                } 
+                if(!wallBetweenStraight(x,y,x,y-1)){
+                    if(!wallBetweenStraight(x,y-1,x-1,y-1)) return false;
+                }
+                return true;
+            }
+            return true;
         }
 
         public Pawn getPawnByCase(int x, int y)
