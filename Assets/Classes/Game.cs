@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 namespace Blockade
 {
@@ -283,6 +284,22 @@ namespace Blockade
             // voir si on bloque
 
             return true;
+        }
+
+        public List<(int,int)> GetAvailableWall(bool isHorizontal)
+        {
+            List<(int, int)> Result = new List<(int,int)> ();
+            for (int x = 0; x < 14;x++)
+            {
+                for (int y = 0; y < 11;y++)
+                {
+                    if (canPlaceWall(x,y,isHorizontal))
+                    {
+                        Result.Add((x,y));
+                    }
+                }
+            }
+            return Result;
         }
 
         private bool IsVerticalWallHere(int x, int y)
