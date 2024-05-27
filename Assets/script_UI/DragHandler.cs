@@ -36,6 +36,7 @@ public class DragHandler : MonoBehaviour
     private int closestPointIndex;
     private Point cubeTopLeftPosition;
 
+    private SoundEffect sfx;
     private void Start()
     {
         hp1 = GameObject.FindGameObjectsWithTag("hp1")[0];
@@ -47,6 +48,7 @@ public class DragHandler : MonoBehaviour
         undoBtnP1 = GameObject.Find("undo_btnP1");
         undoBtnP2 = GameObject.Find("undo_btnP2");
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
     }
 
     private void OnMouseDown()
@@ -76,10 +78,11 @@ public class DragHandler : MonoBehaviour
         wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
         closestPointIndex = int.Parse(Regex.Match(closestPoint.name, @"\d+").Value);
-        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10);
+        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10 - 1);
         if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
         {
             wall.GetComponent<Renderer>().material.color = Color.green;
+            Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
         }
         else
         {
@@ -107,6 +110,9 @@ public class DragHandler : MonoBehaviour
         wall.GetComponent<wallVerification>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
         Debug.Log("Cube attached: " + cubeTopLeftPosition);
         partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
+
+        //PLAY SOUND WALL
+        sfx.WallSound();
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
             undoBtnP1.GetComponent<undoBtnHandler>().wallPut = wall;

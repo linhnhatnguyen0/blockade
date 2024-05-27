@@ -49,10 +49,12 @@ public class PlayerMovementHandler : MonoBehaviour
     private Vector3 previousRotation;
 
     private Vector3 targetPosition;
+    private SoundEffect sfx;
     void Start()
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
+        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
     }
 
 
@@ -119,6 +121,7 @@ public class PlayerMovementHandler : MonoBehaviour
             anim.SetBool("isFlying", false);
             isMoving = false;
         }
+        
     }
 
     /// <summary>
@@ -183,6 +186,8 @@ public class PlayerMovementHandler : MonoBehaviour
                         {
                             if (hit.transform.tag == "Mouvable") // Si la position cliqu�e est mouvable, on d�place le pion
                             {
+                                //PLAY SOUND
+                                sfx.PawnSound();
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
                                 partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);

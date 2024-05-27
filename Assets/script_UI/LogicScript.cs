@@ -83,6 +83,8 @@ public class LogicScript : MonoBehaviour
         //R�cup�rer les personnages choisis par les joueurs et faire apparaitre les pions
         int player1 = PlayerPrefs.GetInt("SpawnCharacterP1");
         int player2 = PlayerPrefs.GetInt("SpawnCharacterP2");
+        GameObject musicManager=  GameObject.Find("MusicManager");
+        Destroy(musicManager); 
         p1Spawn.Add(setSpawnPosition(3, 3));
         p1Spawn.Add(setSpawnPosition(3, 7));
         p2Spawn.Add(setSpawnPosition(10, 3));
