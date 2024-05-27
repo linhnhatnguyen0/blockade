@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Analytics;
 using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 namespace Blockade
 {
@@ -10,6 +11,7 @@ namespace Blockade
         private Board board;
         private Player player1;
         private Player player2;
+        private Graphe graph;
 
         public Player Player1
         {
@@ -37,6 +39,7 @@ namespace Blockade
         public Game()
         {
             board = new Board();
+            graph = new Graphe();
             player1 = new Player(Player.PlayerType.X);
             player2 = new Player(Player.PlayerType.O);
         }
@@ -340,6 +343,47 @@ namespace Blockade
             }
 
             // voir si on bloque
+            Sommet sommetFinal1;
+            Sommet sommetFinal2;
+            Sommet sommetPion1;
+            Sommet sommetPion2;
+
+            if (PlayerPrefs.GetInt("currentPlayer") == 1)
+            {
+                sommetPion1 = graph.GetSommet(player1.Pawn1.X, player1.Pawn1.Y);
+                sommetPion2 = graph.GetSommet(player1.Pawn2.X, player1.Pawn2.Y);
+                sommetFinal1 = graph.GetSommet(10, 3);
+                sommetFinal2 = graph.GetSommet(10, 7);
+            }
+            else
+            {
+                sommetPion1 = graph.GetSommet(player2.Pawn1.X, player2.Pawn1.Y);
+                sommetPion2 = graph.GetSommet(player2.Pawn2.X, player2.Pawn2.Y);
+                sommetFinal1 = graph.GetSommet(3, 3);
+                sommetFinal2 = graph.GetSommet(3, 7);
+            }
+            if (isHorizontal)
+            {
+                graph.SupprimerArete(graph.GetSommet(x, y), graph.GetSommet(x, y + 1));
+                graph.SupprimerArete(graph.GetSommet(x + 1, y), graph.GetSommet(x + 1, y + 1));
+                bool temp = graph.ExisteChemin(sommetPion1, sommetFinal1) || graph.ExisteChemin(sommetPion1, sommetFinal2) || graph.ExisteChemin(sommetPion2, sommetFinal1) || graph.ExisteChemin(sommetPion2, sommetFinal2);
+                Arete temp1 = new Arete(graph.GetSommet(x, y), graph.GetSommet(x, y + 1));
+                Arete temp2 = new Arete(graph.GetSommet(x + 1, y), graph.GetSommet(x + 1, y + 1));
+                graph.Aretes.Add(temp1);
+                graph.Aretes.Add(temp2);
+                return temp;
+            }
+            else
+            {
+                graph.SupprimerArete(graph.GetSommet(x, y), graph.GetSommet(x + 1, y));
+                graph.SupprimerArete(graph.GetSommet(x, y + 1), graph.GetSommet(x + 1, y + 1));
+                bool temp = graph.ExisteChemin(sommetPion1, sommetFinal1) || graph.ExisteChemin(sommetPion1, sommetFinal2) || graph.ExisteChemin(sommetPion2, sommetFinal1) || graph.ExisteChemin(sommetPion2, sommetFinal2);
+                Arete temp1 = new Arete(graph.GetSommet(x, y), graph.GetSommet(x + 1, y));
+                Arete temp2 = new Arete(graph.GetSommet(x, y + 1), graph.GetSommet(x + 1, y + 1));
+                graph.Aretes.Add(temp1);
+                graph.Aretes.Add(temp2);
+                return temp;
+            }
 
             return true;
         }
@@ -381,6 +425,8 @@ namespace Blockade
                 board.gsBoard[x + 1, y + 1].TopWall = newWall;
                 board.gsBoard[x + 1, y].BottomWall = newWall;
                 board.gsBoard[x, y + 1].TopWall = newWall;
+                graph.SupprimerArete(graph.GetSommet(x, y),graph.GetSommet(x,y+1));
+                graph.SupprimerArete(graph.GetSommet(x+1, y), graph.GetSommet(x+1, y + 1));
             }
             else
             {
@@ -390,6 +436,8 @@ namespace Blockade
                 board.gsBoard[x + 1, y].LeftWall = newWall;
                 board.gsBoard[x, y + 1].RightWall = newWall;
                 board.gsBoard[x + 1, y + 1].LeftWall = newWall;
+                graph.SupprimerArete(graph.GetSommet(x, y), graph.GetSommet(x + 1, y));
+                graph.SupprimerArete(graph.GetSommet(x, y + 1), graph.GetSommet(x + 1, y + 1));
             }
         }
     }
