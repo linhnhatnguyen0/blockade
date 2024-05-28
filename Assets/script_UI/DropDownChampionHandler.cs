@@ -131,6 +131,10 @@ public class DropDownChampionHandler : MonoBehaviour
     {
         SceneManager.LoadScene("InGameScene");
     }
+    public void buttonHandlerBOT()
+    {
+        SceneManager.LoadScene("InGameSceneBOT");
+    }
 
     private void Awake()
     {

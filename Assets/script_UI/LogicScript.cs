@@ -14,8 +14,6 @@ public class LogicScript : MonoBehaviour
     public Material[] materials; // Liste des materials
     public Texture2D[] imageList;
     public IHMLink partie;
-    public GameObject undoBtnP1;
-    public GameObject undoBtnP2;
     public RawImage panelImageJ1;
     public RawImage panelImageJ2;
 
