@@ -53,9 +53,11 @@ public class LogicScript : MonoBehaviour
         GameObject champPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
         GameObject champion = Instantiate(champPrefab, p1Spawn[0], Quaternion.Euler(0, 90, 0));
         champion.GetComponent<PlayerPositionHandler>().initialPosition = new Point(3, 3);
+        champion.GetComponent<PlayerPositionHandler>().isUp = true;
         champion.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
         GameObject champion2 = Instantiate(champPrefab2, p1Spawn[1], Quaternion.Euler(0, 90, 0));
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(3, 7);
+        champion2.GetComponent<PlayerPositionHandler>().isUp = false;
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
     }
 
@@ -69,9 +71,11 @@ public class LogicScript : MonoBehaviour
         GameObject champPrefab4 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
         GameObject champion = Instantiate(champPrefab3, p2Spawn[0], Quaternion.Euler(0, -90, 0));
         champion.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 3);
+        champion.GetComponent<PlayerPositionHandler>().isUp = true;
         champion.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
         GameObject champion2 = Instantiate(champPrefab4, p2Spawn[1], Quaternion.Euler(0, -90, 0));
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 7);
+        champion2.GetComponent<PlayerPositionHandler>().isUp = false;
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
     }
 

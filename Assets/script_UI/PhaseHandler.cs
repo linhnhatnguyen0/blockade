@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Blockade;
 
 
 public class PhaseHandler : MonoBehaviour
@@ -52,6 +53,8 @@ public class PhaseHandler : MonoBehaviour
     }
     public void changePhaseHandler()
     {
+        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMouvementHandler").GetComponent<PlayerMovementHandler>();
         endturn_btnP1.GetComponent<Button>().interactable = false;
         endturn_btnP2.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
@@ -62,7 +65,7 @@ public class PhaseHandler : MonoBehaviour
         if (state == 1)
         {
             //WALL
-
+            partie.updatePawnPosition(playerMovementHandler.previousPosition.X, playerMovementHandler.previousPosition.Y, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y);
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {

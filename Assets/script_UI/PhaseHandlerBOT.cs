@@ -2,11 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEngine.ParticleSystem;
+using Blockade;
 
 
 public class PhaseHandlerBOT : MonoBehaviour
 {
     public Announcer announcer;
+    public GameObject wallPrefab;
 
     private int state = 0;
     public GameObject isMyTurnBtnP1;
@@ -48,6 +51,8 @@ public class PhaseHandlerBOT : MonoBehaviour
     }
     public void changePhaseHandler()
     {
+        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         endturn_btnP1.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
         state++;
@@ -57,7 +62,7 @@ public class PhaseHandlerBOT : MonoBehaviour
         if (state == 1)
         {
             //WALL
-
+            partie.updatePawnPosition(playerMovementHandler.previousPosition.X, playerMovementHandler.previousPosition.Y, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y);
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
@@ -97,22 +102,23 @@ public class PhaseHandlerBOT : MonoBehaviour
             phaseBarIconPion.GetComponent<Image>().sprite = phaseBarIconPionP2;
             phaseBarIconWall.GetComponent<Image>().sprite = phaseBarIconWallP2;
             phaseBarIconValid.GetComponent<Image>().sprite = phaseBarIconValidP2;
-            yield return new WaitForSeconds(2);
-            //BOT
+            //BOT Pawn
+            yield return new WaitForSeconds(1);
             ChangeColor(1);
+            //BOT Wall
             yield return new WaitForSeconds(1);
             ChangeColor(2);
             yield return new WaitForSeconds(1);
             ChangeColor(0);
             announcer.Message(1, 1);
             PlayerPrefs.SetInt("currentPlayer", 1);
-            isMyTurnBtnP1.SetActive(true);
-            isMyTurnBtnP2.SetActive(false);
             phaseBarr1.GetComponent<Image>().sprite = phaseBarP1;
             phaseBarr2.GetComponent<Image>().sprite = phaseBarP1;
             phaseBarIconPion.GetComponent<Image>().sprite = phaseBarIconPionP1;
             phaseBarIconWall.GetComponent<Image>().sprite = phaseBarIconWallP1;
             phaseBarIconValid.GetComponent<Image>().sprite = phaseBarIconValidP1;
+            isMyTurnBtnP1.SetActive(true);
+            isMyTurnBtnP2.SetActive(false);
         }
     }
     public void ChangeColor(int state)
@@ -186,5 +192,36 @@ public class PhaseHandlerBOT : MonoBehaviour
     public void victore()
     {
 
+    }
+
+    public void MoveToPlayer(bool isUp, Point targetPosition)
+    {
+        GameObject pawnTarget = null;
+        foreach (var item in GameObject.FindGameObjectsWithTag("Pions"))
+        {
+            if (item.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player2 && item.GetComponent<PlayerPositionHandler>().isUp == isUp)
+            {
+                pawnTarget = item;
+            }
+        }
+        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        PlayerMovementHandler playerMouvementHandler = GameObject.Find("PlayerMouvementHandler").GetComponent<PlayerMovementHandler>();
+        Vector3 target = PlayerMovementHandler.GetCubePositionFromBoard(targetPosition);
+        playerMouvementHandler.GetComponent<PlayerMovementHandler>().movePlayerHandler(pawnTarget, target);
+        partie.updatePawnPosition(pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.X, pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.Y, targetPosition.X, targetPosition.Y);
+        pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition = targetPosition;
+    }
+    public void PlaceWall(Point targetPosition, bool isHorizontal)
+    {
+        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        string wallposition = "GameObject (" + (targetPosition.X * 10 + targetPosition.Y).ToString() + ")";
+        GameObject wallPutter = GameObject.Find(wallposition);
+        Quaternion rotation = Quaternion.identity;
+        if (!isHorizontal)
+        {
+            rotation = Quaternion.Euler(0, 90, 0);
+        }
+        Instantiate(wallPrefab, wallPutter.transform.position, rotation);
+        partie.placeWall(targetPosition.X, targetPosition.Y, isHorizontal);
     }
 }

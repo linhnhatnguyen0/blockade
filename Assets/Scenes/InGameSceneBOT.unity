@@ -10155,6 +10155,7 @@ MonoBehaviour:
   endTurnBtnP2: {fileID: 1279239875}
   undoBtnP1: {fileID: 1248440309}
   undoBtnP2: {fileID: 947330592}
+  currentPlayer: {fileID: 0}
 --- !u!4 &974418940
 Transform:
   m_ObjectHideFlags: 0
@@ -13634,6 +13635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   announcer: {fileID: 1617808776}
+  wallPrefab: {fileID: 2706679320443213187, guid: e7f45e7b7c1a5af4abfa23f9231b7c25, type: 3}
   isMyTurnBtnP1: {fileID: 995762969}
   isMyTurnBtnP2: {fileID: 474053337}
   hp1: {fileID: 92571217}
@@ -13642,13 +13644,13 @@ MonoBehaviour:
   vp2: {fileID: 1587046375}
   endturn_btnP1: {fileID: 1305891116}
   undo_btnP1: {fileID: 1248440309}
-  phaseBar1: {fileID: 344762846}
-  phaseBar2: {fileID: 1724399257}
+  phaseBarr1: {fileID: 273772839}
+  phaseBarr2: {fileID: 1716431470}
   phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
   phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
   phaseBarIconPion: {fileID: 947330592}
-  phaseBarIconWall: {fileID: 273772839}
-  phaseBarIconValid: {fileID: 1716431470}
+  phaseBarIconWall: {fileID: 1279239875}
+  phaseBarIconValid: {fileID: 903931535}
   phaseBarIconPionP1: {fileID: 21300000, guid: b96744ff1018c6649bc81fe0121f6b06, type: 3}
   phaseBarIconPionP2: {fileID: 21300000, guid: ee66894daa4e1d54f9ece176074245c8, type: 3}
   phaseBarIconWallP1: {fileID: 21300000, guid: 9e022d9d72d6898428a230b2679c7d7c, type: 3}
@@ -18332,6 +18334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   announcer: {fileID: 1617808776}
+  wallPrefab: {fileID: 2706679320443213187, guid: e7f45e7b7c1a5af4abfa23f9231b7c25, type: 3}
   isMyTurnBtnP1: {fileID: 995762969}
   isMyTurnBtnP2: {fileID: 474053337}
   hp1: {fileID: 92571217}
@@ -18340,8 +18343,8 @@ MonoBehaviour:
   vp2: {fileID: 1587046375}
   endturn_btnP1: {fileID: 1305891116}
   undo_btnP1: {fileID: 1248440309}
-  phaseBar1: {fileID: 273772839}
-  phaseBar2: {fileID: 1716431470}
+  phaseBarr1: {fileID: 273772839}
+  phaseBarr2: {fileID: 1716431470}
   phaseBarP1: {fileID: 21300000, guid: 1a27fe54c70810143b70ecd55b7f7d2d, type: 3}
   phaseBarP2: {fileID: 21300000, guid: c7362245cf6310046b7931ce2e2f7919, type: 3}
   phaseBarIconPion: {fileID: 947330592}
