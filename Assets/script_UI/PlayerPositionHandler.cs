@@ -11,4 +11,5 @@ public class PlayerPositionHandler : MonoBehaviour
 {
     public Point initialPosition;
     public PlayerID playerID;
+    public bool isUp;
 }

@@ -37,7 +37,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private Transform cubeHit;
 
-    private GameObject currentPlayer;
+    public GameObject currentPlayer;
 
     private PlayerID currentPlayerID;
 
@@ -45,7 +45,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private bool isMoving = false;
 
-    private Point previousPosition;
+    public Point previousPosition;
     private Vector3 previousRotation;
 
     private Vector3 targetPosition;
@@ -185,7 +185,6 @@ public class PlayerMovementHandler : MonoBehaviour
                             {
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
-                                partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);
                                 previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();

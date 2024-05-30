@@ -11,12 +11,12 @@ using Blockade;
 public class DragHandler : MonoBehaviour
 {
     public GameObject wallPreviewPrefab;
-    
+
     public bool isHorizontal;
     public Texture2D DefaultTexture;
     public Texture2D CancelTexture;
     private CursorMode cursorMode = CursorMode.Auto;
-    private Vector2 hotSpot= Vector2.zero;
+    private Vector2 hotSpot = Vector2.zero;
     private Transform closestPoint;
     private GameObject wall;
     Vector3 mOffset;
@@ -36,7 +36,7 @@ public class DragHandler : MonoBehaviour
     private int closestPointIndex;
     private Point cubeTopLeftPosition;
 
-    private void Start()
+    private void Awake()
     {
         hp1 = GameObject.FindGameObjectsWithTag("hp1")[0];
         vp1 = GameObject.FindGameObjectsWithTag("vp1")[0];
@@ -46,9 +46,11 @@ public class DragHandler : MonoBehaviour
         endturn_btnP2 = GameObject.Find("endturn_btnP2");
         undoBtnP1 = GameObject.Find("undo_btnP1");
         undoBtnP2 = GameObject.Find("undo_btnP2");
+    }
+    private void Update()
+    {
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
     }
-
     private void OnMouseDown()
     {
         mOffset = transform.position - GetMouseWorldPos();
@@ -76,18 +78,25 @@ public class DragHandler : MonoBehaviour
         wall = Instantiate(wallPreviewPrefab, closestPoint.position, rotation);
         wall.GetComponent<wallVerification>().isHorizontal = isHorizontal;
         closestPointIndex = int.Parse(Regex.Match(closestPoint.name, @"\d+").Value);
-        cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10 - 1);
+        if (closestPointIndex % 10 == 0)
+        {
+            cubeTopLeftPosition = new Point(closestPointIndex / 11, 9);
+        }
+        else
+        {
+            cubeTopLeftPosition = new Point(closestPointIndex / 10, closestPointIndex % 10 - 1);
+        }
         if (partie.canPlaceWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal))
         {
             wall.GetComponent<Renderer>().material.color = Color.green;
-            Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
+            Cursor.SetCursor(DefaultTexture, Vector2.zero, cursorMode);
         }
         else
         {
             //afficher croix sur curseur
-            
+
             wall.GetComponent<Renderer>().material.color = Color.red;
-            Cursor.SetCursor(CancelTexture,Vector2.zero,cursorMode);
+            Cursor.SetCursor(CancelTexture, Vector2.zero, cursorMode);
         }
     }
 
@@ -96,7 +105,7 @@ public class DragHandler : MonoBehaviour
     {
         Destroy(GameObject.FindGameObjectWithTag("WallDrag"));
         //Remettre curseur normal
-        Cursor.SetCursor(DefaultTexture,Vector2.zero,cursorMode);
+        Cursor.SetCursor(DefaultTexture, Vector2.zero, cursorMode);
         //Pas le droit de placer ici (IG)
         if (wall.GetComponent<Renderer>().material.color == Color.red)
         {
@@ -110,6 +119,7 @@ public class DragHandler : MonoBehaviour
         partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
+            Debug.Log(wall);
             undoBtnP1.GetComponent<undoBtnHandler>().wallPut = wall;
             if (!isHorizontal)
             {

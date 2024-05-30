@@ -55,56 +55,74 @@ namespace Blockade
             return false;
         }
 
-        public bool wallBetweenStraight(int x, int y, int xEnd, int yEnd){
-            if(xEnd == x+1 && yEnd == y){ // verif a droite
-                return board.gsBoard[x,y].hasRightWall();
+        public bool wallBetweenStraight(int x, int y, int xEnd, int yEnd)
+        {
+            if (xEnd == x + 1 && yEnd == y)
+            { // verif a droite
+                return board.gsBoard[x, y].hasRightWall();
             }
-            else if(xEnd == x-1 && yEnd == y){ //verif a gauche
-                return board.gsBoard[x,y].hasLeftWall();
+            else if (xEnd == x - 1 && yEnd == y)
+            { //verif a gauche
+                return board.gsBoard[x, y].hasLeftWall();
             }
-            else if(xEnd == x && yEnd == y+1){ //verif en haut
-                return board.gsBoard[x,y].hasTopWall();
+            else if (xEnd == x && yEnd == y + 1)
+            { //verif en haut
+                return board.gsBoard[x, y].hasTopWall();
             }
-            else if(xEnd == x && yEnd == y-1){ //verif en bas
-                return board.gsBoard[x,y].hasBottomWall();
+            else if (xEnd == x && yEnd == y - 1)
+            { //verif en bas
+                return board.gsBoard[x, y].hasBottomWall();
             }
             return true;
         }
 
-        public bool wallBetweenDiagonal(int x, int y,int xEnd,int yEnd){
-            if(xEnd == x+1 && yEnd == y+1){ //verif en haut a droite
-                if(!wallBetweenStraight(x,y,x+1,y)){
-                    if(!wallBetweenStraight(x+1,y,x+1,y+1)) return false;
-                } 
-                if(!wallBetweenStraight(x,y,x,y+1)){
-                    if(!wallBetweenStraight(x,y+1,x+1,y+1)) return false;
+        public bool wallBetweenDiagonal(int x, int y, int xEnd, int yEnd)
+        {
+            if (xEnd == x + 1 && yEnd == y + 1)
+            { //verif en haut a droite
+                if (!wallBetweenStraight(x, y, x + 1, y))
+                {
+                    if (!wallBetweenStraight(x + 1, y, x + 1, y + 1)) return false;
+                }
+                if (!wallBetweenStraight(x, y, x, y + 1))
+                {
+                    if (!wallBetweenStraight(x, y + 1, x + 1, y + 1)) return false;
                 }
                 return true;
             }
-            else if(xEnd == x-1 && yEnd == y+1){ //verif en haut a gauche
-                if(!wallBetweenStraight(x,y,x-1,y)){
-                    if(!wallBetweenStraight(x-1,y,x-1,y+1)) return false;
-                } 
-                if(!wallBetweenStraight(x,y,x,y+1)){
-                    if(!wallBetweenStraight(x,y+1,x-1,y+1)) return false;
+            else if (xEnd == x - 1 && yEnd == y + 1)
+            { //verif en haut a gauche
+                if (!wallBetweenStraight(x, y, x - 1, y))
+                {
+                    if (!wallBetweenStraight(x - 1, y, x - 1, y + 1)) return false;
+                }
+                if (!wallBetweenStraight(x, y, x, y + 1))
+                {
+                    if (!wallBetweenStraight(x, y + 1, x - 1, y + 1)) return false;
                 }
                 return true;
             }
-            else if(xEnd == x+1 && yEnd == y-1){ // verif en bas a droite
-                if(!wallBetweenStraight(x,y,x+1,y)){
-                    if(!wallBetweenStraight(x+1,y,x+1,y-1)) return false;
-                } 
-                if(!wallBetweenStraight(x,y,x,y-1)){
-                    if(!wallBetweenStraight(x,y-1,x+1,y-1)) return false;
+            else if (xEnd == x + 1 && yEnd == y - 1)
+            { // verif en bas a droite
+                if (!wallBetweenStraight(x, y, x + 1, y))
+                {
+                    if (!wallBetweenStraight(x + 1, y, x + 1, y - 1)) return false;
+                }
+                if (!wallBetweenStraight(x, y, x, y - 1))
+                {
+                    if (!wallBetweenStraight(x, y - 1, x + 1, y - 1)) return false;
                 }
                 return true;
             }
-            else if(xEnd == x-1 && yEnd == y-1){ // verif en bas a gauche
-                if(!wallBetweenStraight(x,y,x-1,y)){
-                    if(!wallBetweenStraight(x-1,y,x-1,y-1)) return false;
-                } 
-                if(!wallBetweenStraight(x,y,x,y-1)){
-                    if(!wallBetweenStraight(x,y-1,x-1,y-1)) return false;
+            else if (xEnd == x - 1 && yEnd == y - 1)
+            { // verif en bas a gauche
+                if (!wallBetweenStraight(x, y, x - 1, y))
+                {
+                    if (!wallBetweenStraight(x - 1, y, x - 1, y - 1)) return false;
+                }
+                if (!wallBetweenStraight(x, y, x, y - 1))
+                {
+                    if (!wallBetweenStraight(x, y - 1, x - 1, y - 1)) return false;
                 }
                 return true;
             }
@@ -172,9 +190,9 @@ namespace Blockade
                     //si 2 pions consécutif au top
                     if (CasehasPawn(x, y - 1) && CasehasPawn(x, y - 2) && y - 3 >= 0)
                     {
-                        if(!CasehasPawn(x, y - 3)) movesPossible.Add((x, y - 3));
-                        if(!CasehasPawn(x - 1, y - 2)) movesPossible.Add((x - 1, y - 2));
-                        if(!CasehasPawn(x + 1, y - 2)) movesPossible.Add((x + 1, y - 2));
+                        if (!CasehasPawn(x, y - 3)) movesPossible.Add((x, y - 3));
+                        if (!CasehasPawn(x - 1, y - 2)) movesPossible.Add((x - 1, y - 2));
+                        if (!CasehasPawn(x + 1, y - 2)) movesPossible.Add((x + 1, y - 2));
                     }
                 }
             }
@@ -203,11 +221,11 @@ namespace Blockade
                         movesPossible.Add((x, y + 1));
                     }
                     //si 2 pions consécutif au bot
-                    if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2) && y + 3 < 11 )
+                    if (CasehasPawn(x, y + 1) && CasehasPawn(x, y + 2) && y + 3 < 11)
                     {
-                        if(!CasehasPawn(x, y + 3)) movesPossible.Add((x, y + 3));
-                        if(!CasehasPawn(x - 1, y + 2)) movesPossible.Add((x - 1, y + 2));
-                        if(!CasehasPawn(x + 1, y + 2)) movesPossible.Add((x + 1, y + 2));
+                        if (!CasehasPawn(x, y + 3)) movesPossible.Add((x, y + 3));
+                        if (!CasehasPawn(x - 1, y + 2)) movesPossible.Add((x - 1, y + 2));
+                        if (!CasehasPawn(x + 1, y + 2)) movesPossible.Add((x + 1, y + 2));
                     }
                 }
             }
@@ -239,9 +257,9 @@ namespace Blockade
                     //si 2 pions consécutif a gauche    
                     if (CasehasPawn(x - 1, y) && CasehasPawn(x - 2, y) && x - 3 >= 0)
                     {
-                        if(!CasehasPawn(x - 3, y)) movesPossible.Add((x - 3, y ));
-                        if(!CasehasPawn(x - 2, y - 1)) movesPossible.Add((x - 2, y - 1));
-                        if(!CasehasPawn(x - 2, y + 1)) movesPossible.Add((x - 2, y + 1));
+                        if (!CasehasPawn(x - 3, y)) movesPossible.Add((x - 3, y));
+                        if (!CasehasPawn(x - 2, y - 1)) movesPossible.Add((x - 2, y - 1));
+                        if (!CasehasPawn(x - 2, y + 1)) movesPossible.Add((x - 2, y + 1));
 
                     }
                 }
@@ -273,9 +291,9 @@ namespace Blockade
                     //si 2 pions consécutif a droite  
                     if (CasehasPawn(x + 1, y) && CasehasPawn(x + 2, y))
                     {
-                        if(!CasehasPawn(x + 3, y)) movesPossible.Add((x + 3, y));
-                        if(!CasehasPawn(x + 2, y - 1)) movesPossible.Add((x + 2, y - 1));
-                        if(!CasehasPawn(x + 2, y + 1)) movesPossible.Add((x + 2, y + 1));
+                        if (!CasehasPawn(x + 3, y)) movesPossible.Add((x + 3, y));
+                        if (!CasehasPawn(x + 2, y - 1)) movesPossible.Add((x + 2, y - 1));
+                        if (!CasehasPawn(x + 2, y + 1)) movesPossible.Add((x + 2, y + 1));
                     }
                 }
             }
@@ -321,7 +339,6 @@ namespace Blockade
 
         public bool canPlaceWall(int x, int y, bool isHorizontal)
         {
-
             if (x < 0 || x > board.gsBoard.Length) return false;
 
             if (y < 0 || y > board.gsBoard.Length) return false;
@@ -388,16 +405,16 @@ namespace Blockade
             return true;
         }
 
-        public List<(int,int)> GetAvailableWall(bool isHorizontal)
+        public List<(int, int)> GetAvailableWall(bool isHorizontal)
         {
-            List<(int, int)> Result = new List<(int,int)> ();
-            for (int x = 0; x < 14;x++)
+            List<(int, int)> Result = new List<(int, int)>();
+            for (int x = 0; x < 14; x++)
             {
-                for (int y = 0; y < 11;y++)
+                for (int y = 0; y < 11; y++)
                 {
-                    if (canPlaceWall(x,y,isHorizontal))
+                    if (canPlaceWall(x, y, isHorizontal))
                     {
-                        Result.Add((x,y));
+                        Result.Add((x, y));
                     }
                 }
             }
@@ -425,8 +442,8 @@ namespace Blockade
                 board.gsBoard[x + 1, y + 1].TopWall = newWall;
                 board.gsBoard[x + 1, y].BottomWall = newWall;
                 board.gsBoard[x, y + 1].TopWall = newWall;
-                graph.SupprimerArete(graph.GetSommet(x, y),graph.GetSommet(x,y+1));
-                graph.SupprimerArete(graph.GetSommet(x+1, y), graph.GetSommet(x+1, y + 1));
+                graph.SupprimerArete(graph.GetSommet(x, y), graph.GetSommet(x, y + 1));
+                graph.SupprimerArete(graph.GetSommet(x + 1, y), graph.GetSommet(x + 1, y + 1));
             }
             else
             {
