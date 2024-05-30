@@ -8,6 +8,7 @@ public class SoundEffect : MonoBehaviour
     public AudioClip sfxBtn,sfxPawn,sfxWall,sfxEndphase;
    
    public void ButtonClickSound(){
+        Debug.Log("in");
         src.clip=sfxBtn;
         src.Play();
    }
