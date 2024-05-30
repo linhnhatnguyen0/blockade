@@ -82,6 +82,8 @@ public class LogicScript : MonoBehaviour
     // Awake est appel� lorsque le script est charg�
     void Awake()
     {
+        GameObject musicManager=  GameObject.Find("MusicAudioSource");
+        Destroy(musicManager); 
         //R�cup�rer les personnages choisis par les joueurs et faire apparaitre les pions
         int player1 = PlayerPrefs.GetInt("SpawnCharacterP1");
         int player2 = PlayerPrefs.GetInt("SpawnCharacterP2");
