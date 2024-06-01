@@ -193,6 +193,6 @@ public class PhaseHandler : MonoBehaviour
 
     public void victore()
     {
-
+        winPanel.SetActive(true);
     }
 }
