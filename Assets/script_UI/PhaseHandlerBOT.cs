@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static UnityEngine.ParticleSystem;
 using Blockade;
 
 
@@ -36,6 +35,9 @@ public class PhaseHandlerBOT : MonoBehaviour
     public Sprite phaseBarIconValidP1;
     public Sprite phaseBarIconValidP2;
 
+    public GameObject winPanel;
+    public TextMeshProUGUI winText;
+
     void Start()
     {
         //PAWN
@@ -48,6 +50,7 @@ public class PhaseHandlerBOT : MonoBehaviour
         phaseBarr2.GetComponent<Image>().fillAmount = 0;
         endturn_btnP1.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
+        winPanel.SetActive(false);
     }
     public void changePhaseHandler()
     {
@@ -223,5 +226,20 @@ public class PhaseHandlerBOT : MonoBehaviour
         }
         Instantiate(wallPrefab, wallPutter.transform.position, rotation);
         partie.placeWall(targetPosition.X, targetPosition.Y, isHorizontal);
+    }
+
+    public void victore(PlayerID playerID)
+    {
+        if (playerID == PlayerID.Player1)
+        {
+            string p1Name = PlayerPrefs.GetString("PlayerName1");
+            winText.text = "Player " + p1Name + " a gagné";
+        }
+        else
+        {
+            string p2Name = PlayerPrefs.GetString("PlayerName2");
+            winText.text = "Player " + p2Name + " a gagné";
+        }
+        winPanel.SetActive(true);
     }
 }

@@ -49,6 +49,8 @@ public class PlayerMovementHandler : MonoBehaviour
     private Vector3 previousRotation;
 
     private Vector3 targetPosition;
+
+    public GameObject phaseHandler;
     void Start()
     {
         board = GameObject.Find("Board");
@@ -115,9 +117,26 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         if (targetPawn.transform.position == targetPosition)
         {
-            cubeHit = null;
             anim.SetBool("isFlying", false);
             isMoving = false;
+            Point point = GetCubeFromBoard(cubeHit);
+            if (currentPlayer.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player1 && ((point.X == 10 && point.Y == 3) || (point.X == 10 && point.Y == 7)))
+            {
+                if (!phaseHandler.GetComponent<PhaseHandler>())
+                {
+                    phaseHandler.GetComponent<PhaseHandlerBOT>().victore(PlayerID.Player1);
+                }
+                phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player1);
+            }
+            if (currentPlayer.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player2 && ((point.X == 3 && point.Y == 3) || (point.X == 3 && point.Y == 7)))
+            {
+                if (!phaseHandler.GetComponent<PhaseHandler>())
+                {
+                    phaseHandler.GetComponent<PhaseHandlerBOT>().victore(PlayerID.Player2);
+                }
+                phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
+            }
+            cubeHit = null;
         }
     }
 
