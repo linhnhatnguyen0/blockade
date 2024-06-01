@@ -36,6 +36,8 @@ public class PhaseHandler : MonoBehaviour
     public Sprite phaseBarIconValidP1;
     public Sprite phaseBarIconValidP2;
 
+    public GameObject winPanel;
+
     void Start()
     {
         //PAWN
@@ -50,6 +52,7 @@ public class PhaseHandler : MonoBehaviour
         endturn_btnP2.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
         undo_btnP2.GetComponent<Button>().interactable = false;
+        winPanel.SetActive(false);
     }
     public void changePhaseHandler()
     {
@@ -190,6 +193,6 @@ public class PhaseHandler : MonoBehaviour
 
     public void victore()
     {
-
+        winPanel.SetActive(true);
     }
 }
