@@ -37,6 +37,7 @@ public class PhaseHandler : MonoBehaviour
     public Sprite phaseBarIconValidP2;
 
     public GameObject winPanel;
+    public TextMeshProUGUI winText;
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class PhaseHandler : MonoBehaviour
     public void changePhaseHandler()
     {
         IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
-        PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMouvementHandler").GetComponent<PlayerMovementHandler>();
+        PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         endturn_btnP1.GetComponent<Button>().interactable = false;
         endturn_btnP2.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
@@ -191,8 +192,18 @@ public class PhaseHandler : MonoBehaviour
         vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorV2;
     }
 
-    public void victore()
+    public void victore(PlayerID playerID)
     {
+        if (playerID == PlayerID.Player1)
+        {
+            string p1Name = PlayerPrefs.GetString("PlayerName1");
+            winText.text = "Player " + p1Name + " a gagné";
+        }
+        else
+        {
+            string p2Name = PlayerPrefs.GetString("PlayerName2");
+            winText.text = "Player " + p2Name + " a gagné";
+        }
         winPanel.SetActive(true);
     }
 }

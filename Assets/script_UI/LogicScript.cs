@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Blockade;
+using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class LogicScript : MonoBehaviour
     public IHMLink partie;
     public RawImage panelImageJ1;
     public RawImage panelImageJ2;
+    public TextMeshProUGUI playerName1;
+    public TextMeshProUGUI playerName2;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
@@ -82,8 +85,8 @@ public class LogicScript : MonoBehaviour
     // Awake est appel� lorsque le script est charg�
     void Awake()
     {
-        GameObject musicManager=  GameObject.Find("MusicAudioSource");
-        Destroy(musicManager); 
+        GameObject musicManager = GameObject.Find("MusicAudioSource");
+        Destroy(musicManager);
         //R�cup�rer les personnages choisis par les joueurs et faire apparaitre les pions
         int player1 = PlayerPrefs.GetInt("SpawnCharacterP1");
         int player2 = PlayerPrefs.GetInt("SpawnCharacterP2");
@@ -128,6 +131,8 @@ public class LogicScript : MonoBehaviour
                 spawnChampionP2("Squid");
                 break;
         }
+        playerName1.text = PlayerPrefs.GetString("PlayerName1");
+        playerName2.text = PlayerPrefs.GetString("PlayerName2");
     }
 
     /// <summary>

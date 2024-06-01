@@ -11,40 +11,15 @@ public class DropDownChampionHandler : MonoBehaviour
 {
     public TextMeshProUGUI textP1;
     public TextMeshProUGUI textP2;
-    public GameObject btnValidP1;
-    public GameObject btnValidP2;
     private int indexP1 = 0;
     private int indexP2 = 0;
-    private bool validP1;
-    private bool validP2;
     public GameObject btnPlayGame;
-
-    private void Start()
-    {
-        btnPlayGame.GetComponent<Button>().interactable = false;
-        validP1 = false;
-        validP2 = false;
-    }
-
-    public void validHandlerP1()
-    {
-        if (btnValidP2.GetComponent<Button>().interactable == false)
-        {
-            btnPlayGame.GetComponent<Button>().interactable = true;
-        }
-        this.GetComponent<Button>().interactable = false;
-    }
-    public void validHandlerP2()
-    {
-        if (btnValidP1.GetComponent<Button>().interactable == false)
-        {
-            btnPlayGame.GetComponent<Button>().interactable = true;
-        }
-        this.GetComponent<Button>().interactable = false;
-    }
+    public TextMeshProUGUI playerName1;
+    public TextMeshProUGUI playerName2;
 
     public void OnDropdownValueChangedP1()
     {
+        Debug.Log(textP1);
         if (this.name == "DroiteP1")
         {
             indexP1++;
@@ -129,10 +104,18 @@ public class DropDownChampionHandler : MonoBehaviour
 
     public void buttonHandler()
     {
+        PlayerPrefs.SetString("PlayerName1", playerName1.text);
+        PlayerPrefs.SetString("PlayerName2", playerName2.text);
+        Debug.Log(PlayerPrefs.GetString("PlayerName1"));
+        Debug.Log(PlayerPrefs.GetString("PlayerName2"));
         SceneManager.LoadScene("InGameScene");
     }
     public void buttonHandlerBOT()
     {
+        PlayerPrefs.SetString("PlayerName1", playerName1.text);
+        PlayerPrefs.SetString("PlayerName2", playerName2.text);
+        Debug.Log(PlayerPrefs.GetString("PlayerName1"));
+        Debug.Log(PlayerPrefs.GetString("PlayerName2"));
         SceneManager.LoadScene("InGameSceneBOT");
     }
 
