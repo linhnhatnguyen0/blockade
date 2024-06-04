@@ -51,6 +51,8 @@ public class PlayerMovementHandler : MonoBehaviour
     private Vector3 targetPosition;
 
     public GameObject phaseHandler;
+
+    public GameObject soundEffect;
     void Start()
     {
         board = GameObject.Find("Board");
@@ -136,6 +138,7 @@ public class PlayerMovementHandler : MonoBehaviour
                 }
                 phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
             }
+            soundEffect.GetComponent<SoundEffect>().PawnSound();
             cubeHit = null;
         }
     }
@@ -182,6 +185,8 @@ public class PlayerMovementHandler : MonoBehaviour
         if (cubeHit != null && currentPlayer != null)
         {
             targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
+            Debug.Log("Target position: " + targetPosition);
+            Debug.Log("Current player " + currentPlayer);
             movePlayerHandler(currentPlayer, targetPosition);
         }
         if (!isMoving)

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Blockade;
+using UnityEngine.SceneManagement;
 
 public class DragHandler : MonoBehaviour
 {
@@ -36,6 +37,10 @@ public class DragHandler : MonoBehaviour
     private int closestPointIndex;
     private Point cubeTopLeftPosition;
 
+    private GameObject soundEffect;
+    private GameObject phaseHandler;
+
+
     private void Awake()
     {
         hp1 = GameObject.FindGameObjectsWithTag("hp1")[0];
@@ -46,6 +51,7 @@ public class DragHandler : MonoBehaviour
         endturn_btnP2 = GameObject.Find("endturn_btnP2");
         undoBtnP1 = GameObject.Find("undo_btnP1");
         undoBtnP2 = GameObject.Find("undo_btnP2");
+        soundEffect = GameObject.Find("SFXAudioSource");
     }
     private void Update()
     {
@@ -110,13 +116,25 @@ public class DragHandler : MonoBehaviour
         if (wall.GetComponent<Renderer>().material.color == Color.red)
         {
             Destroy(wall);
+            soundEffect.GetComponent<SoundEffect>().WallSoundFalse();
             return;
         }
+        soundEffect.GetComponent<SoundEffect>().WallSoundTrue();
         wall.GetComponent<Renderer>().material.color = Color.blue;
         wall.tag = "Untagged";
         wall.GetComponent<wallVerification>().playerID = PlayerPrefs.GetInt("currentPlayer") == 1 ? PlayerID.Player1 : PlayerID.Player2;
-        Debug.Log("Cube attached: " + cubeTopLeftPosition);
-        partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
+        if (SceneManager.GetActiveScene().name == "InGameScene")
+        {
+            phaseHandler = GameObject.Find("PhaseHandler");
+            phaseHandler.GetComponent<PhaseHandler>().cubeTopLeftPosition = cubeTopLeftPosition;
+            phaseHandler.GetComponent<PhaseHandler>().isHorizontal = isHorizontal;
+        }
+        else
+        {
+            phaseHandler = GameObject.Find("PhaseHandlerBOT");
+            phaseHandler.GetComponent<PhaseHandlerBOT>().cubeTopLeftPosition = cubeTopLeftPosition;
+            phaseHandler.GetComponent<PhaseHandlerBOT>().isHorizontal = isHorizontal;
+        }
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
             Debug.Log(wall);

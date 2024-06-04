@@ -38,7 +38,8 @@ public class PhaseHandler : MonoBehaviour
 
     public GameObject winPanel;
     public TextMeshProUGUI winText;
-
+    public Point cubeTopLeftPosition;
+    public bool isHorizontal;
     void Start()
     {
         //PAWN
@@ -85,6 +86,7 @@ public class PhaseHandler : MonoBehaviour
         }
         if (state == 2)
         {
+            partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
             //changeWallButtonColor(false, false, false, false);
             StartCoroutine(DelayResetState());
         }
