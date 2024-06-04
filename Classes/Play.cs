@@ -95,8 +95,14 @@ namespace Blockade
 
         private bool CheckIfGameOver(Player player)
         {
-            // Implémentez votre fonction `gagné` ici.
-            return false;
+            if (game.Board.gsBoard[x, y].StartingCase)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
