@@ -23,6 +23,11 @@ public class AnimatorElements : MonoBehaviour
 
     private bool movementStarted = false;
 
+
+    // Ajoutez une référence à StartCinematic
+    public StartCinematic startCinematic;
+
+
     void Update()
     {
         if (!movementStarted)
@@ -138,5 +143,11 @@ public class AnimatorElements : MonoBehaviour
 
         // Réactiver le GameObject
         interfacejeu.SetActive(true);
+
+        // Appeler la méthode de début de la cinématique
+        if (startCinematic != null)
+        {
+            startCinematic.BeginCinematic();
+        }
     }
 }

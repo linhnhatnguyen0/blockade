@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class StartCinematic : MonoBehaviour
 {
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 
     public GameObject target; // Le GameObject autour duquel la caméra va tourner
     public float rotationSpeed = 30f; // Vitesse de rotation (en degrés par seconde)
@@ -26,8 +15,15 @@ public class StartCinematic : MonoBehaviour
     private float elapsedTime = 0f; // Temps écoulé depuis le début du mouvement
     private Vector3 board;
 
+    private bool startCinematic = false; // Flag pour démarrer la cinématique
+
+    public GameObject interfacejeu;
+
+
     void Start()
     {
+        // Cacher l'interface de jeu
+        interfacejeu.SetActive(false);
         // Enregistrez la rotation initiale de la caméra
         initialRotation = transform.rotation;
         // Enregistrez la position initiale de la caméra
@@ -38,35 +34,49 @@ public class StartCinematic : MonoBehaviour
 
     void Update()
     {
-        // Assurez-vous que le GameObject cible est défini
-        if (target != null)
+        if (startCinematic)
         {
-            // Calculer le nombre de tours complets effectués
-            float completedTurns = elapsedTime / duration;
-
-            // Vérifier si 3 tours complets ont été effectués
-            if (completedTurns >= 1f)
+            // Assurez-vous que le GameObject cible est défini
+            if (target != null)
             {
-                // Revenir à la rotation initiale
-                transform.rotation = initialRotation;
-                // Revenir à la position initiale
-                transform.position = initialPosition;
-                // Arrêter le mouvement de la caméra
-                return;
+                // Calculer le nombre de tours complets effectués
+                float completedTurns = elapsedTime / duration;
+
+                // Vérifier si 3 tours complets ont été effectués
+                if (completedTurns >= 1f)
+                {
+                    // Revenir à la rotation initiale
+                    transform.rotation = initialRotation;
+                    // Revenir à la position initiale
+                    transform.position = initialPosition;
+                    // Arrêter le mouvement de la caméra
+                    startCinematic = false;
+                    interfacejeu.SetActive(true); // Afficher l'interface de jeu
+                    return;
+                }
+
+                // Rotation autour du centre du GameObject cible (horizontalement)
+                transform.RotateAround(board, board, rotationSpeed * Time.deltaTime);
+
+                // Gardez la caméra tournée vers le GameObject cible
+                transform.LookAt(target.transform);
+
+                // Mettre à jour le temps écoulé
+                elapsedTime += Time.deltaTime;
+
+                Debug.Log(elapsedTime);
+                
             }
-
-            // Rotation autour du centre du GameObject cible (horizontalement)
-            transform.RotateAround(board, board, rotationSpeed * Time.deltaTime);
-
-            // Gardez la caméra tournée vers le GameObject cible
-            transform.LookAt(target.transform);
-
-            // Mettre à jour le temps écoulé
-            elapsedTime += Time.deltaTime;
-
-            Debug.Log(elapsedTime);
-
         }
+    }
+
+    // Méthode pour démarrer la cinématique
+    public void BeginCinematic()
+    {
+        startCinematic = true;
+        elapsedTime = 0f;
+        // Cacher l'interface de jeu au début de la cinématique
+        interfacejeu.SetActive(false);
     }
 }
 
