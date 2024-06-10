@@ -17,8 +17,12 @@ public class LogicScript : MonoBehaviour
     public IHMLink partie;
     public RawImage panelImageJ1;
     public RawImage panelImageJ2;
+    public RawImage imageCinematiqueJ1;
+    public RawImage imageCinematiqueJ2;
     public TextMeshProUGUI playerName1;
     public TextMeshProUGUI playerName2;
+    public TextMeshProUGUI playerNameCine1;
+    public TextMeshProUGUI playerNameCine2;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
@@ -30,6 +34,8 @@ public class LogicScript : MonoBehaviour
         //Debug.Log(indexJ1 + "-" + indexJ2);
         panelImageJ1.texture = imageList[indexJ1];
         panelImageJ2.texture = imageList[indexJ2];
+        imageCinematiqueJ1.texture = imageList[indexJ1];
+        imageCinematiqueJ2.texture = imageList[indexJ2];
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
         foreach (Transform lines in plateau.transform)
@@ -133,6 +139,8 @@ public class LogicScript : MonoBehaviour
         }
         playerName1.text = PlayerPrefs.GetString("PlayerName1");
         playerName2.text = PlayerPrefs.GetString("PlayerName2");
+        playerNameCine1.text = PlayerPrefs.GetString("PlayerName1");
+        playerNameCine2.text = PlayerPrefs.GetString("PlayerName2");
     }
 
     /// <summary>
