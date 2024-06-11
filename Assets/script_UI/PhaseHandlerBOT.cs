@@ -219,7 +219,7 @@ public class PhaseHandlerBOT : MonoBehaviour
             }
         }
         IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
-        PlayerMovementHandler playerMouvementHandler = GameObject.Find("PlayerMouvementHandler").GetComponent<PlayerMovementHandler>();
+        PlayerMovementHandler playerMouvementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         Vector3 target = PlayerMovementHandler.GetCubePositionFromBoard(targetPosition);
         playerMouvementHandler.GetComponent<PlayerMovementHandler>().movePlayerHandler(pawnTarget, target);
         partie.updatePawnPosition(pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.X, pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.Y, targetPosition.X, targetPosition.Y);
