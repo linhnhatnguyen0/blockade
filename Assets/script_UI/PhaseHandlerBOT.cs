@@ -39,6 +39,7 @@ public class PhaseHandlerBOT : MonoBehaviour
     public TextMeshProUGUI winText;
     public Point cubeTopLeftPosition;
     public bool isHorizontal;
+    public IHMLink partie;
 
 
     void Start()
@@ -57,7 +58,7 @@ public class PhaseHandlerBOT : MonoBehaviour
     }
     public void changePhaseHandler()
     {
-        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
         PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         endturn_btnP1.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
@@ -110,9 +111,15 @@ public class PhaseHandlerBOT : MonoBehaviour
             phaseBarIconWall.GetComponent<Image>().sprite = phaseBarIconWallP2;
             phaseBarIconValid.GetComponent<Image>().sprite = phaseBarIconValidP2;
             //BOT Pawn
+            (bool, Sommet) pionDeplacement = partie.game.IAFacile.deplacerPion(partie.game, partie.game.Graphe);
+            Point p = new Point(pionDeplacement.Item2.X, pionDeplacement.Item2.Y);
+            MoveToPlayer(pionDeplacement.Item1, p);  
             yield return new WaitForSeconds(1);
             ChangeColor(1);
             //BOT Wall
+            (bool, Sommet) murPlacement = partie.game.IAFacile.poserMur(partie.game);
+            Point p2 = new Point(murPlacement.Item2.X, murPlacement.Item2.Y);
+            PlaceWall(p2, murPlacement.Item1);
             yield return new WaitForSeconds(1);
             ChangeColor(2);
             yield return new WaitForSeconds(1);
