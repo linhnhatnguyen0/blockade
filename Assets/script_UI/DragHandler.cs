@@ -56,6 +56,7 @@ public class DragHandler : MonoBehaviour
     private void Update()
     {
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
     }
     private void OnMouseDown()
     {

@@ -57,6 +57,7 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
+        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
     }
 
 
@@ -207,6 +208,8 @@ public class PlayerMovementHandler : MonoBehaviour
                         {
                             if (hit.transform.tag == "Mouvable") // Si la position cliqu�e est mouvable, on d�place le pion
                             {
+                                //PLAY SOUND
+                                sfx.PawnSound();
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
                                 previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;
