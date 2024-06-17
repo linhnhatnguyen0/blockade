@@ -5,6 +5,9 @@ using UnityEngine;
 public class StartCinematic : MonoBehaviour
 {
     public GameObject target; 
+    public GameObject effectLeft; 
+    public GameObject effectRight; 
+
     public RectTransform letsgo;
     private Quaternion initialRotation; 
     private Vector3 initialPosition; 
@@ -49,6 +52,8 @@ public class StartCinematic : MonoBehaviour
                     transform.rotation = initialRotation;
                     transform.position = initialPosition;
                     audioSource.Stop(); // Arrêter le son à la fin de l'animation
+                    effectLeft.SetActive(false);
+                    effectRight.SetActive(false);
                     interfacejeu.SetActive(true); // Afficher l'interface de jeu
 
                     if (!movementStarted)
@@ -57,7 +62,7 @@ public class StartCinematic : MonoBehaviour
                         movementStarted = true;
                         // return;
                     }
-                    
+
                     startCinematic = false;
                 }
             }
@@ -71,6 +76,8 @@ public class StartCinematic : MonoBehaviour
         elapsedTime = 0f;
         // Cacher l'interface de jeu au début de la cinématique
         interfacejeu.SetActive(false);
+        effectLeft.SetActive(true);
+        effectRight.SetActive(true);
         audioSource.clip = cameraSoundClip;
         audioSource.Play();
     }

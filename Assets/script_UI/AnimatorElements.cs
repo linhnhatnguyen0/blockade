@@ -9,6 +9,11 @@ public class AnimatorElements : MonoBehaviour
     public RectTransform element4;
     public RectTransform element5;
 
+    public GameObject effectLeft; 
+    public GameObject effectRight; 
+    
+    public RectTransform versusEffect;
+
     public GameObject interfacejeu;
     public GameObject startBackground;
 
@@ -39,6 +44,9 @@ public class AnimatorElements : MonoBehaviour
 
     IEnumerator MoveElements()
     {
+        effectLeft.SetActive(false);
+        effectRight.SetActive(false);
+
         // Cacher le GameObject
         interfacejeu.SetActive(false);
         
@@ -47,9 +55,9 @@ public class AnimatorElements : MonoBehaviour
         Vector2 targetPosition2 = new Vector2(-565f, -325f);
         float duration = 2f; // Durée du déplacement en secondes
 
-        Debug.Log("Starting positions:");
-        Debug.Log("element1.anchoredPosition: " + element1.anchoredPosition);
-        Debug.Log("element2.anchoredPosition: " + element2.anchoredPosition);
+        // Debug.Log("Starting positions:");
+        // Debug.Log("element1.anchoredPosition: " + element1.anchoredPosition);
+        // Debug.Log("element2.anchoredPosition: " + element2.anchoredPosition);
 
         // Jouer le son
         audioSource.clip = player1Clip;
@@ -72,12 +80,13 @@ public class AnimatorElements : MonoBehaviour
         element1.anchoredPosition = targetPosition1;
         element2.anchoredPosition = targetPosition2;
 
-        Debug.Log("After movement:");
-        Debug.Log("element1.anchoredPosition: " + element1.anchoredPosition);
-        Debug.Log("element2.anchoredPosition: " + element2.anchoredPosition);
+        // Debug.Log("After movement:");
+        // Debug.Log("element1.anchoredPosition: " + element1.anchoredPosition);
+        // Debug.Log("element2.anchoredPosition: " + element2.anchoredPosition);
 
-        // Déplacement de l'élément 3
+        // Déplacement de l'élément 3 et versusEffect
         Vector2 targetPosition3 = new Vector2(0f, 0f);
+        Vector2 versusEffectPosition = new Vector2(0f, 0f);
         duration = 2f; // Durée du déplacement en secondes
 
         // Jouer le son
@@ -92,15 +101,18 @@ public class AnimatorElements : MonoBehaviour
         {
             float t = timer / duration;
             element3.anchoredPosition = Vector2.Lerp(element3.anchoredPosition, targetPosition3, t);
+            versusEffect.anchoredPosition = Vector2.Lerp(versusEffect.anchoredPosition, versusEffectPosition, t);
             timer += Time.deltaTime;
             yield return null;
         }
 
         // Correction de la position pour s'assurer qu'il soit exactement à la position finale
         element3.anchoredPosition = targetPosition3;
+        versusEffect.anchoredPosition = versusEffectPosition;
 
-        Debug.Log("After element3 movement:");
-        Debug.Log("element3.anchoredPosition: " + element3.anchoredPosition);
+
+        // Debug.Log("After element3 movement:");
+        // Debug.Log("element3.anchoredPosition: " + element3.anchoredPosition);
 
         // Déplacement des éléments 4 et 5
         Vector2 targetPosition4 = new Vector2(565f, 90f);
@@ -128,9 +140,9 @@ public class AnimatorElements : MonoBehaviour
         element4.anchoredPosition = targetPosition4;
         element5.anchoredPosition = targetPosition5;
 
-        Debug.Log("After elements 4 and 5 movement:");
-        Debug.Log("element4.anchoredPosition: " + element4.anchoredPosition);
-        Debug.Log("element5.anchoredPosition: " + element5.anchoredPosition);
+        // Debug.Log("After elements 4 and 5 movement:");
+        // Debug.Log("element4.anchoredPosition: " + element4.anchoredPosition);
+        // Debug.Log("element5.anchoredPosition: " + element5.anchoredPosition);
 
         // Cacher les RectTransforms à la fin de la coroutine
         element1.gameObject.SetActive(false);
@@ -138,6 +150,8 @@ public class AnimatorElements : MonoBehaviour
         element3.gameObject.SetActive(false);
         element4.gameObject.SetActive(false);
         element5.gameObject.SetActive(false);
+
+        versusEffect.gameObject.SetActive(false);
 
         startBackground.gameObject.SetActive(false);
 
