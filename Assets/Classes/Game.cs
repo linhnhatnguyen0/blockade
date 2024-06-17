@@ -12,6 +12,7 @@ namespace Blockade
         private Player player1;
         private Player player2;
         private Graphe graph;
+        private IAFacile iAFacile;
 
         public Player Player1
         {
@@ -42,6 +43,23 @@ namespace Blockade
             graph = new Graphe();
             player1 = new Player(Player.PlayerType.X);
             player2 = new Player(Player.PlayerType.O);
+            iAFacile = new IAFacile(player2.Pawn1,player2.Pawn2 );
+        }
+
+        public IAFacile IAFacile
+        {
+
+            get { return iAFacile; }
+
+            set { iAFacile = value; }
+        }
+        
+        public Graphe Graphe
+        {
+
+            get { return graph; }
+
+            set { graph = value; }
         }
 
         public bool CasehasPawn(int x, int y)
@@ -428,6 +446,11 @@ namespace Blockade
 
         private bool IsHorizontalWallHere(int x, int y)
         {
+            Debug.Log("Check x and y" + x + " yyyyyyy " + y);
+            if(x == 13)
+            {
+                return board.gsBoard[x, y].hasBottomWall();
+            }
             return (board.gsBoard[x, y].hasBottomWall()) || (board.gsBoard[x + 1, y].hasBottomWall());
         }
 
