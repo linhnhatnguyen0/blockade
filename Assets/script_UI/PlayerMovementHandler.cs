@@ -37,7 +37,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private Transform cubeHit;
 
-    private GameObject currentPlayer;
+    public GameObject currentPlayer;
 
     private PlayerID currentPlayerID;
 
@@ -45,11 +45,14 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private bool isMoving = false;
 
-    private Point previousPosition;
+    public Point previousPosition;
     private Vector3 previousRotation;
 
     private Vector3 targetPosition;
-    private SoundEffect sfx;
+
+    public GameObject phaseHandler;
+
+    public GameObject soundEffect;
     void Start()
     {
         board = GameObject.Find("Board");
@@ -117,11 +120,28 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         if (targetPawn.transform.position == targetPosition)
         {
-            cubeHit = null;
             anim.SetBool("isFlying", false);
             isMoving = false;
+            Point point = GetCubeFromBoard(cubeHit);
+            if (currentPlayer.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player1 && ((point.X == 10 && point.Y == 3) || (point.X == 10 && point.Y == 7)))
+            {
+                if (!phaseHandler.GetComponent<PhaseHandler>())
+                {
+                    phaseHandler.GetComponent<PhaseHandlerBOT>().victore(PlayerID.Player1);
+                }
+                phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player1);
+            }
+            if (currentPlayer.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player2 && ((point.X == 3 && point.Y == 3) || (point.X == 3 && point.Y == 7)))
+            {
+                if (!phaseHandler.GetComponent<PhaseHandler>())
+                {
+                    phaseHandler.GetComponent<PhaseHandlerBOT>().victore(PlayerID.Player2);
+                }
+                phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
+            }
+            soundEffect.GetComponent<SoundEffect>().PawnSound();
+            cubeHit = null;
         }
-        
     }
 
     /// <summary>
@@ -166,6 +186,8 @@ public class PlayerMovementHandler : MonoBehaviour
         if (cubeHit != null && currentPlayer != null)
         {
             targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
+            Debug.Log("Target position: " + targetPosition);
+            Debug.Log("Current player " + currentPlayer);
             movePlayerHandler(currentPlayer, targetPosition);
         }
         if (!isMoving)
@@ -190,7 +212,6 @@ public class PlayerMovementHandler : MonoBehaviour
                                 sfx.PawnSound();
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
-                                partie.updatePawnPosition(currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y, GetCubeFromBoard(cubeHit).X, GetCubeFromBoard(cubeHit).Y);
                                 previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;
                                 currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition = GetCubeFromBoard(cubeHit);
                                 deletePlaneAndRemoveMouvable();

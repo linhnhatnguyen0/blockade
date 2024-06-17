@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayGamePlayer.unity
     guid: 846c908ed1ea71c4d9924c1c6449e6c0
+  - enabled: 1
+    path: Assets/Scenes/PlayGameTextureBOT.unity
+    guid: cded8b63fe77d7e498e438366da9c8d9
+  - enabled: 1
+    path: Assets/Scenes/InGameSceneBOT.unity
+    guid: 9136b6b0f51c6eb45ac4868710c41535
   m_configObjects: {}

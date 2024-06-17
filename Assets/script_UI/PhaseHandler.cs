@@ -2,12 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Blockade;
 
 
 public class PhaseHandler : MonoBehaviour
 {
     public Announcer announcer;
-    
+
     private int state = 0;
     public GameObject isMyTurnBtnP1;
     public GameObject isMyTurnBtnP2;
@@ -35,10 +36,14 @@ public class PhaseHandler : MonoBehaviour
     public Sprite phaseBarIconValidP1;
     public Sprite phaseBarIconValidP2;
 
+    public GameObject winPanel;
+    public TextMeshProUGUI winText;
+    public Point cubeTopLeftPosition;
+    public bool isHorizontal;
     void Start()
     {
         //PAWN
-        announcer.Message(1,1);
+        announcer.Message(1, 1);
         PlayerPrefs.SetInt("currentPhase", 0);
         changeWallButtonColor(false, false, false, false);
         isMyTurnBtnP1.SetActive(true);
@@ -49,9 +54,12 @@ public class PhaseHandler : MonoBehaviour
         endturn_btnP2.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
         undo_btnP2.GetComponent<Button>().interactable = false;
+        winPanel.SetActive(false);
     }
     public void changePhaseHandler()
     {
+        IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
+        PlayerMovementHandler playerMovementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         endturn_btnP1.GetComponent<Button>().interactable = false;
         endturn_btnP2.GetComponent<Button>().interactable = false;
         undo_btnP1.GetComponent<Button>().interactable = false;
@@ -62,22 +70,23 @@ public class PhaseHandler : MonoBehaviour
         if (state == 1)
         {
             //WALL
-            
+            partie.updatePawnPosition(playerMovementHandler.previousPosition.X, playerMovementHandler.previousPosition.Y, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.X, playerMovementHandler.currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition.Y);
             PlayerPrefs.SetInt("clickCounter", 0);
             if (PlayerPrefs.GetInt("currentPlayer") == 1)
             {
-                announcer.Message(2,1);
+                announcer.Message(2, 1);
                 changeWallButtonColor(true, true, false, false);
             }
             else
             {
-                announcer.Message(2,2);
+                announcer.Message(2, 2);
                 changeWallButtonColor(false, false, true, true);
             }
-            
+
         }
         if (state == 2)
         {
+            partie.placeWall(cubeTopLeftPosition.X, cubeTopLeftPosition.Y, isHorizontal);
             //changeWallButtonColor(false, false, false, false);
             StartCoroutine(DelayResetState());
         }
@@ -88,12 +97,12 @@ public class PhaseHandler : MonoBehaviour
         yield return new WaitForSeconds(1); // waits 1 seconds
         state = 0;
         //PAWN
-        announcer.Message(1,PlayerPrefs.GetInt("currentPlayer"));
+        announcer.Message(1, PlayerPrefs.GetInt("currentPlayer"));
         ChangeColor(state);
         PlayerPrefs.SetInt("currentPhase", state);
         if (PlayerPrefs.GetInt("currentPlayer") == 1)
         {
-            announcer.Message(1,2);
+            announcer.Message(1, 2);
             PlayerPrefs.SetInt("currentPlayer", 2);
             isMyTurnBtnP1.SetActive(false);
             isMyTurnBtnP2.SetActive(true);
@@ -105,7 +114,7 @@ public class PhaseHandler : MonoBehaviour
         }
         else
         {
-            announcer.Message(1,1);
+            announcer.Message(1, 1);
             PlayerPrefs.SetInt("currentPlayer", 1);
             isMyTurnBtnP1.SetActive(true);
             isMyTurnBtnP2.SetActive(false);
@@ -184,9 +193,19 @@ public class PhaseHandler : MonoBehaviour
         hp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorH2;
         vp2.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = colorV2;
     }
-    
-    public void victore()
+
+    public void victore(PlayerID playerID)
     {
-        
+        if (playerID == PlayerID.Player1)
+        {
+            string p1Name = PlayerPrefs.GetString("PlayerName1");
+            winText.text = "Player " + p1Name + " a gagné";
+        }
+        else
+        {
+            string p2Name = PlayerPrefs.GetString("PlayerName2");
+            winText.text = "Player " + p2Name + " a gagné";
+        }
+        winPanel.SetActive(true);
     }
 }

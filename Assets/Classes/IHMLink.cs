@@ -17,7 +17,7 @@ namespace Blockade
 
         public List<Point> canMovePosition(Point currentPosition)
         {
-           List<(int,int)> possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
+            List<(int, int)> possiblemove = game.getAvailableMove(game.getPawnByCase(currentPosition.X, currentPosition.Y));
             return possiblemove.Select(t => new Point(t.Item1, t.Item2)).ToList();
         }
 
@@ -42,6 +42,18 @@ namespace Blockade
                 game.placeWall(game.Player2, x, y, isHorizontal);
             }
 
+        }
+
+        public bool EndGame(int x, int y)
+        {
+            if (game.Board.gsBoard[x, y].StartingCase)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

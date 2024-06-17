@@ -5,22 +5,32 @@ using UnityEngine;
 public class SoundEffect : MonoBehaviour
 {
     public AudioSource src;
-    public AudioClip sfxBtn,sfxPawn,sfxWall,sfxEndphase;
-   
-   public void ButtonClickSound(){
-        src.clip=sfxBtn;
+    public AudioClip sfxBtn, sfxPawn, sfxWallFalse, sfxWallTrue, sfxEndphase;
+
+    public void ButtonClickSound()
+    {
+        Debug.Log("in");
+        src.clip = sfxBtn;
         src.Play();
-   }
-   public void EndphaseSound(){
-        src.clip=sfxEndphase;
+    }
+    public void EndphaseSound()
+    {
+        src.clip = sfxEndphase;
         src.Play();
-   }
-   public void WallSound(){
-        src.clip=sfxWall;
+    }
+    public void WallSoundTrue()
+    {
+        src.clip = sfxWallTrue;
         src.Play();
-   }
-   public void PawnSound(){
-        src.clip=sfxPawn;
+    }
+    public void PawnSound()
+    {
+        src.clip = sfxPawn;
         src.Play();
-   }
+    }
+    public void WallSoundFalse()
+    {
+        src.clip = sfxWallFalse;
+        src.Play();
+    }
 }
