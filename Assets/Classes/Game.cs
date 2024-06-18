@@ -446,7 +446,6 @@ namespace Blockade
 
         private bool IsHorizontalWallHere(int x, int y)
         {
-            Debug.Log("Check x and y" + x + " yyyyyyy " + y);
             if(x == 13)
             {
                 return board.gsBoard[x, y].hasBottomWall();

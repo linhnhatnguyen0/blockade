@@ -78,11 +78,11 @@ namespace Blockade
 
             if(smallestList == ListMoovePawn1Final1 || smallestList == ListMoovePawn1Final2)
             {
-                return (true ,smallestList[0]); // pion haut
+                return (true ,smallestList[1]); // pion haut
             }
             else 
             {
-                return (false ,smallestList[0]);// pion bas
+                return (false ,smallestList[1]);// pion bas
 
             }
 

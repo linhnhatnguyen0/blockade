@@ -40,6 +40,7 @@ public class PhaseHandlerBOT : MonoBehaviour
     public Point cubeTopLeftPosition;
     public bool isHorizontal;
     public IHMLink partie;
+    public GameObject board;
 
 
     void Start()
@@ -113,6 +114,7 @@ public class PhaseHandlerBOT : MonoBehaviour
             //BOT Pawn
             (bool, Sommet) pionDeplacement = partie.game.IAFacile.deplacerPion(partie.game, partie.game.Graphe);
             Point p = new Point(pionDeplacement.Item2.X, pionDeplacement.Item2.Y);
+            Debug.Log("The pion bouge" + p.X + p.Y);
             MoveToPlayer(pionDeplacement.Item1, p);  
             yield return new WaitForSeconds(1);
             ChangeColor(1);
@@ -221,7 +223,8 @@ public class PhaseHandlerBOT : MonoBehaviour
         IHMLink partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
         PlayerMovementHandler playerMouvementHandler = GameObject.Find("PlayerMovementHandler").GetComponent<PlayerMovementHandler>();
         Vector3 target = PlayerMovementHandler.GetCubePositionFromBoard(targetPosition);
-        playerMouvementHandler.GetComponent<PlayerMovementHandler>().movePlayerHandler(pawnTarget, target);
+        target = new Vector3(target.x, 2.1f, target.z);
+        playerMouvementHandler.GetComponent<PlayerMovementHandler>().movePlayerHandler(pawnTarget, target, board.transform.GetChild(targetPosition.X).GetChild(targetPosition.Y));
         partie.updatePawnPosition(pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.X, pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition.Y, targetPosition.X, targetPosition.Y);
         pawnTarget.GetComponent<PlayerPositionHandler>().initialPosition = targetPosition;
     }
@@ -235,7 +238,9 @@ public class PhaseHandlerBOT : MonoBehaviour
         {
             rotation = Quaternion.Euler(0, 90, 0);
         }
-        Instantiate(wallPrefab, wallPutter.transform.position, rotation);
+        GameObject wall = Instantiate(wallPrefab, wallPutter.transform.position, rotation);
+        wall.name = "Walls";
+        wall.tag = "Untagged";
         partie.placeWall(targetPosition.X, targetPosition.Y, isHorizontal);
     }
 

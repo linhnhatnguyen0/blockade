@@ -40,8 +40,8 @@ public class LogicScript : MonoBehaviour
         panelImageJ2.texture = imageList[indexJ2];
         // imageCinematiqueJ1.texture = imageList[indexJ1];
         // imageCinematiqueJ2.texture = imageList[indexJ2];
-        imageWinnerJ1.texture = imageList[indexJ1];
-        imageWinnerJ2.texture = imageList[indexJ2];
+        //imageWinnerJ1.texture = imageList[indexJ1];
+        //imageWinnerJ2.texture = imageList[indexJ2];
 
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");

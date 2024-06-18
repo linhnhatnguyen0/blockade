@@ -99,7 +99,7 @@ public class PlayerMovementHandler : MonoBehaviour
     /// La fonction de gestion du rotation et du mouvement du pion
     /// </summary>
     /// <param name="targetPawn" name="targetPosition"></param>
-    public void movePlayerHandler(GameObject targetPawn, Vector3 targetPosition)
+    public void movePlayerHandler(GameObject targetPawn, Vector3 targetPosition, Transform cubeHit)
     {
         anim = targetPawn.GetComponent<Animator>();
         Vector3 direction = (targetPosition - targetPawn.transform.position).normalized;
@@ -109,7 +109,9 @@ public class PlayerMovementHandler : MonoBehaviour
             targetPawn.transform.rotation = Quaternion.RotateTowards(targetPawn.transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             if (targetPawn.transform.rotation == toRotation)
             {
-                targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
+                Debug.Log("Direction2");
+                // targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
+                targetPawn.transform.position = targetPosition;
                 isMoving = true;
                 anim.SetBool("isFlying", true);
             }
@@ -117,6 +119,7 @@ public class PlayerMovementHandler : MonoBehaviour
         else
         {
             targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
+            Debug.Log(targetPawn.transform.position);
             isMoving = true;
             anim.SetBool("isFlying", true);
         }
@@ -190,7 +193,7 @@ public class PlayerMovementHandler : MonoBehaviour
             targetPosition = new Vector3(cubeHit.position.x, currentPlayer.transform.position.y, cubeHit.position.z);
             Debug.Log("Target position: " + targetPosition);
             Debug.Log("Current player " + currentPlayer);
-            movePlayerHandler(currentPlayer, targetPosition);
+            movePlayerHandler(currentPlayer, targetPosition, cubeHit);
         }
         if (!isMoving)
         {
