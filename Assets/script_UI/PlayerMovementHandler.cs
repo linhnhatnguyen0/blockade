@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Blockade;
+using UnityEngine.SceneManagement;
 
 public struct Point
 {
@@ -110,8 +111,14 @@ public class PlayerMovementHandler : MonoBehaviour
             if (targetPawn.transform.rotation == toRotation)
             {
                 Debug.Log("Direction2");
-                // targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
-                targetPawn.transform.position = targetPosition;
+                if (SceneManager.GetActiveScene().name == "InGameSceneBOT" && targetPawn.GetComponent<PlayerPositionHandler>().playerID == PlayerID.Player2)
+                {
+                    targetPawn.transform.position = targetPosition;
+                }
+                else
+                {
+                    targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
+                }
                 isMoving = true;
                 anim.SetBool("isFlying", true);
             }
@@ -119,7 +126,6 @@ public class PlayerMovementHandler : MonoBehaviour
         else
         {
             targetPawn.transform.position = Vector3.MoveTowards(targetPawn.transform.position, targetPosition, Time.deltaTime * speed);
-            Debug.Log(targetPawn.transform.position);
             isMoving = true;
             anim.SetBool("isFlying", true);
         }
@@ -144,8 +150,6 @@ public class PlayerMovementHandler : MonoBehaviour
                 }
                 phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
             }
-            sfx.PawnSound();
-            cubeHit = null;
         }
     }
 

@@ -9,7 +9,6 @@ public class SoundEffect : MonoBehaviour
 
     public void ButtonClickSound()
     {
-        Debug.Log("in");
         src.clip = sfxBtn;
         src.Play();
     }

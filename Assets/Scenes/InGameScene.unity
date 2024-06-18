@@ -1095,6 +1095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXAudioSource
       objectReference: {fileID: 0}
+    - target: {fileID: 1733070685495949793, guid: 5ab8356b99684c747a048309bf16898c, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 4203297188424911064, guid: e52e252106794214c9013c34413bf890, type: 2}
     - target: {fileID: 1733070685495949806, guid: 5ab8356b99684c747a048309bf16898c, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1139,6 +1143,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5685116550485166118, guid: 5ab8356b99684c747a048309bf16898c, type: 3}
+      propertyPath: sfxEndphase
+      value: 
+      objectReference: {fileID: 8300000, guid: 62f2463fb076ba84cb0790ce1d2a81cb, type: 3}
     - target: {fileID: 5685116550485166118, guid: 5ab8356b99684c747a048309bf16898c, type: 3}
       propertyPath: sfxPawnTrue
       value: 
@@ -5235,6 +5243,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9025585934549550497}
     m_Modifications:
+    - target: {fileID: 7515233650364317863, guid: c901a9cd66b756a4cab2db87d8653a9b, type: 3}
+      propertyPath: m_Value
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7515233651907644000, guid: c901a9cd66b756a4cab2db87d8653a9b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7612,7 +7624,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698448828}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &698448830
 Camera:
   m_ObjectHideFlags: 0

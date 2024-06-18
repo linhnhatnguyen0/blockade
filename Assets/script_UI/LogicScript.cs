@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Blockade;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class LogicScript : MonoBehaviour
     public RawImage panelImageJ1;
     public RawImage panelImageJ2;
     public RawImage imageCinematiqueJ1;
-    public RawImage imageCinematiqueJ2;    
+    public RawImage imageCinematiqueJ2;
     public RawImage imageWinnerJ1;
     public RawImage imageWinnerJ2;
     public TextMeshProUGUI playerName1;
@@ -38,10 +39,13 @@ public class LogicScript : MonoBehaviour
         //Debug.Log(indexJ1 + "-" + indexJ2);
         panelImageJ1.texture = imageList[indexJ1];
         panelImageJ2.texture = imageList[indexJ2];
-        // imageCinematiqueJ1.texture = imageList[indexJ1];
-        // imageCinematiqueJ2.texture = imageList[indexJ2];
-        //imageWinnerJ1.texture = imageList[indexJ1];
-        //imageWinnerJ2.texture = imageList[indexJ2];
+        if (SceneManager.GetActiveScene().name == "InGameScene")
+        {
+            imageCinematiqueJ1.texture = imageList[indexJ1];
+            imageCinematiqueJ2.texture = imageList[indexJ2];
+            imageWinnerJ1.texture = imageList[indexJ1];
+            imageWinnerJ2.texture = imageList[indexJ2];
+        }
 
         PlayerPrefs.SetInt("currentPlayer", 1);
         int indexSol = PlayerPrefs.GetInt("IndexSol");
@@ -148,10 +152,14 @@ public class LogicScript : MonoBehaviour
         }
         playerName1.text = PlayerPrefs.GetString("PlayerName1");
         playerName2.text = PlayerPrefs.GetString("PlayerName2");
-        // playerNameCine1.text = PlayerPrefs.GetString("PlayerName1");
-        // playerNameCine2.text = PlayerPrefs.GetString("PlayerName2");
-        // winnerName1.text = PlayerPrefs.GetString("PlayerName1");
-        // winnerName2.text = PlayerPrefs.GetString("PlayerName2");
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "InGameScene")
+        {
+            playerNameCine1.text = PlayerPrefs.GetString("PlayerName1");
+            playerNameCine2.text = PlayerPrefs.GetString("PlayerName2");
+            winnerName1.text = PlayerPrefs.GetString("PlayerName1");
+            winnerName2.text = PlayerPrefs.GetString("PlayerName2");
+        }
     }
 
     /// <summary>
