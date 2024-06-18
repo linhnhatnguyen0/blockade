@@ -438,7 +438,7 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -80
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -80
+  m_Value: -15.1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2808,7 +2808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95770c41b91cc2b43ad6e891e3133513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 435435832080cd44593383bad4d50441, type: 2}
+  audioMixer: {fileID: 24100000, guid: e52e252106794214c9013c34413bf890, type: 2}
 --- !u!1 &7515233651999948657
 GameObject:
   m_ObjectHideFlags: 0
