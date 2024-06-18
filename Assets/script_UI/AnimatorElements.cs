@@ -9,9 +9,9 @@ public class AnimatorElements : MonoBehaviour
     public RectTransform element4;
     public RectTransform element5;
 
-    public GameObject effectLeft; 
-    public GameObject effectRight; 
-    
+    public GameObject effectLeft;
+    public GameObject effectRight;
+
     public RectTransform versusEffect;
 
     public GameObject interfacejeu;
@@ -49,7 +49,7 @@ public class AnimatorElements : MonoBehaviour
 
         // Cacher le GameObject
         interfacejeu.SetActive(false);
-        
+
         // Déplacement des éléments 1 et 2
         Vector2 targetPosition1 = new Vector2(-565f, 90f);
         Vector2 targetPosition2 = new Vector2(-565f, -325f);

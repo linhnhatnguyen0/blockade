@@ -7702,7 +7702,7 @@ AudioSource:
   m_GameObject: {fileID: 698448828}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1539127859003662240, guid: e52e252106794214c9013c34413bf890, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -23113,10 +23113,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Announcement text !
+  m_text: "D\xE9place text !"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f84ef0b4088b424c9acd65fc82a522d, type: 2}
+  m_sharedMaterial: {fileID: -7389280485079585984, guid: 4f84ef0b4088b424c9acd65fc82a522d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
