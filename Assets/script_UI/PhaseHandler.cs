@@ -40,6 +40,21 @@ public class PhaseHandler : MonoBehaviour
     public TextMeshProUGUI winText;
     public Point cubeTopLeftPosition;
     public bool isHorizontal;
+
+    public RectTransform winnerPicture1;
+    public RectTransform winnerPicture2;
+    public RectTransform winnerName1;
+    public RectTransform winnerName2;
+    public ParticleSystem confetti;
+
+    public AudioSource audioSource; // Référence à l'AudioSource
+    public AudioClip winner1Clip; // Référence au clip audio à jouer
+    public AudioClip winner2Clip; // Référence au clip audio à jouer
+    public AudioClip winnerEffectClip; // Référence au clip audio à jouer
+    public AudioClip victoryClip; // Référence au clip audio à jouer
+
+    private bool movementStarted = false;
+
     void Start()
     {
         //PAWN
@@ -198,14 +213,107 @@ public class PhaseHandler : MonoBehaviour
     {
         if (playerID == PlayerID.Player1)
         {
+            if (!movementStarted)
+            {
+                StartCoroutine(MoveElements1());
+                movementStarted = true;
+            }
             string p1Name = PlayerPrefs.GetString("PlayerName1");
-            winText.text = "Player " + p1Name + " a gagn�";
+            winText.text = "Player " + p1Name + " a gagné";
         }
         else
         {
+            if (!movementStarted)
+            {
+                StartCoroutine(MoveElements2());
+                movementStarted = true;
+            }
             string p2Name = PlayerPrefs.GetString("PlayerName2");
-            winText.text = "Player " + p2Name + " a gagn�";
+            winText.text = "Player " + p2Name + " a gagné";
         }
+        StartCoroutine(ShowWinPanelWithDelay());
+    }
+
+    private IEnumerator ShowWinPanelWithDelay()
+    {
+        yield return new WaitForSeconds(5f); // Attendre 3 secondes
         winPanel.SetActive(true);
     }
+    IEnumerator MoveElements1()
+    {
+        
+        Vector2 winnerPicture1Position = new Vector2(0f, 90f);
+        Vector2 winnerName1Position = new Vector2(0f, -325f);
+        float duration = 5f; // Durée du déplacement en secondes
+
+        // Jouer le son
+        audioSource.clip = winner1Clip;
+        audioSource.Play();
+
+        // Jouer le second son en utilisant PlayOneShot
+        audioSource.PlayOneShot(winnerEffectClip);
+
+        // Jouer le second son en utilisant PlayOneShot
+        audioSource.PlayOneShot(victoryClip);
+
+        confetti.Play(); // Démarrer le système de particules
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            float t = timer / duration;
+            winnerPicture1.anchoredPosition = Vector2.Lerp(winnerPicture1.anchoredPosition, winnerPicture1Position, t);
+            winnerName1.anchoredPosition = Vector2.Lerp(winnerName1.anchoredPosition, winnerName1Position, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Correction des positions pour s'assurer qu'ils soient exactement à la position finale
+        winnerPicture1.anchoredPosition = winnerPicture1Position;
+        winnerName1.anchoredPosition = winnerName1Position;
+
+        // Cacher les RectTransforms à la fin de la coroutine
+        winnerPicture1.gameObject.SetActive(false);
+        winnerName1.gameObject.SetActive(false);
+        confetti.gameObject.SetActive(false);
+    }
+
+    IEnumerator MoveElements2()
+    {
+        
+        Vector2 winnerPicture2Position = new Vector2(0f, 90f);
+        Vector2 winnerName2Position = new Vector2(0f, -325f);
+        float duration = 5f; // Durée du déplacement en secondes
+
+        // Jouer le son
+        audioSource.clip = winner2Clip;
+        audioSource.Play();
+
+        // Jouer le second son en utilisant PlayOneShot
+        audioSource.PlayOneShot(winnerEffectClip);
+
+        // Jouer le second son en utilisant PlayOneShot
+        audioSource.PlayOneShot(victoryClip);
+
+        confetti.Play(); // Démarrer le système de particules
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            float t = timer / duration;
+            winnerPicture2.anchoredPosition = Vector2.Lerp(winnerPicture2.anchoredPosition, winnerPicture2Position, t);
+            winnerName2.anchoredPosition = Vector2.Lerp(winnerName2.anchoredPosition, winnerName2Position, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Correction des positions pour s'assurer qu'ils soient exactement à la position finale
+        winnerPicture2.anchoredPosition = winnerPicture2Position;
+        winnerName2.anchoredPosition = winnerName2Position;
+
+        // Cacher les RectTransforms à la fin de la coroutine
+        winnerPicture2.gameObject.SetActive(false);
+        winnerName2.gameObject.SetActive(false);
+    }
+
 }
