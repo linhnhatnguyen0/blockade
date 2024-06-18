@@ -40,8 +40,6 @@ public class DragHandler : MonoBehaviour
     private GameObject soundEffect;
     private GameObject phaseHandler;
 
-    private SoundEffect sfx;
-
 
     private void Awake()
     {
@@ -58,7 +56,6 @@ public class DragHandler : MonoBehaviour
     private void Update()
     {
         partie = GameObject.Find("Logic").GetComponent<LogicScript>().partie;
-        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
     }
     private void OnMouseDown()
     {
