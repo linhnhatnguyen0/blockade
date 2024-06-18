@@ -40,6 +40,8 @@ public class DragHandler : MonoBehaviour
     private GameObject soundEffect;
     private GameObject phaseHandler;
 
+    private SoundEffect sfx;
+
 
     private void Awake()
     {

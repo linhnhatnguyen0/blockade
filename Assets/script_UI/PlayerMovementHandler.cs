@@ -53,6 +53,8 @@ public class PlayerMovementHandler : MonoBehaviour
     public GameObject phaseHandler;
 
     public GameObject soundEffect;
+
+    public SoundEffect sfx;
     void Start()
     {
         board = GameObject.Find("Board");
