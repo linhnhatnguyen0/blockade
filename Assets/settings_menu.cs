@@ -6,10 +6,12 @@ using UnityEngine.Audio;
 public class settings_menu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    public void SetMusicVolume (float volume){
-        audioMixer.SetFloat("MusicVolume", volume);
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("Music", volume);
     }
-    public void SetSFXVolume (float volume){
-        audioMixer.SetFloat("SFXVolume", volume);
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFX", volume);
     }
 }

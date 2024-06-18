@@ -59,7 +59,7 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
-        sfx = GameObject.Find("audiosource").GetComponent<SoundEffect>();
+        sfx = GameObject.Find("SFXAudioSource").GetComponent<SoundEffect>();
     }
 
 
@@ -141,7 +141,7 @@ public class PlayerMovementHandler : MonoBehaviour
                 }
                 phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
             }
-            soundEffect.GetComponent<SoundEffect>().PawnSound();
+            sfx.PawnSound();
             cubeHit = null;
         }
     }
