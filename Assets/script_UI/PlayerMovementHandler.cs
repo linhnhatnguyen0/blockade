@@ -53,10 +53,13 @@ public class PlayerMovementHandler : MonoBehaviour
     public GameObject phaseHandler;
 
     public GameObject soundEffect;
+
+    public SoundEffect sfx;
     void Start()
     {
         board = GameObject.Find("Board");
         PlayerPrefs.SetInt("clickCounter", 0);
+        sfx = GameObject.Find("SFXAudioSource").GetComponent<SoundEffect>();
     }
 
 
@@ -138,7 +141,7 @@ public class PlayerMovementHandler : MonoBehaviour
                 }
                 phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
             }
-            soundEffect.GetComponent<SoundEffect>().PawnSound();
+            sfx.PawnSound();
             cubeHit = null;
         }
     }
@@ -207,6 +210,8 @@ public class PlayerMovementHandler : MonoBehaviour
                         {
                             if (hit.transform.tag == "Mouvable") // Si la position cliqu�e est mouvable, on d�place le pion
                             {
+                                //PLAY SOUND
+                                sfx.PawnSound();
                                 PlayerPrefs.SetInt("clickCounter", 2);
                                 cubeHit = hit.transform;
                                 previousPosition = currentPlayer.GetComponent<PlayerPositionHandler>().initialPosition;

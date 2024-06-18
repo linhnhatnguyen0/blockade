@@ -20,8 +20,6 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
         index = 0;
         AfficherMaterialActuel();
         //Debug.LogError(index);
-
-
     }
 
     void AfficherMaterialActuel()
@@ -41,7 +39,7 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
         //Debug.Log(PlayerPrefs.GetInt("IndexIconeJ1") + "-" + PlayerPrefs.GetInt("IndexIconeJ1"));
     }
 
-    // Méthode pour afficher le matériau à l'index
+    // Mï¿½thode pour afficher le matï¿½riau ï¿½ l'index
     public void AfficherMaterialSuivant()
     {
         if (numeroJoueur == 1)
@@ -65,7 +63,7 @@ public class Controle_Diapo_Icon_Joueurs : MonoBehaviour
         //Debug.LogError(index);
     }
 
-    // Méthode pour afficher le matériau précédent
+    // Mï¿½thode pour afficher le matï¿½riau prï¿½cï¿½dent
     public void AfficherMaterialPrecedent()
     {
         if (numeroJoueur == 1)
