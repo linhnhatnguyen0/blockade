@@ -1843,8 +1843,8 @@ MonoBehaviour:
   textP1: {fileID: 802945491}
   textP2: {fileID: 816852681}
   btnPlayGame: {fileID: 662793264}
-  playerName1: {fileID: 0}
-  playerName2: {fileID: 0}
+  playerName1: {fileID: 2045604698}
+  playerName2: {fileID: 1897381449}
 --- !u!1001 &676445342
 PrefabInstance:
   m_ObjectHideFlags: 0
