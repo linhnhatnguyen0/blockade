@@ -8,6 +8,11 @@ public class ButtonChangeScene : MonoBehaviour
 {
     public void ChargerNouvelleScene(string nomScene)
     {
+        if (nomScene == "PlayNewGame")
+        {
+            GameObject musicManager = GameObject.Find("MusicAudioSource");
+            Destroy(musicManager);
+        }
         SceneManager.LoadScene(nomScene);
     }
 }

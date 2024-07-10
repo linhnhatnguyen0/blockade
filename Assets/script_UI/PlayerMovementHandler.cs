@@ -150,6 +150,7 @@ public class PlayerMovementHandler : MonoBehaviour
                 }
                 phaseHandler.GetComponent<PhaseHandler>().victore(PlayerID.Player2);
             }
+            this.cubeHit = null;
         }
     }
 

@@ -14,4 +14,9 @@ public class settings_menu : MonoBehaviour
     {
         audioMixer.SetFloat("SFX", volume);
     }
+
+    public void Quitter()
+    {
+        Application.Quit();
+    }
 }

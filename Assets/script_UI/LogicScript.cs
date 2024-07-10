@@ -28,6 +28,10 @@ public class LogicScript : MonoBehaviour
     public TextMeshProUGUI playerNameCine2;
     public TextMeshProUGUI winnerName1;
     public TextMeshProUGUI winnerName2;
+    public GameObject Gekko;
+    public GameObject Pudu;
+    public GameObject Sparrow;
+    public GameObject Squid;
 
     // Start est appel� avant la premi�re frame de mise � jour
     // Changer la couleur du plateau en fonction de la couleur choisie par le joueur
@@ -69,13 +73,30 @@ public class LogicScript : MonoBehaviour
     /// <param name="champNamePrefab"></param>
     private void spawnChampionP1(string champNamePrefab)
     {
-        GameObject champPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
-        GameObject champPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
+        GameObject champPrefab;
+        switch (champNamePrefab)
+        {
+            case "Squid":
+                champPrefab = Squid;
+                break;
+            case "Sparrow":
+                champPrefab = Sparrow;
+                break;
+            case "Pudu":
+                champPrefab = Pudu;
+                break;
+            case "Gekko":
+                champPrefab = Gekko;
+                break;
+            default:
+                champPrefab = Gekko;
+                break;
+        }
         GameObject champion = Instantiate(champPrefab, p1Spawn[0], Quaternion.Euler(0, 90, 0));
         champion.GetComponent<PlayerPositionHandler>().initialPosition = new Point(3, 3);
         champion.GetComponent<PlayerPositionHandler>().isUp = true;
         champion.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
-        GameObject champion2 = Instantiate(champPrefab2, p1Spawn[1], Quaternion.Euler(0, 90, 0));
+        GameObject champion2 = Instantiate(champPrefab, p1Spawn[1], Quaternion.Euler(0, 90, 0));
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(3, 7);
         champion2.GetComponent<PlayerPositionHandler>().isUp = false;
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player1;
@@ -87,13 +108,30 @@ public class LogicScript : MonoBehaviour
     /// <param name="champNamePrefab"></param>
     private void spawnChampionP2(string champNamePrefab)
     {
-        GameObject champPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
-        GameObject champPrefab4 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Champions/" + champNamePrefab + ".prefab");
-        GameObject champion = Instantiate(champPrefab3, p2Spawn[0], Quaternion.Euler(0, -90, 0));
+        GameObject champPrefab2;
+        switch (champNamePrefab)
+        {
+            case "Squid":
+                champPrefab2 = Squid;
+                break;
+            case "Sparrow":
+                champPrefab2 = Sparrow;
+                break;
+            case "Pudu":
+                champPrefab2 = Pudu;
+                break;
+            case "Gekko":
+                champPrefab2 = Gekko;
+                break;
+            default:
+                champPrefab2 = Gekko;
+                break;
+        }
+        GameObject champion = Instantiate(champPrefab2, p2Spawn[0], Quaternion.Euler(0, -90, 0));
         champion.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 3);
         champion.GetComponent<PlayerPositionHandler>().isUp = true;
         champion.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
-        GameObject champion2 = Instantiate(champPrefab4, p2Spawn[1], Quaternion.Euler(0, -90, 0));
+        GameObject champion2 = Instantiate(champPrefab2, p2Spawn[1], Quaternion.Euler(0, -90, 0));
         champion2.GetComponent<PlayerPositionHandler>().initialPosition = new Point(10, 7);
         champion2.GetComponent<PlayerPositionHandler>().isUp = false;
         champion2.GetComponent<PlayerPositionHandler>().playerID = PlayerID.Player2;
